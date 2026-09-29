@@ -165,12 +165,18 @@ const formatZip = (v) => {
   const d = zipDigits(v);
   return d.length === 7 ? `${d.slice(0, 3)}-${d.slice(3)}` : toHalf(v).replace(/[^\d-]/g, '');
 };
-/** 旧データ：住所の先頭の「〒123-4567」を郵便番号欄へ移す */
+/** 金額欄：桁数に応じて文字サイズを下げ、枠からはみ出さないようにする */
+function amountValue(text) {
+  const size = text.length <= 9 ? 'l' : text.length <= 12 ? 'm' : text.length <= 15 ? 's' : 'xs';
+  return h('div', { class: 'v', dataset: { size } }, h('span', { class: 'num' }, text), h('small', null, '（税込）'));
+}
+/** 旧データ：住所の先頭の「〒123-4567」（〒なしで郵便番号だけの行も）を郵便番号欄へ移す */
 function migrateParty(p) {
   if (!p || typeof p !== 'object') return p;
   const out = { zip: '', ...p };
   if (!out.zip && typeof out.address === 'string') {
-    const m = /^\s*〒\s*([0-9０-９]{3})\s*[-‐－−ー]?\s*([0-9０-９]{4})[ \t　]*(?:\r?\n)?/.exec(out.address);
+    const m = /^\s*〒\s*([0-9０-９]{3})\s*[-‐－−ー]?\s*([0-9０-９]{4})[ \t　]*(?:\r?\n)?/.exec(out.address)
+      || /^\s*([0-9０-９]{3})\s*[-‐－−ー]?\s*([0-9０-９]{4})[ \t　]*(?:\r?\n|$)/.exec(out.address);
     if (m) {
       out.zip = formatZip(m[1] + m[2]);
       out.address = out.address.slice(m[0].length).replace(/^\s+/, '');
@@ -727,7 +733,9 @@ $('#items').addEventListener('focusin', (e) => {
   const raw = amountRaw(el.value);
   if (raw !== el.value) el.value = raw;
   // iOS Safari はフォーカス直後の選択が解除されるため遅延させる
-  setTimeout(() => { if (document.activeElement === el) { try { el.setSelectionRange(0, el.value.length); } catch { el.select(); } } }, 0);
+  try { el.select(); } catch {}
+  const atFocus = el.value;
+  setTimeout(() => { if (document.activeElement === el && el.value === atFocus) { try { el.setSelectionRange(0, el.value.length); } catch { el.select(); } } }, 0);
 });
 $('#items').addEventListener('focusout', (e) => {
   const el = e.target;
@@ -892,7 +900,7 @@ function render() {
     to.append(
       h('div', { class: 'd-amount' },
         h('div', { class: 'k' }, t.amountLabel),
-        h('div', { class: 'v' }, `${yen(amountDue)}-`, h('small', null, '（税込）'))),
+        amountValue(`${yen(amountDue)}-`)),
       h('div', { class: 'd-proviso' }, `但し　${doc.subject.trim() || '　　　　　　　　'}　として`),
       h('div', { class: 'd-received' }, t.lead),
       c.stamp > 0 ? h('div', { class: 'd-stamp' }, h('span', null, '収入印紙'), h('span', null, `${formatYen(c.stamp)}円`)) : null);
@@ -904,7 +912,7 @@ function render() {
       t.showDue ? h('div', { class: 'd-subject' }, h('span', { class: 'k' }, t.dueLabel), h('span', { class: 'v' }, jaDate(doc.dueDate))) : null,
       h('div', { class: 'd-amount' },
         h('div', { class: 'k' }, t.amountLabel),
-        h('div', { class: 'v' }, yen(amountDue), h('small', null, '（税込）'))));
+        amountValue(yen(amountDue))));
   }
   if (doc.type === 'receipt') {
     to.append(h('div', { class: 'd-subject', style: 'margin-top:3mm' }, h('span', { class: 'k' }, '取引年月日'), h('span', { class: 'v' }, periodText(doc))));

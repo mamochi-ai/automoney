@@ -131,8 +131,12 @@ input.bad,textarea.bad{border-color:var(--warn)}
 .d-subject .v{word-break:break-all}
 .d-amount{margin-top:5mm;display:flex;align-items:stretch;border:1.5px solid var(--ink)}
 .d-amount .k{background:var(--ink);color:#fff;padding:2.5mm 4mm;font-weight:700;display:flex;align-items:center;font-size:10pt;white-space:nowrap}
-.d-amount .v{flex:1;padding:2mm 4mm;font-size:18pt;font-weight:700;text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
-.d-amount .v small{font-size:9pt;font-weight:400;margin-left:2mm}
+.d-amount .v{flex:1;min-width:0;padding:2mm 3mm;font-size:18pt;font-weight:700;display:flex;flex-wrap:wrap;align-items:baseline;justify-content:flex-end;column-gap:1.5mm;font-variant-numeric:tabular-nums;letter-spacing:-.01em}
+.d-amount .v[data-size="m"]{font-size:15pt}
+.d-amount .v[data-size="s"]{font-size:12.5pt}
+.d-amount .v[data-size="xs"]{font-size:10.5pt}
+.d-amount .v .num{white-space:nowrap}
+.d-amount .v small{font-size:8.5pt;font-weight:400;white-space:nowrap}
 .d-from{width:68mm;flex:none;position:relative;font-size:9pt;padding-top:1mm}
 .d-logo{display:block;max-width:44mm;max-height:16mm;object-fit:contain;margin:0 0 2.5mm}
 .d-iname{font-size:11pt;font-weight:700;word-break:break-all;padding-right:6mm}
