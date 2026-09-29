@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>請求書作成 | ゼロ請求書 — インボイス対応・登録不要・無料</title>
+<meta name="description" content="インボイス制度（適格請求書）対応の請求書・見積書・納品書・領収書をブラウザだけで作成。登録不要・無料、データは端末の外に送信されません。源泉徴収・軽減税率・収入印紙の計算にも対応し、そのままPDFで保存できます。">
+<meta name="theme-color" content="#0f6e5a">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ゼロ請求書">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:title" content="請求書作成 | ゼロ請求書 — インボイス対応・登録不要・無料">
+<meta property="og:description" content="適格請求書の必須項目をおさえた請求書・見積書・納品書・領収書をブラウザだけで作成。データは送信されず、PDFで保存できます。">
+<meta property="og:url" content="https://example.com/app/">
+<meta property="og:image" content="https://example.com/assets/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://example.com/assets/og.png">
+<link rel="canonical" href="https://example.com/app/">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="stylesheet" href="app.css">
+<script type="module" src="app.js"></script>
+</head>
+<body class="app-body">
+<header class="site-header no-print"><div class="wrap"><a class="brand" href="../">ゼロ請求書</a><nav class="nav"><a href="../app/" aria-current="page">請求書を作る</a><a href="../tools/">計算ツール</a><a href="../#pricing">料金</a></nav></div></header>
+
+<div class="toolbar no-print">
+  <div class="toolbar-in">
+    <div class="doctype" role="group" aria-label="書類の種類">
+      <button type="button" data-type="invoice" aria-pressed="true">請求書</button>
+      <button type="button" data-type="estimate" aria-pressed="false">見積書</button>
+      <button type="button" data-type="delivery" aria-pressed="false">納品書</button>
+      <button type="button" data-type="receipt" aria-pressed="false">領収書</button>
+    </div>
+    <div class="actions">
+      <button type="button" class="btn btn-sm" id="btnNew">新規</button>
+      <button type="button" class="btn btn-sm" id="btnSave">保存</button>
+      <button type="button" class="btn btn-sm" id="btnList">保存済み<span class="count" id="docCount"></span></button>
+      <button type="button" class="btn btn-sm btn-primary" id="btnPrint">PDFで保存</button>
+    </div>
+  </div>
+  <div class="toolbar-status"><span id="saveStatus" class="muted">下書きを自動保存しています</span><span class="print-hint">印刷ダイアログで『PDFに保存』を選択</span><span id="planBadge" class="plan-badge">無料版</span></div>
+</div>
+
+<main class="app">
+  <form class="editor no-print" id="editor" autocomplete="off" novalidate>
+    <p class="privacy-note">入力内容はこの端末のブラウザ内（localStorage）にだけ保存され、外部には送信されません。</p>
+
+    <section class="ed-card">
+      <h2>基本情報</h2>
+      <div class="grid2">
+        <div><label for="f-number">番号</label><input id="f-number" name="number" inputmode="text"></div>
+        <div><label for="f-issueDate">発行日</label><input id="f-issueDate" name="issueDate" type="date"></div>
+      </div>
+      <div class="field"><label for="f-subject" id="lbl-subject">件名</label><input id="f-subject" name="subject" placeholder="例: 2026年9月分 Webサイト保守"></div>
+      <div class="field"><label for="f-period">取引年月日・対象期間</label><input id="f-period" name="period" placeholder="例: 2026年9月1日〜9月30日（空欄なら発行日を表示）"></div>
+      <div class="field" id="dueField">
+        <label for="f-dueDate" id="lbl-due">支払期日</label>
+        <input id="f-dueDate" name="dueDate" type="date">
+        <div class="chips" aria-label="支払期日のプリセット">
+          <button type="button" class="chip" data-due="m1">翌月末</button>
+          <button type="button" class="chip" data-due="m2">翌々月末</button>
+          <button type="button" class="chip" data-due="d30">30日後</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="ed-card">
+      <h2>取引先（宛先）</h2>
+      <div class="client-row">
+        <div class="grow"><label for="f-clientName">取引先名</label><input id="f-clientName" name="client.name" placeholder="例: 株式会社サンプル" list="clientMaster"></div>
+        <div class="honorific"><label for="f-honorific">敬称</label>
+          <select id="f-honorific" name="client.honorific"><option value="御中">御中</option><option value="様">様</option><option value="">なし</option></select>
+        </div>
+      </div>
+      <datalist id="clientMaster"></datalist>
+      <div class="field"><label for="f-clientAddress">取引先住所（任意）</label><input id="f-clientAddress" name="client.address" placeholder="例: 東京都千代田区…"></div>
+      <div class="inline-actions">
+        <select id="clientPick" aria-label="保存済みの取引先から選ぶ"><option value="">保存済みの取引先から選ぶ…</option></select>
+        <button type="button" class="btn btn-sm" id="btnSaveClient">この取引先を保存</button>
+      </div>
+    </section>
+
+    <section class="ed-card">
+      <h2>明細</h2>
+      <div class="grid2">
+        <div><label for="f-priceMode">単価の入力</label>
+          <select id="f-priceMode" name="priceMode"><option value="exclusive">税抜（外税）</option><option value="inclusive">税込（内税）</option></select>
+        </div>
+        <div><label for="f-rounding">消費税の端数</label><select id="f-rounding" name="rounding"></select></div>
+      </div>
+      <div id="items" class="items"></div>
+      <datalist id="itemMaster"></datalist>
+      <div class="inline-actions">
+        <button type="button" class="btn btn-sm" id="btnAddItem">＋ 行を追加</button>
+        <button type="button" class="btn btn-sm btn-ghost" id="btnMasters">取引先・品目マスタ</button>
+      </div>
+      <label class="check"><input type="checkbox" name="withholding" id="f-withholding"> 源泉徴収あり（税抜金額に対して10.21%／100万円超の部分は20.42%）</label>
+      <div class="sum-mini" id="sumMini" aria-live="polite"></div>
+      <div class="stamp-note" id="stampNote" hidden></div>
+    </section>
+
+    <section class="ed-card">
+      <h2>発行者（あなた）</h2>
+      <p class="muted small">一度入力すると次の書類にも引き継がれます。</p>
+      <div class="field"><label for="f-issuerName">氏名・屋号</label><input id="f-issuerName" name="issuer.name" placeholder="例: 山田デザイン事務所 山田太郎"></div>
+      <div class="field"><label for="f-issuerAddress">住所</label><textarea id="f-issuerAddress" name="issuer.address" rows="2" placeholder="〒100-0001&#10;東京都千代田区…"></textarea></div>
+      <div class="field">
+        <label for="f-regNo">登録番号（適格請求書発行事業者）</label>
+        <input id="f-regNo" name="issuer.regNo" placeholder="T1234567890123" inputmode="text" autocapitalize="characters" spellcheck="false">
+        <p class="hint" id="regNoMsg" aria-live="polite"></p>
+      </div>
+      <div class="grid2">
+        <div><label for="f-phone">電話番号</label><input id="f-phone" name="issuer.phone" type="tel"></div>
+        <div><label for="f-email">メール</label><input id="f-email" name="issuer.email" type="email"></div>
+      </div>
+      <div class="field" id="bankField"><label for="f-bank">振込先</label><textarea id="f-bank" name="issuer.bank" rows="2" placeholder="例: ○○銀行 △△支店 普通 1234567 ヤマダタロウ"></textarea></div>
+      <div class="pro-assets">
+        <div class="asset">
+          <span class="asset-label">ロゴ <span class="pro-tag">PRO</span></span>
+          <div class="asset-ctl">
+            <button type="button" class="btn btn-sm" data-asset-pick="logo">画像を選ぶ</button>
+            <button type="button" class="btn btn-sm btn-ghost" data-asset-clear="logo" hidden>削除</button>
+          </div>
+        </div>
+        <div class="asset">
+          <span class="asset-label">角印・印影 <span class="pro-tag">PRO</span></span>
+          <div class="asset-ctl">
+            <button type="button" class="btn btn-sm" data-asset-pick="seal">画像を選ぶ</button>
+            <button type="button" class="btn btn-sm btn-ghost" data-asset-clear="seal" hidden>削除</button>
+          </div>
+        </div>
+        <input type="file" id="assetFile" accept="image/png,image/jpeg,image/webp,image/gif" hidden>
+      </div>
+    </section>
+
+    <section class="ed-card">
+      <h2>備考</h2>
+      <textarea id="f-notes" name="notes" rows="3" placeholder="例: 振込手数料はご負担ください。"></textarea>
+    </section>
+
+    <div class="ed-bottom">
+      <button type="button" class="btn btn-primary" id="btnPrint2">PDFで保存</button>
+      <p class="muted small">印刷ダイアログで『PDFに保存』を選択してください。用紙サイズはA4、余白は「デフォルト」、「ヘッダーとフッター」はオフがおすすめです。</p>
+    </div>
+  </form>
+
+  <section class="preview-pane" aria-label="プレビュー（印刷される書類）">
+    <div class="preview-label no-print">プレビュー（A4・このまま印刷されます）</div>
+    <div class="preview-scaler" id="scaler"><div class="paper" id="paper"></div></div>
+  </section>
+</main>
+
+<dialog id="listDialog" class="dlg no-print" aria-labelledby="listTitle">
+  <div class="dlg-head"><h2 id="listTitle">保存済みの書類</h2><button type="button" class="dlg-x" data-close aria-label="閉じる">×</button></div>
+  <p class="muted small" id="listLimit"></p>
+  <div id="docList" class="doc-list"></div>
+  <div class="dlg-foot">
+    <div class="dlg-foot-group">
+      <button type="button" class="btn btn-sm" id="btnCsv">CSVで書き出し <span class="pro-tag">PRO</span></button>
+    </div>
+    <div class="dlg-foot-group">
+      <button type="button" class="btn btn-sm" id="btnExport">バックアップ（JSON）を保存</button>
+      <button type="button" class="btn btn-sm" id="btnImport">バックアップから復元</button>
+      <input type="file" id="importFile" accept="application/json,.json" hidden>
+    </div>
+  </div>
+</dialog>
+
+<dialog id="masterDialog" class="dlg no-print" aria-labelledby="masterTitle">
+  <div class="dlg-head"><h2 id="masterTitle">取引先・品目マスタ</h2><button type="button" class="dlg-x" data-close aria-label="閉じる">×</button></div>
+  <p class="muted small">品目は明細の各行の「登録」ボタンで追加できます。品目名の入力欄で候補から選ぶと単位・単価・税率が入ります。</p>
+  <h3>取引先</h3>
+  <div id="clientList" class="master-list"></div>
+  <h3>品目</h3>
+  <div id="itemList" class="master-list"></div>
+</dialog>
+
+<dialog id="proDialog" class="dlg dlg-pro no-print" aria-labelledby="proTitle">
+  <div class="dlg-head"><h2 id="proTitle">Pro版の機能です</h2><button type="button" class="dlg-x" data-close aria-label="閉じる">×</button></div>
+  <p id="proReason" class="pro-reason"></p>
+  <ul class="pro-list">
+    <li>書類の保存数が無制限（無料版は5件まで）</li>
+    <li>ロゴ・角印（印影）の画像を書類に表示</li>
+    <li>書類下部の「ゼロ請求書で作成」表記を削除</li>
+    <li>保存済み書類の一覧をCSVで書き出し</li>
+  </ul>
+  <div class="pro-price"><span class="yen" id="proPrice"></span><span class="muted">買い切り・税込／サブスクなし</span></div>
+  <a class="btn btn-primary btn-block" id="proBuy" target="_blank" rel="noopener">Pro版を購入する</a>
+  <p class="muted small">購入後、メールで届くライセンスキーを下に貼り付けてください。</p>
+  <form id="licenseForm" class="license-form">
+    <label for="licenseKey">ライセンスキー</label>
+    <textarea id="licenseKey" rows="3" spellcheck="false" placeholder="ライセンスキーを貼り付け"></textarea>
+    <button type="submit" class="btn btn-block" id="btnActivate">ライセンスを有効化</button>
+    <p class="hint" id="licenseMsg" aria-live="polite"></p>
+  </form>
+</dialog>
+
+<div id="toast" class="toast no-print" role="status" aria-live="polite"></div>
+</body>
+</html>
