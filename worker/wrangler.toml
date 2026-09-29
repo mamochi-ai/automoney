@@ -1,0 +1,19 @@
+# ゼロ請求書 ライセンス発行 Worker
+# デプロイ手順は worker/README.md 参照。
+name = "zero-invoice-license"
+main = "src/index.js"
+compatibility_date = "2025-01-01"
+workers_dev = true
+
+[vars]
+# サイトのオリジン（スキーム+ホスト、末尾スラッシュなし）。カンマ区切りで複数可。
+# 例: "https://zero-invoice.example,http://localhost:8080"
+ALLOWED_ORIGIN = "https://example.com"
+# 任意: Checkout Session の amount_total と一致しなければ拒否（JPY は円単位）。空文字で無効。
+EXPECTED_AMOUNT = "1480"
+# 任意: Payment Link ID (plink_...) と一致しなければ拒否。空文字で無効。
+EXPECTED_PAYMENT_LINK = ""
+
+# Secrets（ここには書かない。`npx wrangler secret put <NAME>` で設定）:
+#   STRIPE_SECRET_KEY    Stripe の制限付きキー (rk_live_...) — 権限: Checkout Sessions = Read のみ
+#   LICENSE_PRIVATE_KEY  scripts/keygen.mjs が出力した PKCS8 base64 の Ed25519 秘密鍵

@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="referrer" content="no-referrer">
+<title>ご購入ありがとうございます | ゼロ請求書</title>
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+  main{padding:32px 0 16px}
+  .narrow{max-width:640px}
+  h1{font-size:1.5rem;line-height:1.4;margin:0 0 8px}
+  h2{font-size:1.05rem;margin:0 0 8px}
+  .state[hidden]{display:none}
+  .stack>*+*{margin-top:16px}
+  .spinner{width:28px;height:28px;border:3px solid var(--line);border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite;flex:none}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  @media (prefers-reduced-motion:reduce){.spinner{animation-duration:2.4s}}
+  .row{display:flex;align-items:center;gap:12px}
+  .badge{display:inline-block;padding:2px 10px;border-radius:999px;background:var(--accent-soft);color:var(--accent);font-size:.8rem;font-weight:700}
+  .key{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.8rem;line-height:1.5;word-break:break-all;resize:none;min-height:5.5em;background:var(--bg)}
+  .actions{display:flex;gap:8px;flex-wrap:wrap}
+  .actions .btn{flex:1 1 auto}
+  .note{border-left:3px solid var(--accent);padding:8px 12px;background:var(--accent-soft);border-radius:0 8px 8px 0;font-size:.9rem}
+  .note.warnbox{border-left-color:var(--warn);background:transparent;border:1px solid var(--line);border-left:3px solid var(--warn)}
+  .msg{font-size:.9rem;min-height:1.5em;margin:8px 0 0}
+  .ok{color:var(--accent);font-weight:600}
+  ol{padding-left:1.3em;margin:8px 0}
+  code{font-size:.85em;word-break:break-all}
+</style>
+</head>
+<body>
+<header class="site-header"><div class="wrap"><a class="brand" href="../">ゼロ請求書</a><nav class="nav"><a href="../app/">請求書を作る</a><a href="../tools/">計算ツール</a><a href="../#pricing">料金</a></nav></div></header>
+
+<main class="wrap narrow">
+  <!-- 読み込み中 -->
+  <section id="st-loading" class="state card" aria-live="polite">
+    <div class="row">
+      <div class="spinner" aria-hidden="true"></div>
+      <div>
+        <h1 style="font-size:1.15rem;margin:0">お支払いを確認しています…</h1>
+        <p class="muted" id="loading-detail" style="margin:0;font-size:.9rem">数秒で完了します。このページを閉じずにお待ちください。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 成功 -->
+  <section id="st-success" class="state stack" hidden>
+    <div>
+      <span class="badge">Pro 有効化済み</span>
+      <h1 style="margin-top:8px">ご購入ありがとうございます</h1>
+      <p class="muted" style="margin:0" id="success-lead">ゼロ請求書 Pro がこのブラウザで使えるようになりました。</p>
+    </div>
+
+    <div class="card stack">
+      <div>
+        <label for="license-key">あなたのライセンスキー</label>
+        <textarea id="license-key" class="key" rows="4" readonly spellcheck="false" autocomplete="off"></textarea>
+      </div>
+      <div class="actions">
+        <button type="button" class="btn btn-primary" id="copy-btn">キーをコピー</button>
+        <button type="button" class="btn" id="download-btn">テキストで保存</button>
+      </div>
+      <p class="msg" id="copy-msg" role="status"></p>
+      <p class="note" style="margin:0"><strong>このキーは必ず保管してください。</strong>別のブラウザ・パソコン・スマホで Pro を使うときや、ブラウザのデータを消去したときに、このキーを貼り付けるだけで再度有効化できます。パスワードマネージャーやメモ帳への保存がおすすめです。</p>
+      <p class="note warnbox" id="activate-warn" style="margin:0" hidden></p>
+    </div>
+
+    <div class="actions">
+      <a class="btn btn-primary" href="../app/">請求書を作る</a>
+    </div>
+  </section>
+
+  <!-- エラー -->
+  <section id="st-error" class="state stack" hidden>
+    <div>
+      <h1 id="error-title">ライセンスを発行できませんでした</h1>
+      <p id="error-msg" style="margin:0"></p>
+    </div>
+    <div class="card stack" id="error-help">
+      <p style="margin:0">お支払い済みなのにこの表示が出る場合は、お手数ですが下記までご連絡ください。確認のうえライセンスキーをお送りします（返信目安: 2営業日以内）。</p>
+      <p style="margin:0"><a id="contact-link" href="#"></a></p>
+      <p class="muted" style="margin:0;font-size:.85rem" id="ref-line" hidden>問い合わせ番号: <code id="ref-code"></code></p>
+      <div class="actions"><button type="button" class="btn" id="retry-btn">もう一度確認する</button></div>
+    </div>
+  </section>
+
+  <!-- 手動有効化（エラー時・直接アクセス時） -->
+  <section id="st-manual" class="state card stack" style="margin-top:16px" hidden>
+    <div>
+      <h2>ライセンスキーで有効化</h2>
+      <p class="muted" style="margin:0;font-size:.9rem">お持ちのライセンスキー（<code>ZI1.</code> で始まる文字列）を貼り付けると、このブラウザで Pro が使えるようになります。</p>
+    </div>
+    <form id="manual-form" novalidate>
+      <label for="manual-key">ライセンスキー</label>
+      <textarea id="manual-key" class="key" rows="4" spellcheck="false" autocomplete="off" autocapitalize="off" placeholder="ZI1.xxxxx.yyyyy"></textarea>
+      <div class="actions" style="margin-top:12px"><button type="submit" class="btn btn-primary">有効化する</button></div>
+      <p class="msg" id="manual-msg" role="status"></p>
+    </form>
+  </section>
+</main>
+
+<footer class="site-footer"><div class="wrap">© ゼロ請求書 ・ <a href="../">トップへ</a></div></footer>
+
+<script type="module">
+import { CONFIG } from '../config.js';
+import { activateLicense, getStoredLicense, verifyLicense } from '../lib/license.js';
+
+const $ = (id) => document.getElementById(id);
+const states = ['st-loading', 'st-success', 'st-error'];
+function show(id) { for (const s of states) $(s).hidden = s !== id; }
+
+const params = new URLSearchParams(location.search);
+const sessionId = (params.get('session_id') || '').trim();
+
+// 問い合わせリンク
+function setupContact(extra) {
+  const a = $('contact-link');
+  const subject = 'ゼロ請求書 Pro ライセンスについて';
+  const body = ['ライセンスキーが表示されませんでした。', '', `問い合わせ番号: ${sessionId || '(なし)'}`, extra ? `エラー: ${extra}` : '', '', '購入時のメールアドレス:', ''].join('\n');
+  a.href = `mailto:${CONFIG.contactEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  a.textContent = CONFIG.contactEmail;
+  if (sessionId) { $('ref-code').textContent = sessionId; $('ref-line').hidden = false; }
+}
+
+function showError(title, message, { retry = true, code = '' } = {}) {
+  $('error-title').textContent = title;
+  $('error-msg').textContent = message;
+  $('retry-btn').parentElement.hidden = !retry || !sessionId;
+  setupContact(code);
+  show('st-error');
+  $('st-manual').hidden = false;
+}
+
+async function showSuccess(key, email) {
+  $('license-key').value = key;
+  show('st-success');
+  $('st-manual').hidden = true;
+  const r = await activateLicense(key);
+  const warn = $('activate-warn');
+  if (r.ok) {
+    const who = r.email || email;
+    $('success-lead').textContent = who
+      ? `ゼロ請求書 Pro がこのブラウザで使えるようになりました（購入者: ${who}）。`
+      : 'ゼロ請求書 Pro がこのブラウザで使えるようになりました。';
+    warn.hidden = true;
+  } else {
+    $('success-lead').textContent = 'ライセンスキーを発行しました。';
+    warn.textContent = `このブラウザでの自動有効化に失敗しました: ${r.error} キーを保管し、別のブラウザで有効化してください。`;
+    warn.hidden = false;
+    document.querySelector('#st-success .badge').textContent = '発行済み';
+  }
+}
+
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+
+async function claimOnce() {
+  const url = new URL(CONFIG.licenseClaimEndpoint);
+  url.searchParams.set('session_id', sessionId);
+  const ctrl = new AbortController();
+  const t = setTimeout(() => ctrl.abort(), 20000);
+  try {
+    const res = await fetch(url, { method: 'GET', mode: 'cors', credentials: 'omit', cache: 'no-store', signal: ctrl.signal });
+    let body = {};
+    try { body = await res.json(); } catch { /* ignore */ }
+    return { status: res.status, body };
+  } catch {
+    return { status: 0, body: { error: 'network' } };
+  } finally {
+    clearTimeout(t);
+  }
+}
+
+async function claim() {
+  show('st-loading');
+  $('st-manual').hidden = true;
+  if (!CONFIG.licenseClaimEndpoint || /REPLACE_ME/.test(CONFIG.licenseClaimEndpoint)) {
+    showError('ライセンス発行サーバーが未設定です', 'サイト管理者の設定が完了していません。お手数ですが下記までご連絡ください。', { retry: false, code: 'endpoint_not_configured' });
+    return;
+  }
+  // 決済直後は Stripe 側の反映が遅れることがあるので数回リトライ
+  const delays = [0, 2500, 5000, 8000];
+  let last;
+  for (let i = 0; i < delays.length; i++) {
+    if (delays[i]) {
+      $('loading-detail').textContent = `確認に時間がかかっています…（${i + 1}/${delays.length}）`;
+      await sleep(delays[i]);
+    }
+    last = await claimOnce();
+    if (last.status === 200 && last.body.key) return showSuccess(last.body.key, last.body.email);
+    const retriable = last.status === 0 || last.status >= 500 || (last.status === 402 && last.body.error === 'not_paid');
+    if (!retriable) break;
+  }
+  const { status, body } = last;
+  const code = body.error || `http_${status}`;
+  if (status === 402 && body.error === 'not_paid') {
+    showError('お支払いの完了を確認できませんでした', 'コンビニ払い・銀行振込など後払いの方法を選んだ場合は、お支払い完了後にこのページを再読み込みしてください（このページの URL をブックマークしておくと便利です）。', { code });
+  } else if (status === 402) {
+    showError('ライセンスを発行できませんでした', body.message || 'お支払い内容を確認できませんでした。', { code });
+  } else if (status === 400 || status === 404) {
+    showError('決済情報が見つかりませんでした', 'URL が途中で切れている可能性があります。購入完了画面から再度アクセスするか、下記までご連絡ください。', { retry: false, code });
+  } else if (status === 0) {
+    showError('サーバーに接続できませんでした', '通信環境をご確認のうえ「もう一度確認する」を押してください。', { code });
+  } else {
+    showError('ライセンスを発行できませんでした', body.message || '一時的なエラーが発生しました。時間をおいて再度お試しください。', { code });
+  }
+}
+
+// コピー / 保存
+$('copy-btn').addEventListener('click', async () => {
+  const ta = $('license-key');
+  let ok = false;
+  try { await navigator.clipboard.writeText(ta.value); ok = true; } catch {
+    try { ta.focus(); ta.select(); ok = document.execCommand('copy'); } catch { ok = false; }
+  }
+  $('copy-msg').textContent = ok ? 'コピーしました。安全な場所に保管してください。' : 'コピーできませんでした。キーを選択して手動でコピーしてください。';
+  $('copy-msg').className = ok ? 'msg ok' : 'msg warn';
+});
+$('license-key').addEventListener('focus', (e) => e.target.select());
+$('download-btn').addEventListener('click', () => {
+  const key = $('license-key').value;
+  const text = `ゼロ請求書 Pro ライセンスキー\n\n${key}\n\n有効化: ${location.origin}${location.pathname}（「ライセンスキーで有効化」に貼り付け）\n`;
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob([text], { type: 'text/plain;charset=utf-8' }));
+  a.download = 'zero-invoice-license.txt';
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+});
+$('retry-btn').addEventListener('click', () => claim());
+
+// 手動有効化
+$('manual-form').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const msg = $('manual-msg');
+  const key = $('manual-key').value;
+  msg.className = 'msg muted'; msg.textContent = '確認しています…';
+  const r = await activateLicense(key);
+  if (r.ok) {
+    msg.className = 'msg ok';
+    msg.textContent = r.email ? `有効化しました（${r.email}）。Pro 機能が使えます。` : '有効化しました。Pro 機能が使えます。';
+  } else {
+    msg.className = 'msg warn'; msg.textContent = r.error;
+  }
+});
+
+// 起動
+if (sessionId) {
+  claim();
+} else {
+  // 直接アクセス: 既に有効ならキーを表示、なければ手動有効化のみ
+  const stored = getStoredLicense();
+  const v = stored ? await verifyLicense(stored) : { valid: false };
+  if (v.valid) {
+    await showSuccess(stored, String(v.payload.sub).includes('@') ? v.payload.sub : null);
+    document.querySelector('#st-success h1').textContent = 'Pro は有効です';
+  } else {
+    for (const s of states) $(s).hidden = true;
+    $('st-manual').hidden = false;
+  }
+}
+</script>
+</body>
+</html>
