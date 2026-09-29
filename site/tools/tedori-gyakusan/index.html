@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>手取りから報酬額を逆算｜源泉徴収後に○円受け取るための請求額計算ツール</title>
+<meta name="description" content="「手取りで10万円ほしい」など、源泉徴収（10.21%・20.42%）を差し引かれた後の金額から、請求すべき報酬額（税抜）と消費税込みの請求額・振込額を逆算する無料ツール。早見表と計算式つき。">
+<link rel="canonical" href="https://example.com/tools/tedori-gyakusan/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ゼロ請求書">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:title" content="手取りから報酬額を逆算｜源泉徴収後に○円受け取るための請求額計算ツール">
+<meta property="og:description" content="「手取りで10万円ほしい」など、源泉徴収（10.21%・20.42%）を差し引かれた後の金額から、請求すべき報酬額（税抜）と消費税込みの請求額・振込額を逆算する無料ツール。早見表と計算式つき。">
+<meta property="og:url" content="https://example.com/tools/tedori-gyakusan/">
+<meta property="og:image" content="https://example.com/assets/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="手取りから報酬額を逆算｜源泉徴収後に○円受け取るための請求額計算ツール">
+<meta name="twitter:description" content="「手取りで10万円ほしい」など、源泉徴収（10.21%・20.42%）を差し引かれた後の金額から、請求すべき報酬額（税抜）と消費税込みの請求額・振込額を逆算する無料ツール。早見表と計算式つき。">
+<meta name="theme-color" content="#0f6e5a">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../assets/style.css">
+<link rel="stylesheet" href="../../tools/tools.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"手取りから報酬額を逆算するツール","url":"https://example.com/tools/tedori-gyakusan/","description":"「手取りで10万円ほしい」など、源泉徴収（10.21%・20.42%）を差し引かれた後の金額から、請求すべき報酬額（税抜）と消費税込みの請求額・振込額を逆算する無料ツール。早見表と計算式つき。","applicationCategory":"FinanceApplication","operatingSystem":"Web","inLanguage":"ja","browserRequirements":"Requires JavaScript","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"JPY"},"publisher":{"@type":"Organization","name":"ゼロ請求書"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"手取り10万円にするには、いくら請求すればいいですか？","acceptedAnswer":{"@type":"Answer","text":"源泉徴収（10.21%）だけを考えると、報酬額は税抜111,370円です。消費税10%を区分して上乗せする場合、請求額（税込）は122,507円になります。"}},{"@type":"Question","name":"「手取り ÷ 0.9」で計算してはいけないのですか？","acceptedAnswer":{"@type":"Answer","text":"源泉徴収の税率は10%ではなく、復興特別所得税を含めた10.21%です。÷0.9で計算すると報酬額がやや多めになります。正しくは ÷0.8979（手取り897,900円以下の場合）です。"}},{"@type":"Question","name":"手取りが90万円を超える場合の計算は？","acceptedAnswer":{"@type":"Answer","text":"報酬が100万円を超えると、超えた部分の税率が20.42%になります。手取りが897,900円を超える場合は「（手取り−102,100円）÷0.7958」が目安になります。"}},{"@type":"Question","name":"逆算した報酬額の手取りが希望額より1円多いのはなぜですか？","acceptedAnswer":{"@type":"Answer","text":"源泉徴収税額の1円未満切り捨ての影響で、ちょうど希望額になる報酬額が存在しない場合があります。その場合は、希望額を下回らない最小の報酬額を表示しています。"}},{"@type":"Question","name":"消費税を上乗せしない場合はどうなりますか？","acceptedAnswer":{"@type":"Answer","text":"チェックを外すと、消費税なしで計算します。報酬額と振込額は「報酬額 − 源泉徴収税額」で一致します。"}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ゼロ請求書","item":"https://example.com/"},{"@type":"ListItem","position":2,"name":"計算ツール","item":"https://example.com/tools/"},{"@type":"ListItem","position":3,"name":"手取りから報酬額を逆算","item":"https://example.com/tools/tedori-gyakusan/"}]}</script>
+</head>
+<body>
+<header class="site-header"><div class="wrap"><a class="brand" href="../../">ゼロ請求書</a><nav class="nav"><a href="../../app/">請求書を作る</a><a href="../../tools/">計算ツール</a><a href="../../#pricing">料金</a></nav></div></header>
+<main class="wrap">
+<ol class="crumbs" aria-label="パンくずリスト"><li><a href="../../">ゼロ請求書</a></li><li><a href="../../tools/">計算ツール</a></li><li aria-current="page">手取りから報酬額を逆算</li></ol>
+<div class="tool-hero"><h1>手取りから報酬額を逆算するツール</h1><p>源泉徴収された後に受け取りたい金額（手取り）を入力すると、請求書に書くべき報酬額を1円単位で逆算します。消費税を上乗せした請求額と、実際の振込額も確認できます。</p></div>
+<form class="tool" id="f" autocomplete="off">
+<div class="card">
+<h2>受け取りたい金額</h2>
+<div class="field"><label for="net">手取り額（源泉徴収後・税抜）</label><input id="net" name="net" class="amount-input" type="text" inputmode="numeric" value="100000"><p class="hint">消費税を除いた、源泉徴収後に手元に残したい報酬額</p></div>
+<div class="field"><label class="check"><input type="checkbox" name="ct" value="1" checked>消費税10%を区分して上乗せ請求する</label><p class="hint">報酬と消費税を分けて記載し、源泉徴収は税抜額に対して行う前提で計算します。</p></div>
+</div>
+<div class="card" aria-live="polite">
+<h2>逆算結果</h2>
+<p class="result-main"><span class="label">請求する報酬額（税抜・源泉徴収前）</span><span class="big" id="r-gross">—</span></p>
+<dl class="rows">
+<div><dt>源泉徴収税額</dt><dd id="r-wh">—</dd></div>
+<div><dt>実際の手取り（報酬 − 源泉税）</dt><dd id="r-net">—</dd></div>
+<div><dt>消費税（10%）</dt><dd id="r-ct">—</dd></div>
+<div><dt>請求額（税込）</dt><dd id="r-total">—</dd></div>
+<div class="total"><dt>振込額</dt><dd id="r-pay">—</dd></div>
+</dl>
+<p class="formula" id="r-formula"></p>
+<div class="tool-actions"><button type="button" class="btn" data-copy-link>この計算結果のURLをコピー</button></div>
+</div>
+</form>
+<aside class="card cta no-print"><p><strong>この金額で請求書を作る — 登録不要・無料</strong><span class="muted">源泉徴収・消費税（税率ごとの端数処理）・登録番号の記載に対応した適格請求書を、ブラウザだけで作成。データは端末の外に送信されません。</span></p><a class="btn btn-primary" href="../../app/">請求書を作る（無料）</a></aside>
+<article class="article">
+
+<h2>手取りから報酬額を逆算する計算式</h2>
+<p>源泉徴収税は報酬額に比例してかかるため、「手取り ÷（1 − 税率）」で報酬額の目安を出せます。</p>
+<div class="table-scroll"><table><thead><tr><th>手取り額</th><th>報酬額（税抜）の目安</th></tr></thead><tbody>
+<tr><td>897,900円以下</td><td>手取り ÷ 0.8979</td></tr>
+<tr><td>897,900円超</td><td>（手取り − 102,100円）÷ 0.7958</td></tr>
+</tbody></table></div>
+<p>897,900円は、報酬がちょうど100万円のときの手取り（1,000,000円 − 102,100円）です。これを超えると、100万円を超える部分に20.42%がかかるため計算式が変わります。</p>
+<h3>割り算だけでは1円ずれることがある</h3>
+<p>源泉徴収税額は1円未満を切り捨てるため、割り算の結果を丸めただけでは手取りが1円足りなかったり、1円多すぎたりすることがあります。このツールは候補の前後を実際に源泉徴収税の計算にかけて確認し、<strong>手取りが希望額以上になる最小の報酬額</strong>を表示しています。</p>
+<p class="formula">例：手取り100,000円 → 100,000 ÷ 0.8979 ≒ 111,370.98 → 報酬 111,370円（源泉税 11,370円、手取り 100,000円）</p>
+
+<h2>手取り別の早見表</h2>
+<p>消費税10%を区分して上乗せし、税抜の報酬額に対して源泉徴収される場合の早見表です。</p>
+<div class="table-scroll"><table><thead><tr><th class="num">手取り（希望額）</th><th class="num">報酬額（税抜）</th><th class="num">源泉徴収税額</th><th class="num">請求額（税込）</th><th class="num">振込額</th></tr></thead><tbody>
+<tr><td class="num">10,000円</td><td class="num">11,136円</td><td class="num">1,136円</td><td class="num">12,249円</td><td class="num">11,113円</td></tr>
+<tr><td class="num">30,000円</td><td class="num">33,411円</td><td class="num">3,411円</td><td class="num">36,752円</td><td class="num">33,341円</td></tr>
+<tr><td class="num">50,000円</td><td class="num">55,685円</td><td class="num">5,685円</td><td class="num">61,253円</td><td class="num">55,568円</td></tr>
+<tr><td class="num">100,000円</td><td class="num">111,370円</td><td class="num">11,370円</td><td class="num">122,507円</td><td class="num">111,137円</td></tr>
+<tr><td class="num">200,000円</td><td class="num">222,741円</td><td class="num">22,741円</td><td class="num">245,015円</td><td class="num">222,274円</td></tr>
+<tr><td class="num">300,000円</td><td class="num">334,112円</td><td class="num">34,112円</td><td class="num">367,523円</td><td class="num">333,411円</td></tr>
+<tr><td class="num">500,000円</td><td class="num">556,854円</td><td class="num">56,854円</td><td class="num">612,539円</td><td class="num">555,685円</td></tr>
+<tr><td class="num">800,000円</td><td class="num">890,967円</td><td class="num">90,967円</td><td class="num">980,063円</td><td class="num">889,096円</td></tr>
+<tr><td class="num">1,000,000円</td><td class="num">1,128,298円</td><td class="num">128,298円</td><td class="num">1,241,127円</td><td class="num">1,112,829円</td></tr>
+<tr><td class="num">2,000,000円</td><td class="num">2,384,895円</td><td class="num">384,895円</td><td class="num">2,623,384円</td><td class="num">2,238,489円</td></tr>
+</tbody></table></div>
+<p class="caption">消費税・源泉徴収税額ともに1円未満切り捨てで計算しています。</p>
+
+<h2>「手取り」と「振込額」は違う</h2>
+<p>消費税を上乗せして請求した場合、口座に振り込まれる金額は「税込の請求額 − 源泉徴収税額」です。この中には、あとで納める（または免税事業者として受け取る）消費税分が含まれています。このページでいう手取りは、消費税を除いた「報酬額 − 源泉徴収税額」のことです。</p>
+<h2>逆算した金額で見積もり・請求するときのポイント</h2>
+<ul>
+<li>見積書・請求書には「報酬（税抜）」「消費税」「源泉徴収税」を分けて記載すると、源泉徴収の対象が税抜額になります。</li>
+<li>取引先によっては「税込で○円」と決まっていることもあります。事前に税抜・税込どちらの金額で合意したのかを確認しましょう。</li>
+<li>源泉徴収は所得税の前払いです。確定申告で精算されるため、最終的な税負担は所得全体で決まります。</li>
+</ul>
+<section class="faq"><h2>よくある質問</h2><details><summary>手取り10万円にするには、いくら請求すればいいですか？</summary><p>源泉徴収（10.21%）だけを考えると、報酬額は税抜111,370円です。消費税10%を区分して上乗せする場合、請求額（税込）は122,507円になります。</p></details>
+<details><summary>「手取り ÷ 0.9」で計算してはいけないのですか？</summary><p>源泉徴収の税率は10%ではなく、復興特別所得税を含めた10.21%です。÷0.9で計算すると報酬額がやや多めになります。正しくは ÷0.8979（手取り897,900円以下の場合）です。</p></details>
+<details><summary>手取りが90万円を超える場合の計算は？</summary><p>報酬が100万円を超えると、超えた部分の税率が20.42%になります。手取りが897,900円を超える場合は「（手取り−102,100円）÷0.7958」が目安になります。</p></details>
+<details><summary>逆算した報酬額の手取りが希望額より1円多いのはなぜですか？</summary><p>源泉徴収税額の1円未満切り捨ての影響で、ちょうど希望額になる報酬額が存在しない場合があります。その場合は、希望額を下回らない最小の報酬額を表示しています。</p></details>
+<details><summary>消費税を上乗せしない場合はどうなりますか？</summary><p>チェックを外すと、消費税なしで計算します。報酬額と振込額は「報酬額 − 源泉徴収税額」で一致します。</p></details></section>
+<p class="disclaimer">本ページの計算結果と解説は、一般的なルールにもとづく目安です。個別の取引への当てはめや特例の有無によって結果が変わることがあります。最終的な判断は税理士・税務署にご確認ください。</p>
+</article>
+<aside class="card cta no-print"><p><strong>計算できたら、そのまま請求書に — 登録不要・無料</strong><span class="muted">源泉徴収・消費税（税率ごとの端数処理）・登録番号の記載に対応した適格請求書を、ブラウザだけで作成。データは端末の外に送信されません。</span></p><a class="btn btn-primary" href="../../app/">請求書を作る（無料）</a></aside>
+</main>
+<footer class="site-footer"><div class="wrap">
+<nav class="footer-links" aria-label="計算ツール"><a href="../../tools/">計算ツール一覧</a><a href="../../tools/gensen/">源泉徴収税 計算</a><a href="../../tools/tedori-gyakusan/">手取りから報酬額を逆算</a><a href="../../tools/shohizei/">消費税 計算（税込⇔税抜）</a><a href="../../tools/inshi/">領収書の収入印紙 計算</a><a href="../../tools/touroku-bangou/">インボイス登録番号チェッカー</a><a href="../../tools/shiharai-kijitsu/">支払期日 計算</a></nav>
+<nav class="footer-links legal" aria-label="規約"><a href="../../">ゼロ請求書 トップ</a><a href="../../app/">請求書を作る</a><a href="../../legal/privacy/">プライバシーポリシー</a><a href="../../legal/tokushoho/">特定商取引法に基づく表記</a><a href="../../legal/terms/">利用規約</a></nav>
+<p>当サイトの計算ツールは一般的なルールに基づく目安です。最終的な判断は税理士・税務署にご確認ください。</p>
+<p>&copy; ゼロ請求書</p>
+</div></footer>
+<script type="module">
+import { withholdingTax, grossFromNet, calcInvoice } from '../../lib/tax.js';
+import { parseAmount, yen, bindForm, setupCopyLink, setText } from '../tools.js';
+const form = document.getElementById('f');
+function render() {
+  const net = parseAmount(form.net.value);
+  if (net == null) {
+    ['r-gross','r-wh','r-net','r-ct','r-total','r-pay'].forEach((id) => setText(id, '—'));
+    setText('r-formula', '金額を数字で入力してください。');
+    return;
+  }
+  const gross = grossFromNet(net);
+  const wh = withholdingTax(gross);
+  const ct = form.ct.checked ? calcInvoice([{ qty: 1, unitPrice: gross, rate: 10 }]).tax : 0;
+  setText('r-gross', yen(gross));
+  setText('r-wh', '−' + yen(wh));
+  setText('r-net', yen(gross - wh));
+  setText('r-ct', form.ct.checked ? yen(ct) : 'なし');
+  setText('r-total', yen(gross + ct));
+  setText('r-pay', yen(gross + ct - wh));
+  const fmt = (n) => n.toLocaleString('ja-JP');
+  setText('r-formula', net <= 897900
+    ? `目安：${fmt(net)}円 ÷ 0.8979 → 手取りが希望額以上になる最小の報酬額は ${fmt(gross)}円`
+    : `目安：（${fmt(net)}円 − 102,100円）÷ 0.7958 → 手取りが希望額以上になる最小の報酬額は ${fmt(gross)}円`);
+}
+bindForm(form, render);
+setupCopyLink();
+</script>
+</body>
+</html>

@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>源泉徴収税 計算ツール｜報酬から源泉税・手取りを自動計算【10.21%・100万円超対応】</title>
+<meta name="description" content="フリーランスの報酬にかかる源泉徴収税額（10.21%／100万円超は20.42%）と手取り額・振込額を無料で自動計算。消費税を区分記載した場合の税抜計算、計算例の早見表、対象になる報酬の範囲も解説します。">
+<link rel="canonical" href="https://example.com/tools/gensen/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ゼロ請求書">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:title" content="源泉徴収税 計算ツール｜報酬から源泉税・手取りを自動計算【10.21%・100万円超対応】">
+<meta property="og:description" content="フリーランスの報酬にかかる源泉徴収税額（10.21%／100万円超は20.42%）と手取り額・振込額を無料で自動計算。消費税を区分記載した場合の税抜計算、計算例の早見表、対象になる報酬の範囲も解説します。">
+<meta property="og:url" content="https://example.com/tools/gensen/">
+<meta property="og:image" content="https://example.com/assets/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="源泉徴収税 計算ツール｜報酬から源泉税・手取りを自動計算【10.21%・100万円超対応】">
+<meta name="twitter:description" content="フリーランスの報酬にかかる源泉徴収税額（10.21%／100万円超は20.42%）と手取り額・振込額を無料で自動計算。消費税を区分記載した場合の税抜計算、計算例の早見表、対象になる報酬の範囲も解説します。">
+<meta name="theme-color" content="#0f6e5a">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../assets/style.css">
+<link rel="stylesheet" href="../../tools/tools.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"源泉徴収税 計算ツール（報酬・料金）","url":"https://example.com/tools/gensen/","description":"フリーランスの報酬にかかる源泉徴収税額（10.21%／100万円超は20.42%）と手取り額・振込額を無料で自動計算。消費税を区分記載した場合の税抜計算、計算例の早見表、対象になる報酬の範囲も解説します。","applicationCategory":"FinanceApplication","operatingSystem":"Web","inLanguage":"ja","browserRequirements":"Requires JavaScript","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"JPY"},"publisher":{"@type":"Organization","name":"ゼロ請求書"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"源泉徴収税の税率は10%ではないのですか？","acceptedAnswer":{"@type":"Answer","text":"所得税10%に加えて、2037年（令和19年）までは復興特別所得税（所得税額の2.1%）がかかるため、合計で10.21%になります。100万円を超える部分は20.42%です。"}},{"@type":"Question","name":"報酬が100万円を超えると全額に20.42%がかかりますか？","acceptedAnswer":{"@type":"Answer","text":"いいえ。100万円までの部分は10.21%、100万円を超える部分だけが20.42%です。計算式は「（支払金額−100万円）×20.42%＋102,100円」です。"}},{"@type":"Question","name":"消費税にも源泉徴収税はかかりますか？","acceptedAnswer":{"@type":"Answer","text":"原則は消費税込みの金額が対象ですが、請求書等で報酬額と消費税額が明確に区分されていれば、税抜の報酬額だけを対象にして差し支えないとされています。"}},{"@type":"Question","name":"インボイス登録をしていない免税事業者でも源泉徴収されますか？","acceptedAnswer":{"@type":"Answer","text":"はい。源泉徴収の要否は、支払う報酬の種類と支払者が源泉徴収義務者かどうかで決まり、受け取る側のインボイス登録の有無とは関係ありません。"}},{"@type":"Question","name":"源泉徴収税の端数はどう処理しますか？","acceptedAnswer":{"@type":"Answer","text":"計算した源泉徴収税額の1円未満の端数は切り捨てます。このツールも1円未満切り捨てで計算しています。"}},{"@type":"Question","name":"振込額と手取りの違いは何ですか？","acceptedAnswer":{"@type":"Answer","text":"振込額は「税込の請求額 − 源泉徴収税額」で、実際に口座に入金される金額です。このツールの手取りは消費税（預かった税金）を除いた「税抜報酬 − 源泉徴収税額」を表示しています。"}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ゼロ請求書","item":"https://example.com/"},{"@type":"ListItem","position":2,"name":"計算ツール","item":"https://example.com/tools/"},{"@type":"ListItem","position":3,"name":"源泉徴収税 計算","item":"https://example.com/tools/gensen/"}]}</script>
+</head>
+<body>
+<header class="site-header"><div class="wrap"><a class="brand" href="../../">ゼロ請求書</a><nav class="nav"><a href="../../app/">請求書を作る</a><a href="../../tools/">計算ツール</a><a href="../../#pricing">料金</a></nav></div></header>
+<main class="wrap">
+<ol class="crumbs" aria-label="パンくずリスト"><li><a href="../../">ゼロ請求書</a></li><li><a href="../../tools/">計算ツール</a></li><li aria-current="page">源泉徴収税 計算</li></ol>
+<div class="tool-hero"><h1>源泉徴収税 計算ツール（報酬・料金）</h1><p>報酬額を入力すると、源泉徴収税額（復興特別所得税を含む）と手取り・振込額がすぐに表示されます。100万円を超える報酬や、消費税を区分して記載する場合にも対応しています。</p></div>
+<form class="tool" id="f" autocomplete="off">
+<div class="card">
+<h2>報酬の条件</h2>
+<div class="field"><label for="amount">報酬額（円）</label><input id="amount" name="amount" class="amount-input" type="text" inputmode="numeric" value="100000" aria-describedby="amount-hint"><p class="hint" id="amount-hint">カンマ・全角数字も入力できます</p></div>
+<div class="field"><span class="muted" style="font-size:.85rem">消費税の扱い</span>
+<div class="seg" role="radiogroup" aria-label="消費税の扱い">
+<label><input type="radio" name="tax" value="separate" checked>税抜額を入力（消費税10%を別に記載）</label>
+<label><input type="radio" name="tax" value="inclusive">税込額を入力（消費税を区分しない）</label>
+<label><input type="radio" name="tax" value="none">消費税なし</label>
+</div>
+<p class="hint" id="tax-hint"></p></div>
+</div>
+<div class="card" aria-live="polite">
+<h2>計算結果</h2>
+<p class="result-main"><span class="label">源泉徴収税額</span><span class="big" id="r-wh">—</span></p>
+<dl class="rows">
+<div><dt>源泉徴収の対象額</dt><dd id="r-base">—</dd></div>
+<div><dt>消費税（10%）</dt><dd id="r-ct">—</dd></div>
+<div><dt>請求額（税込）</dt><dd id="r-total">—</dd></div>
+<div><dt>源泉徴収税額</dt><dd id="r-wh2">—</dd></div>
+<div class="total"><dt>振込額（差引支払額）</dt><dd id="r-pay">—</dd></div>
+<div><dt>手取り（税抜報酬 − 源泉税）</dt><dd id="r-net">—</dd></div>
+</dl>
+<p class="formula" id="r-formula"></p>
+<div class="tool-actions"><button type="button" class="btn" data-copy-link>この計算結果のURLをコピー</button></div>
+</div>
+</form>
+<aside class="card cta no-print"><p><strong>この金額で請求書を作る — 登録不要・無料</strong><span class="muted">源泉徴収・消費税（税率ごとの端数処理）・登録番号の記載に対応した適格請求書を、ブラウザだけで作成。データは端末の外に送信されません。</span></p><a class="btn btn-primary" href="../../app/">請求書を作る（無料）</a></aside>
+<article class="article">
+
+<h2>源泉徴収税の計算方法</h2>
+<p>フリーランス（個人）に支払う原稿料・デザイン料・講演料などの「報酬・料金」は、支払う側が所得税と復興特別所得税を差し引いて（源泉徴収して）支払います。税率は次のとおりです。</p>
+<div class="table-scroll"><table><thead><tr><th>1回に支払う金額</th><th>源泉徴収税額の計算式</th></tr></thead><tbody>
+<tr><td>100万円以下の部分</td><td>支払金額 × 10.21%</td></tr>
+<tr><td>100万円を超える部分</td><td>（支払金額 − 100万円）× 20.42% ＋ 102,100円</td></tr>
+</tbody></table></div>
+<p>10.21%は所得税10%に、その2.1%にあたる復興特別所得税（0.21%）を加えた税率です。計算結果の1円未満の端数は切り捨てます。</p>
+<h3>100万円を超える場合の計算例</h3>
+<p>報酬が150万円なら、100万円までの部分に10.21%、超える50万円の部分に20.42%がかかります。</p>
+<p class="formula">（1,500,000 − 1,000,000）× 20.42% ＋ 102,100 ＝ 204,200円</p>
+<p>「150万円 × 20.42%」ではない点に注意してください。20.42%がかかるのは100万円を超えた部分だけです。</p>
+
+<h2>消費税を含めるか？ 税抜額で計算できる条件</h2>
+<p>源泉徴収の対象は原則として消費税を含めた支払金額です。ただし、請求書などで<strong>報酬の額と消費税の額が明確に区分されている場合</strong>は、消費税を除いた税抜の報酬額だけを源泉徴収の対象にして差し支えないとされています（国税庁の通達による取扱い）。</p>
+<div class="table-scroll"><table><thead><tr><th>請求書の書き方</th><th>源泉徴収の対象</th><th class="num">報酬10万円の場合の源泉税</th></tr></thead><tbody>
+<tr><td>報酬 100,000円／消費税 10,000円 と区分して記載</td><td>税抜 100,000円</td><td class="num">10,210円</td></tr>
+<tr><td>報酬 110,000円（税込）とだけ記載</td><td>税込 110,000円</td><td class="num">11,231円</td></tr>
+</tbody></table></div>
+<p>区分記載するほうが源泉税は少なくなり、振込額が増えます。請求書では「報酬（税抜）」「消費税」「源泉徴収税」を分けて書くのが一般的です。</p>
+
+<h2>計算例の早見表（10.21%／20.42%）</h2>
+<p>税抜の報酬額に消費税10%を区分して上乗せし、税抜額に対して源泉徴収する場合の早見表です。</p>
+<div class="table-scroll"><table><thead><tr><th class="num">報酬（税抜）</th><th class="num">源泉徴収税額</th><th class="num">手取り（税抜−源泉）</th><th class="num">請求額（税込）</th><th class="num">振込額</th></tr></thead><tbody>
+<tr><td class="num">10,000円</td><td class="num">1,021円</td><td class="num">8,979円</td><td class="num">11,000円</td><td class="num">9,979円</td></tr>
+<tr><td class="num">30,000円</td><td class="num">3,063円</td><td class="num">26,937円</td><td class="num">33,000円</td><td class="num">29,937円</td></tr>
+<tr><td class="num">50,000円</td><td class="num">5,105円</td><td class="num">44,895円</td><td class="num">55,000円</td><td class="num">49,895円</td></tr>
+<tr><td class="num">100,000円</td><td class="num">10,210円</td><td class="num">89,790円</td><td class="num">110,000円</td><td class="num">99,790円</td></tr>
+<tr><td class="num">300,000円</td><td class="num">30,630円</td><td class="num">269,370円</td><td class="num">330,000円</td><td class="num">299,370円</td></tr>
+<tr><td class="num">500,000円</td><td class="num">51,050円</td><td class="num">448,950円</td><td class="num">550,000円</td><td class="num">498,950円</td></tr>
+<tr><td class="num">1,000,000円</td><td class="num">102,100円</td><td class="num">897,900円</td><td class="num">1,100,000円</td><td class="num">997,900円</td></tr>
+<tr><td class="num">1,500,000円</td><td class="num">204,200円</td><td class="num">1,295,800円</td><td class="num">1,650,000円</td><td class="num">1,445,800円</td></tr>
+<tr><td class="num">2,000,000円</td><td class="num">306,300円</td><td class="num">1,693,700円</td><td class="num">2,200,000円</td><td class="num">1,893,700円</td></tr>
+<tr><td class="num">3,000,000円</td><td class="num">510,500円</td><td class="num">2,489,500円</td><td class="num">3,300,000円</td><td class="num">2,789,500円</td></tr>
+</tbody></table></div>
+<p class="caption">消費税は1円未満切り捨て、源泉徴収税額は1円未満切り捨てで計算しています。</p>
+
+<h2>源泉徴収の対象になる報酬・ならない報酬</h2>
+<p>個人に支払う報酬のうち、所得税法で定められたものが源泉徴収の対象です。フリーランスに関係が深いものの例は次のとおりです。</p>
+<ul>
+<li><strong>対象になる例</strong>：原稿料、講演料、デザイン料（Webデザイン・ロゴ・イラスト等）、翻訳料、写真の撮影料、通訳料、講師料、脚本・作曲の報酬 など</li>
+<li><strong>一般に対象として列挙されていない例</strong>：プログラミング・システム開発の報酬、単純な事務作業やデータ入力の報酬 など</li>
+</ul>
+<p>同じ「Web制作」でも、デザインの報酬として支払うのか、システム開発の報酬として支払うのかで扱いが変わることがあります。契約内容で判断に迷う場合は、支払う側・受け取る側で事前に確認しておきましょう。</p>
+<h3>源泉徴収が不要なケース</h3>
+<ul>
+<li>支払う側が源泉徴収義務者でない場合（例：従業員を雇っておらず給与を支払っていない個人事業主や、会社員が個人として依頼する場合）</li>
+<li>支払う相手が法人の場合（一部の例外を除く）</li>
+</ul>
+<h3>交通費・宿泊費はどうなる？</h3>
+<p>報酬と一緒に支払う旅費や交通費も、原則として報酬に含めて源泉徴収の対象になります。ただし、支払う側が交通機関やホテルに直接支払い、その金額が通常必要な範囲である場合は対象外とされています。</p>
+
+<h2>源泉徴収された税金はどうなる？</h2>
+<p>源泉徴収税は所得税の前払いのようなものです。フリーランスは確定申告で1年間の所得税を計算し、源泉徴収された税額を差し引いて精算します。経費や控除が多い場合は、払いすぎた分が還付されることがあります。支払調書や入金明細で、取引先ごとの源泉徴収税額を記録しておきましょう。</p>
+<section class="faq"><h2>よくある質問</h2><details><summary>源泉徴収税の税率は10%ではないのですか？</summary><p>所得税10%に加えて、2037年（令和19年）までは復興特別所得税（所得税額の2.1%）がかかるため、合計で10.21%になります。100万円を超える部分は20.42%です。</p></details>
+<details><summary>報酬が100万円を超えると全額に20.42%がかかりますか？</summary><p>いいえ。100万円までの部分は10.21%、100万円を超える部分だけが20.42%です。計算式は「（支払金額−100万円）×20.42%＋102,100円」です。</p></details>
+<details><summary>消費税にも源泉徴収税はかかりますか？</summary><p>原則は消費税込みの金額が対象ですが、請求書等で報酬額と消費税額が明確に区分されていれば、税抜の報酬額だけを対象にして差し支えないとされています。</p></details>
+<details><summary>インボイス登録をしていない免税事業者でも源泉徴収されますか？</summary><p>はい。源泉徴収の要否は、支払う報酬の種類と支払者が源泉徴収義務者かどうかで決まり、受け取る側のインボイス登録の有無とは関係ありません。</p></details>
+<details><summary>源泉徴収税の端数はどう処理しますか？</summary><p>計算した源泉徴収税額の1円未満の端数は切り捨てます。このツールも1円未満切り捨てで計算しています。</p></details>
+<details><summary>振込額と手取りの違いは何ですか？</summary><p>振込額は「税込の請求額 − 源泉徴収税額」で、実際に口座に入金される金額です。このツールの手取りは消費税（預かった税金）を除いた「税抜報酬 − 源泉徴収税額」を表示しています。</p></details></section>
+<p class="disclaimer">本ページの計算結果と解説は、一般的なルールにもとづく目安です。個別の取引への当てはめや特例の有無によって結果が変わることがあります。最終的な判断は税理士・税務署にご確認ください。</p>
+</article>
+<aside class="card cta no-print"><p><strong>計算できたら、そのまま請求書に — 登録不要・無料</strong><span class="muted">源泉徴収・消費税（税率ごとの端数処理）・登録番号の記載に対応した適格請求書を、ブラウザだけで作成。データは端末の外に送信されません。</span></p><a class="btn btn-primary" href="../../app/">請求書を作る（無料）</a></aside>
+</main>
+<footer class="site-footer"><div class="wrap">
+<nav class="footer-links" aria-label="計算ツール"><a href="../../tools/">計算ツール一覧</a><a href="../../tools/gensen/">源泉徴収税 計算</a><a href="../../tools/tedori-gyakusan/">手取りから報酬額を逆算</a><a href="../../tools/shohizei/">消費税 計算（税込⇔税抜）</a><a href="../../tools/inshi/">領収書の収入印紙 計算</a><a href="../../tools/touroku-bangou/">インボイス登録番号チェッカー</a><a href="../../tools/shiharai-kijitsu/">支払期日 計算</a></nav>
+<nav class="footer-links legal" aria-label="規約"><a href="../../">ゼロ請求書 トップ</a><a href="../../app/">請求書を作る</a><a href="../../legal/privacy/">プライバシーポリシー</a><a href="../../legal/tokushoho/">特定商取引法に基づく表記</a><a href="../../legal/terms/">利用規約</a></nav>
+<p>当サイトの計算ツールは一般的なルールに基づく目安です。最終的な判断は税理士・税務署にご確認ください。</p>
+<p>&copy; ゼロ請求書</p>
+</div></footer>
+<script type="module">
+import { withholdingTax, calcInvoice } from '../../lib/tax.js';
+import { parseAmount, yen, bindForm, setupCopyLink, setText } from '../tools.js';
+const form = document.getElementById('f');
+const hints = {
+  separate: '請求書で報酬と消費税を分けて書く場合。源泉徴収は税抜額に対して行います。',
+  inclusive: '税込金額だけを記載する場合。消費税を含めた全額が源泉徴収の対象になります。',
+  none: '消費税を上乗せしない場合（入力額がそのまま源泉徴収の対象）。',
+};
+function render() {
+  const mode = form.tax.value;
+  setText('tax-hint', hints[mode]);
+  const amt = parseAmount(form.amount.value);
+  if (amt == null) {
+    ['r-wh','r-base','r-ct','r-total','r-wh2','r-pay','r-net'].forEach((id) => setText(id, '—'));
+    setText('r-formula', '金額を数字で入力してください。');
+    return;
+  }
+  let base, ct, total;
+  if (mode === 'separate') { base = amt; ct = calcInvoice([{ qty: 1, unitPrice: amt, rate: 10 }]).tax; total = base + ct; }
+  else if (mode === 'inclusive') { base = amt; ct = null; total = amt; }
+  else { base = amt; ct = 0; total = amt; }
+  const wh = withholdingTax(base);
+  setText('r-wh', yen(wh));
+  setText('r-wh2', '−' + yen(wh));
+  setText('r-base', yen(base));
+  setText('r-ct', ct == null ? '税込額に含む' : yen(ct));
+  setText('r-total', yen(total));
+  setText('r-pay', yen(total - wh));
+  const netBase = mode === 'inclusive' ? total - calcInvoice([{ qty: 1, unitPrice: total, rate: 10 }], { priceMode: 'inclusive' }).tax : base;
+  setText('r-net', yen(netBase - wh));
+  const fmt = (n) => n.toLocaleString('ja-JP');
+  setText('r-formula', base <= 1000000
+    ? `計算式：${fmt(base)}円 × 10.21% ＝ ${fmt(wh)}円（1円未満切り捨て）`
+    : `計算式：（${fmt(base)}円 − 1,000,000円）× 20.42% ＋ 102,100円 ＝ ${fmt(wh)}円（1円未満切り捨て）`);
+}
+bindForm(form, render);
+setupCopyLink();
+</script>
+</body>
+</html>

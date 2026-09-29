@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>消費税 計算ツール｜税込・税抜を一発変換（10%・8%／端数処理・インボイス対応）</title>
+<meta name="description" content="税抜から税込、税込から税抜・消費税額を10%・8%で即計算。切り捨て・四捨五入・切り上げの端数処理を選べて、インボイス制度の「1請求書・税率ごとに1回」の端数処理と行ごと計算の差も比較できる無料ツールです。">
+<link rel="canonical" href="https://example.com/tools/shohizei/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ゼロ請求書">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:title" content="消費税 計算ツール｜税込・税抜を一発変換（10%・8%／端数処理・インボイス対応）">
+<meta property="og:description" content="税抜から税込、税込から税抜・消費税額を10%・8%で即計算。切り捨て・四捨五入・切り上げの端数処理を選べて、インボイス制度の「1請求書・税率ごとに1回」の端数処理と行ごと計算の差も比較できる無料ツールです。">
+<meta property="og:url" content="https://example.com/tools/shohizei/">
+<meta property="og:image" content="https://example.com/assets/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="消費税 計算ツール｜税込・税抜を一発変換（10%・8%／端数処理・インボイス対応）">
+<meta name="twitter:description" content="税抜から税込、税込から税抜・消費税額を10%・8%で即計算。切り捨て・四捨五入・切り上げの端数処理を選べて、インボイス制度の「1請求書・税率ごとに1回」の端数処理と行ごと計算の差も比較できる無料ツールです。">
+<meta name="theme-color" content="#0f6e5a">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../assets/style.css">
+<link rel="stylesheet" href="../../tools/tools.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"消費税 計算ツール（税込⇔税抜・10%／8%）","url":"https://example.com/tools/shohizei/","description":"税抜から税込、税込から税抜・消費税額を10%・8%で即計算。切り捨て・四捨五入・切り上げの端数処理を選べて、インボイス制度の「1請求書・税率ごとに1回」の端数処理と行ごと計算の差も比較できる無料ツールです。","applicationCategory":"FinanceApplication","operatingSystem":"Web","inLanguage":"ja","browserRequirements":"Requires JavaScript","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"JPY"},"publisher":{"@type":"Organization","name":"ゼロ請求書"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"税込価格から税抜価格を出すには？","acceptedAnswer":{"@type":"Answer","text":"10%の場合は「税込 × 10 ÷ 110」で消費税額を求めて端数処理し、税込から差し引きます。単純に「税込 ÷ 1.1」をしても近い値になりますが、端数処理によって1円ずれることがあります。"}},{"@type":"Question","name":"消費税の端数は切り捨て・四捨五入・切り上げのどれが正しいですか？","acceptedAnswer":{"@type":"Answer","text":"いずれも認められており、事業者が選べます。ただし、インボイスでは1枚の請求書につき税率ごとに1回だけ端数処理する必要があります。"}},{"@type":"Question","name":"インボイスで明細ごとに消費税を計算してはいけないのですか？","acceptedAnswer":{"@type":"Answer","text":"明細ごとに消費税額を計算して端数処理し、その合計を請求書の消費税額とする方法は認められていません。税率ごとに合計した金額に対して1回端数処理します。"}},{"@type":"Question","name":"税抜で請求すべき？税込で請求すべき？","acceptedAnswer":{"@type":"Answer","text":"インボイスでは「税率ごとに区分した合計額（税抜または税込）」と「税率ごとの消費税額」の記載が必要です。どちらの方式でも構いませんが、源泉徴収がある取引では報酬と消費税を区分記載すると、源泉徴収の対象を税抜額にできます。"}},{"@type":"Question","name":"免税事業者は請求書に消費税を記載できますか？","acceptedAnswer":{"@type":"Answer","text":"免税事業者はインボイス（適格請求書）を発行できず、登録番号や「消費税額」を記載した適格請求書は作れません。価格の設定や記載方法は取引先と相談のうえ、誤解を招かない表示にしましょう。"}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ゼロ請求書","item":"https://example.com/"},{"@type":"ListItem","position":2,"name":"計算ツール","item":"https://example.com/tools/"},{"@type":"ListItem","position":3,"name":"消費税 計算","item":"https://example.com/tools/shohizei/"}]}</script>
+</head>
+<body>
+<header class="site-header"><div class="wrap"><a class="brand" href="../../">ゼロ請求書</a><nav class="nav"><a href="../../app/">請求書を作る</a><a href="../../tools/">計算ツール</a><a href="../../#pricing">料金</a></nav></div></header>
+<main class="wrap">
+<ol class="crumbs" aria-label="パンくずリスト"><li><a href="../../">ゼロ請求書</a></li><li><a href="../../tools/">計算ツール</a></li><li aria-current="page">消費税 計算</li></ol>
+<div class="tool-hero"><h1>消費税 計算ツール（税込⇔税抜・10%／8%）</h1><p>金額を入れるだけで、税込・税抜・消費税額がすぐにわかります。端数処理の方法を選べるほか、複数の明細をインボイスのルール（税率ごとに1回の端数処理）で計算した場合と、行ごとに計算した場合の差も確認できます。</p></div>
+<form class="tool" id="f" autocomplete="off">
+<div class="card">
+<h2>金額と条件</h2>
+<div class="field"><label for="amount">金額（円）</label><input id="amount" name="amount" class="amount-input" type="text" inputmode="numeric" value="10000"></div>
+<div class="field"><span class="muted" style="font-size:.85rem">入力した金額は</span>
+<div class="seg" role="radiogroup" aria-label="入力金額の種類"><label><input type="radio" name="mode" value="exclusive" checked>税抜（税込を求める）</label><label><input type="radio" name="mode" value="inclusive">税込（税抜を求める）</label></div></div>
+<div class="row2">
+<div class="field"><span class="muted" style="font-size:.85rem">税率</span><div class="seg" role="radiogroup" aria-label="税率"><label><input type="radio" name="rate" value="10" checked>10%</label><label><input type="radio" name="rate" value="8">8%（軽減）</label></div></div>
+<div class="field"><label for="rounding">端数処理</label><select id="rounding" name="rounding"><option value="floor" selected>切り捨て</option><option value="round">四捨五入</option><option value="ceil">切り上げ</option></select></div>
+</div>
+</div>
+<div class="card" aria-live="polite">
+<h2>計算結果</h2>
+<p class="result-main"><span class="label" id="r-main-label">税込金額</span><span class="big" id="r-main">—</span></p>
+<dl class="rows">
+<div><dt>税抜金額</dt><dd id="r-base">—</dd></div>
+<div><dt>消費税額</dt><dd id="r-tax">—</dd></div>
+<div class="total"><dt>税込金額</dt><dd id="r-total">—</dd></div>
+</dl>
+<p class="formula" id="r-formula"></p>
+<div class="tool-actions"><button type="button" class="btn" data-copy-link>この計算結果のURLをコピー</button></div>
+</div>
+<div class="card" style="grid-column:1/-1">
+<h2>明細が複数あるとき：インボイスの端数処理と行ごとの計算を比較</h2>
+<p class="muted" style="font-size:.85rem;margin:0 0 8px">税抜の単価・数量・税率を入力してください（端数処理は上の設定を使います）。</p>
+<div class="table-scroll"><table class="items"><thead><tr><th>単価（税抜）</th><th>数量</th><th>税率</th><th class="num">金額</th></tr></thead><tbody>
+<tr><td><input name="p1" type="text" inputmode="numeric" aria-label="1行目の単価" value="198"></td><td><input name="q1" type="text" inputmode="numeric" aria-label="1行目の数量" value="3"></td><td><select name="r1" aria-label="1行目の税率"><option value="10">10%</option><option value="8" selected>8%</option></select></td><td class="num" id="l1">—</td></tr>
+<tr><td><input name="p2" type="text" inputmode="numeric" aria-label="2行目の単価" value="298"></td><td><input name="q2" type="text" inputmode="numeric" aria-label="2行目の数量" value="1"></td><td><select name="r2" aria-label="2行目の税率"><option value="10">10%</option><option value="8" selected>8%</option></select></td><td class="num" id="l2">—</td></tr>
+<tr><td><input name="p3" type="text" inputmode="numeric" aria-label="3行目の単価" value="1480"></td><td><input name="q3" type="text" inputmode="numeric" aria-label="3行目の数量" value="1"></td><td><select name="r3" aria-label="3行目の税率"><option value="10" selected>10%</option><option value="8">8%</option></select></td><td class="num" id="l3">—</td></tr>
+<tr><td><input name="p4" type="text" inputmode="numeric" aria-label="4行目の単価" value="55"></td><td><input name="q4" type="text" inputmode="numeric" aria-label="4行目の数量" value="1"></td><td><select name="r4" aria-label="4行目の税率"><option value="10" selected>10%</option><option value="8">8%</option></select></td><td class="num" id="l4">—</td></tr>
+<tr><td><input name="p5" type="text" inputmode="numeric" aria-label="5行目の単価" value=""></td><td><input name="q5" type="text" inputmode="numeric" aria-label="5行目の数量" value=""></td><td><select name="r5" aria-label="5行目の税率"><option value="10" selected>10%</option><option value="8">8%</option></select></td><td class="num" id="l5">—</td></tr>
+</tbody></table></div>
+<div class="compare">
+<div><span class="label">インボイスのルール（税率ごとに1回）</span><span class="v" id="c-invoice">—</span><span class="label" id="c-invoice-detail"></span></div>
+<div><span class="label">行ごとに端数処理して合計</span><span class="v" id="c-line">—</span><span class="label" id="c-line-detail"></span></div>
+</div>
+<p class="note" id="c-diff"></p>
+</div>
+</form>
+<aside class="card cta no-print"><p><strong>この金額で請求書を作る — 登録不要・無料</strong><span class="muted">源泉徴収・消費税（税率ごとの端数処理）・登録番号の記載に対応した適格請求書を、ブラウザだけで作成。データは端末の外に送信されません。</span></p><a class="btn btn-primary" href="../../app/">請求書を作る（無料）</a></aside>
+<article class="article">
+
+<h2>消費税の計算式</h2>
+<div class="table-scroll"><table><thead><tr><th>求めたいもの</th><th>10%の場合</th><th>8%（軽減税率）の場合</th></tr></thead><tbody>
+<tr><td>税抜 → 税込</td><td>税抜 × 1.1</td><td>税抜 × 1.08</td></tr>
+<tr><td>税抜 → 消費税額</td><td>税抜 × 10%</td><td>税抜 × 8%</td></tr>
+<tr><td>税込 → 消費税額</td><td>税込 × 10 ÷ 110</td><td>税込 × 8 ÷ 108</td></tr>
+<tr><td>税込 → 税抜</td><td>税込 − 消費税額</td><td>税込 − 消費税額</td></tr>
+</tbody></table></div>
+<p>税込から税抜を求めるときは、先に「税込 × 10/110」で消費税額を出して端数処理し、税込から差し引くと、税抜・消費税・税込の合計がきれいに一致します。このツールもこの順番で計算しています。</p>
+<p>なお、消費税10%の内訳は国税7.8%・地方消費税2.2%、軽減税率8%の内訳は国税6.24%・地方消費税1.76%です。</p>
+
+<h3>税抜 → 税込の計算例（切り捨て）</h3>
+<div class="table-scroll"><table><thead><tr><th class="num">税抜金額</th><th class="num">消費税（10%）</th><th class="num">税込（10%）</th><th class="num">消費税（8%）</th><th class="num">税込（8%）</th></tr></thead><tbody>
+<tr><td class="num">100円</td><td class="num">10円</td><td class="num">110円</td><td class="num">8円</td><td class="num">108円</td></tr>
+<tr><td class="num">980円</td><td class="num">98円</td><td class="num">1,078円</td><td class="num">78円</td><td class="num">1,058円</td></tr>
+<tr><td class="num">1,000円</td><td class="num">100円</td><td class="num">1,100円</td><td class="num">80円</td><td class="num">1,080円</td></tr>
+<tr><td class="num">9,800円</td><td class="num">980円</td><td class="num">10,780円</td><td class="num">784円</td><td class="num">10,584円</td></tr>
+<tr><td class="num">12,345円</td><td class="num">1,234円</td><td class="num">13,579円</td><td class="num">987円</td><td class="num">13,332円</td></tr>
+<tr><td class="num">33,333円</td><td class="num">3,333円</td><td class="num">36,666円</td><td class="num">2,666円</td><td class="num">35,999円</td></tr>
+<tr><td class="num">100,000円</td><td class="num">10,000円</td><td class="num">110,000円</td><td class="num">8,000円</td><td class="num">108,000円</td></tr>
+</tbody></table></div>
+<h3>税込 → 税抜の計算例（切り捨て）</h3>
+<div class="table-scroll"><table><thead><tr><th class="num">税込金額</th><th class="num">税抜（10%）</th><th class="num">消費税（10%）</th><th class="num">税抜（8%）</th><th class="num">消費税（8%）</th></tr></thead><tbody>
+<tr><td class="num">110円</td><td class="num">100円</td><td class="num">10円</td><td class="num">102円</td><td class="num">8円</td></tr>
+<tr><td class="num">1,000円</td><td class="num">910円</td><td class="num">90円</td><td class="num">926円</td><td class="num">74円</td></tr>
+<tr><td class="num">1,100円</td><td class="num">1,000円</td><td class="num">100円</td><td class="num">1,019円</td><td class="num">81円</td></tr>
+<tr><td class="num">5,500円</td><td class="num">5,000円</td><td class="num">500円</td><td class="num">5,093円</td><td class="num">407円</td></tr>
+<tr><td class="num">10,000円</td><td class="num">9,091円</td><td class="num">909円</td><td class="num">9,260円</td><td class="num">740円</td></tr>
+<tr><td class="num">108,000円</td><td class="num">98,182円</td><td class="num">9,818円</td><td class="num">100,000円</td><td class="num">8,000円</td></tr>
+</tbody></table></div>
+
+<h2>端数処理は3種類：どれを選んでもいい？</h2>
+<p>消費税額に1円未満の端数が出たときの処理方法（切り捨て・四捨五入・切り上げ）は法律で決まっておらず、事業者が選べます。実務では、受け取る側に不利にならない<strong>切り捨て</strong>がよく使われます。</p>
+<div class="table-scroll"><table><thead><tr><th>金額（税率）</th><th class="num">計算上の消費税</th><th class="num">切り捨て</th><th class="num">四捨五入</th><th class="num">切り上げ</th></tr></thead><tbody>
+<tr><td>12,345円（10%）</td><td class="num">1,234.5円</td><td class="num">1,234円</td><td class="num">1,235円</td><td class="num">1,235円</td></tr>
+<tr><td>998円（8%）</td><td class="num">79.84円</td><td class="num">79円</td><td class="num">80円</td><td class="num">80円</td></tr>
+<tr><td>1,234円（8%）</td><td class="num">98.72円</td><td class="num">98円</td><td class="num">99円</td><td class="num">99円</td></tr>
+</tbody></table></div>
+
+<h2>インボイス制度の端数処理は「1請求書につき、税率ごとに1回」</h2>
+<p>適格請求書（インボイス）に記載する消費税額は、<strong>1枚の適格請求書につき、税率ごとに1回だけ</strong>端数処理をします。商品や明細の行ごとに消費税を計算して端数処理し、それを合計する方法は認められていません。</p>
+<h3>行ごとに処理した場合との差の例</h3>
+<div class="table-scroll"><table><thead><tr><th>明細</th><th>単価 × 数量</th><th>税率</th><th class="num">金額（税抜）</th><th class="num">行ごとの消費税（切り捨て）</th></tr></thead><tbody>
+<tr><td>商品A</td><td>198円 × 3</td><td>8%</td><td class="num">594円</td><td class="num">47円</td></tr>
+<tr><td>商品B</td><td>298円 × 1</td><td>8%</td><td class="num">298円</td><td class="num">23円</td></tr>
+<tr><td>商品C</td><td>1,480円 × 1</td><td>10%</td><td class="num">1,480円</td><td class="num">148円</td></tr>
+<tr><td>商品D</td><td>55円 × 1</td><td>10%</td><td class="num">55円</td><td class="num">5円</td></tr>
+</tbody></table></div>
+<div class="table-scroll"><table><thead><tr><th>計算方法</th><th class="num">8%対象の消費税</th><th class="num">10%対象の消費税</th><th class="num">合計</th></tr></thead><tbody>
+<tr><td>インボイスのルール（税率ごとに1回）</td><td class="num">71円</td><td class="num">153円</td><td class="num">224円</td></tr>
+<tr><td>行ごとに端数処理して合計（不可）</td><td class="num">70円</td><td class="num">153円</td><td class="num">223円</td></tr>
+</tbody></table></div>
+<p>8%対象の合計 892円 × 8% ＝ 71.36円 → 71円 と、税率ごとの合計額に対して1回だけ切り捨てるのが正しい計算です。行ごとに切り捨てると端数の切り捨てが積み重なり、この例では1円少なくなります。明細が多い請求書ほど差が出やすくなります。</p>
+<p>上のツールの「明細が複数あるとき」の欄で、実際の明細を入れて差を確認できます。</p>
+
+<h2>8%（軽減税率）の対象</h2>
+<ul>
+<li>酒類・外食を除く飲食料品（テイクアウト・宅配を含む）</li>
+<li>週2回以上発行される新聞の定期購読料</li>
+</ul>
+<p>デザイン料・原稿料・コンサルティング料など、フリーランスの役務提供の多くは標準税率10%です。</p>
+<section class="faq"><h2>よくある質問</h2><details><summary>税込価格から税抜価格を出すには？</summary><p>10%の場合は「税込 × 10 ÷ 110」で消費税額を求めて端数処理し、税込から差し引きます。単純に「税込 ÷ 1.1」をしても近い値になりますが、端数処理によって1円ずれることがあります。</p></details>
+<details><summary>消費税の端数は切り捨て・四捨五入・切り上げのどれが正しいですか？</summary><p>いずれも認められており、事業者が選べます。ただし、インボイスでは1枚の請求書につき税率ごとに1回だけ端数処理する必要があります。</p></details>
+<details><summary>インボイスで明細ごとに消費税を計算してはいけないのですか？</summary><p>明細ごとに消費税額を計算して端数処理し、その合計を請求書の消費税額とする方法は認められていません。税率ごとに合計した金額に対して1回端数処理します。</p></details>
+<details><summary>税抜で請求すべき？税込で請求すべき？</summary><p>インボイスでは「税率ごとに区分した合計額（税抜または税込）」と「税率ごとの消費税額」の記載が必要です。どちらの方式でも構いませんが、源泉徴収がある取引では報酬と消費税を区分記載すると、源泉徴収の対象を税抜額にできます。</p></details>
+<details><summary>免税事業者は請求書に消費税を記載できますか？</summary><p>免税事業者はインボイス（適格請求書）を発行できず、登録番号や「消費税額」を記載した適格請求書は作れません。価格の設定や記載方法は取引先と相談のうえ、誤解を招かない表示にしましょう。</p></details></section>
+<p class="disclaimer">本ページの計算結果と解説は、一般的なルールにもとづく目安です。個別の取引への当てはめや特例の有無によって結果が変わることがあります。最終的な判断は税理士・税務署にご確認ください。</p>
+</article>
+<aside class="card cta no-print"><p><strong>計算できたら、そのまま請求書に — 登録不要・無料</strong><span class="muted">源泉徴収・消費税（税率ごとの端数処理）・登録番号の記載に対応した適格請求書を、ブラウザだけで作成。データは端末の外に送信されません。</span></p><a class="btn btn-primary" href="../../app/">請求書を作る（無料）</a></aside>
+</main>
+<footer class="site-footer"><div class="wrap">
+<nav class="footer-links" aria-label="計算ツール"><a href="../../tools/">計算ツール一覧</a><a href="../../tools/gensen/">源泉徴収税 計算</a><a href="../../tools/tedori-gyakusan/">手取りから報酬額を逆算</a><a href="../../tools/shohizei/">消費税 計算（税込⇔税抜）</a><a href="../../tools/inshi/">領収書の収入印紙 計算</a><a href="../../tools/touroku-bangou/">インボイス登録番号チェッカー</a><a href="../../tools/shiharai-kijitsu/">支払期日 計算</a></nav>
+<nav class="footer-links legal" aria-label="規約"><a href="../../">ゼロ請求書 トップ</a><a href="../../app/">請求書を作る</a><a href="../../legal/privacy/">プライバシーポリシー</a><a href="../../legal/tokushoho/">特定商取引法に基づく表記</a><a href="../../legal/terms/">利用規約</a></nav>
+<p>当サイトの計算ツールは一般的なルールに基づく目安です。最終的な判断は税理士・税務署にご確認ください。</p>
+<p>&copy; ゼロ請求書</p>
+</div></footer>
+<script type="module">
+import { calcInvoice, roundYen, ROUNDING_LABELS } from '../../lib/tax.js';
+import { parseAmount, yen, bindForm, setupCopyLink, setText } from '../tools.js';
+const form = document.getElementById('f');
+function render() {
+  const amt = parseAmount(form.amount.value);
+  const mode = form.mode.value;
+  const rate = Number(form.rate.value);
+  const rounding = form.rounding.value;
+  setText('r-main-label', mode === 'exclusive' ? '税込金額' : '税抜金額');
+  if (amt == null) {
+    ['r-main','r-base','r-tax','r-total'].forEach((id) => setText(id, '—'));
+    setText('r-formula', '金額を数字で入力してください。');
+  } else {
+    const r = calcInvoice([{ qty: 1, unitPrice: amt, rate }], { priceMode: mode, rounding }).byRate[String(rate)];
+    setText('r-main', yen(mode === 'exclusive' ? r.total : r.base));
+    setText('r-base', yen(r.base));
+    setText('r-tax', yen(r.tax));
+    setText('r-total', yen(r.total));
+    const fmt = (n) => n.toLocaleString('ja-JP');
+    setText('r-formula', mode === 'exclusive'
+      ? `消費税：${fmt(amt)}円 × ${rate}% ＝ ${fmt(amt * rate / 100)}円 → ${ROUNDING_LABELS[rounding]}で ${fmt(r.tax)}円`
+      : `消費税：${fmt(amt)}円 × ${rate} ÷ ${100 + rate} ＝ ${fmt(Math.round(amt * rate / (100 + rate) * 100) / 100)}円 → ${ROUNDING_LABELS[rounding]}で ${fmt(r.tax)}円`);
+  }
+  // 明細の比較
+  const items = [];
+  for (let i = 1; i <= 5; i++) {
+    const p = parseAmount(form['p' + i].value), q = parseAmount(form['q' + i].value);
+    if (p == null || q == null) { setText('l' + i, '—'); continue; }
+    items.push({ qty: q, unitPrice: p, rate: Number(form['r' + i].value), i });
+  }
+  if (!items.length) { ['c-invoice','c-line'].forEach((id) => setText(id, '—')); setText('c-diff', ''); return; }
+  const inv = calcInvoice(items, { rounding });
+  items.forEach((it, k) => setText('l' + it.i, yen(inv.lines[k])));
+  const per = {};
+  items.forEach((it, k) => { per[it.rate] = (per[it.rate] || 0) + roundYen(inv.lines[k] * it.rate / 100, rounding); });
+  const perSum = Object.values(per).reduce((a, b) => a + b, 0);
+  const detail = (o) => Object.keys(o).sort((a, b) => b - a).map((k) => `${k}%：${yen(o[k])}`).join(' / ');
+  setText('c-invoice', yen(inv.tax));
+  setText('c-invoice-detail', detail(Object.fromEntries(Object.entries(inv.byRate).map(([k, v]) => [k, v.tax]))));
+  setText('c-line', yen(perSum));
+  setText('c-line-detail', detail(per));
+  const d = inv.tax - perSum;
+  setText('c-diff', d === 0 ? 'この明細では、どちらの方法でも消費税額は同じです。'
+    : `差額 ${yen(Math.abs(d))}。インボイスでは「税率ごとに1回」の ${yen(inv.tax)} が正しい消費税額です（税込合計 ${yen(inv.total)}）。`);
+}
+bindForm(form, render);
+setupCopyLink();
+</script>
+</body>
+</html>

@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>インボイス登録番号チェッカー｜T+13桁の形式・チェックデジットを無料で検証</title>
+<meta name="description" content="適格請求書発行事業者の登録番号（T＋13桁）の形式とチェックデジットをブラウザ上で検証する無料ツール。打ち間違いの確認や複数番号の一括チェックに対応。登録の有無は国税庁の公表サイトでの確認方法も案内します。">
+<link rel="canonical" href="https://example.com/tools/touroku-bangou/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ゼロ請求書">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:title" content="インボイス登録番号チェッカー｜T+13桁の形式・チェックデジットを無料で検証">
+<meta property="og:description" content="適格請求書発行事業者の登録番号（T＋13桁）の形式とチェックデジットをブラウザ上で検証する無料ツール。打ち間違いの確認や複数番号の一括チェックに対応。登録の有無は国税庁の公表サイトでの確認方法も案内します。">
+<meta property="og:url" content="https://example.com/tools/touroku-bangou/">
+<meta property="og:image" content="https://example.com/assets/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="インボイス登録番号チェッカー｜T+13桁の形式・チェックデジットを無料で検証">
+<meta name="twitter:description" content="適格請求書発行事業者の登録番号（T＋13桁）の形式とチェックデジットをブラウザ上で検証する無料ツール。打ち間違いの確認や複数番号の一括チェックに対応。登録の有無は国税庁の公表サイトでの確認方法も案内します。">
+<meta name="theme-color" content="#0f6e5a">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../assets/style.css">
+<link rel="stylesheet" href="../../tools/tools.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"インボイス登録番号チェッカー","url":"https://example.com/tools/touroku-bangou/","description":"適格請求書発行事業者の登録番号（T＋13桁）の形式とチェックデジットをブラウザ上で検証する無料ツール。打ち間違いの確認や複数番号の一括チェックに対応。登録の有無は国税庁の公表サイトでの確認方法も案内します。","applicationCategory":"FinanceApplication","operatingSystem":"Web","inLanguage":"ja","browserRequirements":"Requires JavaScript","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"JPY"},"publisher":{"@type":"Organization","name":"ゼロ請求書"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"登録番号の「T」は小文字でもいいですか？","acceptedAnswer":{"@type":"Answer","text":"請求書には大文字の「T」で記載するのが一般的です。このツールは小文字や全角文字を入力しても、大文字・半角に整えてから検証します。"}},{"@type":"Question","name":"チェックデジットが合っていれば、登録されている番号ですか？","acceptedAnswer":{"@type":"Answer","text":"いいえ。チェックデジットは数字の整合性を確かめるだけで、登録の有無はわかりません。登録状況は国税庁の適格請求書発行事業者公表サイトで確認してください。"}},{"@type":"Question","name":"個人事業主の登録番号はマイナンバーですか？","acceptedAnswer":{"@type":"Answer","text":"いいえ。個人事業者の登録番号には、マイナンバー（個人番号）とは別の13桁の番号が割り当てられます。"}},{"@type":"Question","name":"法人の登録番号は法人番号と同じですか？","acceptedAnswer":{"@type":"Answer","text":"法人番号を持つ法人の登録番号は「T」＋法人番号です。"}},{"@type":"Question","name":"入力した番号はどこかに送信されますか？","acceptedAnswer":{"@type":"Answer","text":"送信されません。検証はすべてお使いのブラウザ内で行われます（ページのURLに番号が含まれるのは、結果を共有しやすくするためです）。"}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ゼロ請求書","item":"https://example.com/"},{"@type":"ListItem","position":2,"name":"計算ツール","item":"https://example.com/tools/"},{"@type":"ListItem","position":3,"name":"インボイス登録番号チェッカー","item":"https://example.com/tools/touroku-bangou/"}]}</script>
+</head>
+<body>
+<header class="site-header"><div class="wrap"><a class="brand" href="../../">ゼロ請求書</a><nav class="nav"><a href="../../app/">請求書を作る</a><a href="../../tools/">計算ツール</a><a href="../../#pricing">料金</a></nav></div></header>
+<main class="wrap">
+<ol class="crumbs" aria-label="パンくずリスト"><li><a href="../../">ゼロ請求書</a></li><li><a href="../../tools/">計算ツール</a></li><li aria-current="page">インボイス登録番号チェッカー</li></ol>
+<div class="tool-hero"><h1>インボイス登録番号チェッカー</h1><p>請求書に書く・受け取った登録番号が「T＋13桁」の正しい形式か、チェックデジットが合っているかをその場で確認できます。入力した番号はブラウザの外に送信されません。</p></div>
+<form class="tool" id="f" autocomplete="off">
+<div class="card">
+<h2>登録番号を入力</h2>
+<div class="field"><label for="q">登録番号（例：T7000012050002）</label><input id="q" name="q" class="amount-input" type="text" inputmode="text" autocapitalize="characters" spellcheck="false" value="" placeholder="T1234567890123"><p class="hint">ハイフン・スペース・全角数字が混じっていても自動で整えます</p></div>
+<div class="tool-actions" style="margin-top:0"><button type="button" class="btn" id="sample">記入例を入れる</button></div>
+<div class="field" style="margin-top:18px"><label for="batch">まとめてチェック（1行に1番号）</label><textarea id="batch" rows="4" spellcheck="false" placeholder="T7000012050002&#10;T1234567890123"></textarea><ul class="batch-out" id="batch-out"></ul></div>
+</div>
+<div class="card" aria-live="polite">
+<h2>検証結果</h2>
+<p class="result-main"><span class="label">形式・チェックデジット</span><span class="status" id="r-status">番号を入力してください</span></p>
+<dl class="rows">
+<div><dt>整形後の番号</dt><dd id="r-norm">—</dd></div>
+<div><dt>チェックデジット（先頭の数字）</dt><dd id="r-check">—</dd></div>
+<div><dt>番号から計算した正しい値</dt><dd id="r-expected">—</dd></div>
+</dl>
+<p class="note" id="r-reason"></p>
+<p class="note warn">このツールは番号の形式と計算上の整合性だけを確認します。実際に登録されているか（登録の取消・失効を含む）は確認していません。</p>
+<div class="tool-actions"><a class="btn btn-primary" href="https://www.invoice-kohyo.nta.go.jp/" target="_blank" rel="noopener">国税庁 公表サイトで登録状況を確認</a><button type="button" class="btn" data-copy-link>URLをコピー</button></div>
+</div>
+</form>
+<aside class="card cta no-print"><p><strong>この金額で請求書を作る — 登録不要・無料</strong><span class="muted">源泉徴収・消費税（税率ごとの端数処理）・登録番号の記載に対応した適格請求書を、ブラウザだけで作成。データは端末の外に送信されません。</span></p><a class="btn btn-primary" href="../../app/">請求書を作る（無料）</a></aside>
+<article class="article">
+
+<h2>インボイスの登録番号とは</h2>
+<p>適格請求書発行事業者（インボイス発行事業者）として登録すると、税務署から登録番号が通知されます。登録番号は<strong>アルファベットの「T」と13桁の数字</strong>で構成されています。</p>
+<div class="table-scroll"><table><thead><tr><th>事業者の種類</th><th>登録番号の構成</th></tr></thead><tbody>
+<tr><td>法人（法人番号がある）</td><td>「T」＋ 法人番号（13桁）</td></tr>
+<tr><td>個人事業者・人格のない社団など</td><td>「T」＋ 新たに割り当てられた13桁の番号（マイナンバーは使われません）</td></tr>
+</tbody></table></div>
+<p>適格請求書（インボイス）には、この登録番号を記載する必要があります。取引先から受け取った請求書で仕入税額控除を受けるには、記載された番号が正しく、請求書の発行時点で登録されていることが前提です。</p>
+
+<h2>チェックデジットの仕組み</h2>
+<p>13桁の数字のうち、<strong>先頭の1桁はチェックデジット（検査用数字）</strong>です。残りの12桁から計算した値と一致するかを確かめることで、数字の打ち間違いや読み間違いの多くを見つけられます。</p>
+<ol>
+<li>チェックデジットを除いた12桁について、一番右（最下位）を1桁目として数えます。</li>
+<li>奇数桁の数字には1を、偶数桁の数字には2を掛けて、すべて合計します。</li>
+<li>合計を9で割った余りを求め、「9 − 余り」がチェックデジットになります。</li>
+</ol>
+<p class="formula">例：T7000012050002 → 12桁「000012050002」から計算した値は 7。先頭の「7」と一致するので形式上は正しい番号です（国税庁の法人番号を例にしています）。</p>
+<p>チェックデジットで見つけられるのは、1桁の打ち間違いなど一部の誤りです。別の実在しない番号でも、たまたまチェックデジットが一致することはあります。</p>
+
+<h2>登録されているかは国税庁の公表サイトで確認</h2>
+<p>番号が実際に登録されているか、登録日や取消・失効の有無は、国税庁の<a href="https://www.invoice-kohyo.nta.go.jp/" target="_blank" rel="noopener">適格請求書発行事業者公表サイト</a>で登録番号を入力して確認できます。公表サイトでは、法人は名称と本店所在地、個人事業者は氏名（本人の申出があれば屋号なども）が表示されます。</p>
+<h3>新しい取引先の番号を確認するときの手順</h3>
+<ol>
+<li>このツールで、番号の形式とチェックデジットを確認する（打ち間違いを早めに発見）</li>
+<li>公表サイトで番号を検索し、名称が請求書の発行者と一致するかを確認する</li>
+<li>登録日が取引日より前か、取消・失効していないかを確認する</li>
+</ol>
+<section class="faq"><h2>よくある質問</h2><details><summary>登録番号の「T」は小文字でもいいですか？</summary><p>請求書には大文字の「T」で記載するのが一般的です。このツールは小文字や全角文字を入力しても、大文字・半角に整えてから検証します。</p></details>
+<details><summary>チェックデジットが合っていれば、登録されている番号ですか？</summary><p>いいえ。チェックデジットは数字の整合性を確かめるだけで、登録の有無はわかりません。登録状況は国税庁の適格請求書発行事業者公表サイトで確認してください。</p></details>
+<details><summary>個人事業主の登録番号はマイナンバーですか？</summary><p>いいえ。個人事業者の登録番号には、マイナンバー（個人番号）とは別の13桁の番号が割り当てられます。</p></details>
+<details><summary>法人の登録番号は法人番号と同じですか？</summary><p>法人番号を持つ法人の登録番号は「T」＋法人番号です。</p></details>
+<details><summary>入力した番号はどこかに送信されますか？</summary><p>送信されません。検証はすべてお使いのブラウザ内で行われます（ページのURLに番号が含まれるのは、結果を共有しやすくするためです）。</p></details></section>
+<p class="disclaimer">本ページの計算結果と解説は、一般的なルールにもとづく目安です。個別の取引への当てはめや特例の有無によって結果が変わることがあります。最終的な判断は税理士・税務署にご確認ください。</p>
+</article>
+<aside class="card cta no-print"><p><strong>計算できたら、そのまま請求書に — 登録不要・無料</strong><span class="muted">源泉徴収・消費税（税率ごとの端数処理）・登録番号の記載に対応した適格請求書を、ブラウザだけで作成。データは端末の外に送信されません。</span></p><a class="btn btn-primary" href="../../app/">請求書を作る（無料）</a></aside>
+</main>
+<footer class="site-footer"><div class="wrap">
+<nav class="footer-links" aria-label="計算ツール"><a href="../../tools/">計算ツール一覧</a><a href="../../tools/gensen/">源泉徴収税 計算</a><a href="../../tools/tedori-gyakusan/">手取りから報酬額を逆算</a><a href="../../tools/shohizei/">消費税 計算（税込⇔税抜）</a><a href="../../tools/inshi/">領収書の収入印紙 計算</a><a href="../../tools/touroku-bangou/">インボイス登録番号チェッカー</a><a href="../../tools/shiharai-kijitsu/">支払期日 計算</a></nav>
+<nav class="footer-links legal" aria-label="規約"><a href="../../">ゼロ請求書 トップ</a><a href="../../app/">請求書を作る</a><a href="../../legal/privacy/">プライバシーポリシー</a><a href="../../legal/tokushoho/">特定商取引法に基づく表記</a><a href="../../legal/terms/">利用規約</a></nav>
+<p>当サイトの計算ツールは一般的なルールに基づく目安です。最終的な判断は税理士・税務署にご確認ください。</p>
+<p>&copy; ゼロ請求書</p>
+</div></footer>
+<script type="module">
+import { validateRegistrationNumber } from '../../lib/tax.js';
+import { toHalf, bindForm, setupCopyLink, setText } from '../tools.js';
+const form = document.getElementById('f');
+const norm = (s) => toHalf(s).trim().toUpperCase().replace(/[\s\-ー―－]/g, '');
+function expectedDigit(n) {
+  if (!/^T\d{13}$/.test(n)) return null;
+  for (let d = 1; d <= 9; d++) if (validateRegistrationNumber('T' + d + n.slice(2)).valid) return d;
+  return null;
+}
+function render() {
+  const raw = form.q.value;
+  const n = norm(raw);
+  const st = document.getElementById('r-status');
+  if (!n) {
+    st.textContent = '番号を入力してください'; st.className = 'status';
+    ['r-norm','r-check','r-expected'].forEach((id) => setText(id, '—')); setText('r-reason', '');
+  } else {
+    const r = validateRegistrationNumber(n);
+    st.textContent = r.valid ? '形式・チェックデジットOK' : '誤りの可能性があります';
+    st.className = 'status ' + (r.valid ? 'ok' : 'ng');
+    setText('r-norm', n);
+    const exp = expectedDigit(n);
+    setText('r-check', /^T\d{13}$/.test(n) ? n[1] : '—');
+    setText('r-expected', exp == null ? '—' : String(exp));
+    setText('r-reason', r.valid ? 'この番号は形式とチェックデジットの条件を満たしています。登録状況は国税庁の公表サイトで確認してください。' : r.reason);
+  }
+  const lines = document.getElementById('batch').value.split(/\r?\n/).map((s) => s.trim()).filter(Boolean).slice(0, 200);
+  const out = document.getElementById('batch-out');
+  out.replaceChildren(...lines.map((line) => {
+    const li = document.createElement('li');
+    const v = validateRegistrationNumber(norm(line));
+    li.textContent = (v.valid ? '✓ ' : '✗ ') + norm(line) + (v.valid ? '' : '（' + v.reason + '）');
+    li.className = v.valid ? '' : 'warn';
+    return li;
+  }));
+}
+const api = bindForm(form, render);
+document.getElementById('sample').addEventListener('click', () => { form.q.value = 'T7000012050002'; api.update(); });
+setupCopyLink();
+</script>
+</body>
+</html>

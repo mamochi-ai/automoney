@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>支払期日 計算ツール｜締め日・支払サイトから期日を計算【60日ルール確認つき】</title>
+<meta name="description" content="納品日（受領日）と「月末締め翌月末払い」などの支払条件から支払期日を計算し、受領日から60日以内かを確認できる無料ツール。取適法（旧下請法）とフリーランス保護法の60日ルール、月単位の締切制度の扱いも解説します。">
+<link rel="canonical" href="https://example.com/tools/shiharai-kijitsu/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ゼロ請求書">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:title" content="支払期日 計算ツール｜締め日・支払サイトから期日を計算【60日ルール確認つき】">
+<meta property="og:description" content="納品日（受領日）と「月末締め翌月末払い」などの支払条件から支払期日を計算し、受領日から60日以内かを確認できる無料ツール。取適法（旧下請法）とフリーランス保護法の60日ルール、月単位の締切制度の扱いも解説します。">
+<meta property="og:url" content="https://example.com/tools/shiharai-kijitsu/">
+<meta property="og:image" content="https://example.com/assets/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="支払期日 計算ツール｜締め日・支払サイトから期日を計算【60日ルール確認つき】">
+<meta name="twitter:description" content="納品日（受領日）と「月末締め翌月末払い」などの支払条件から支払期日を計算し、受領日から60日以内かを確認できる無料ツール。取適法（旧下請法）とフリーランス保護法の60日ルール、月単位の締切制度の扱いも解説します。">
+<meta name="theme-color" content="#0f6e5a">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../assets/style.css">
+<link rel="stylesheet" href="../../tools/tools.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"支払期日 計算ツール（締め日・支払サイト）","url":"https://example.com/tools/shiharai-kijitsu/","description":"納品日（受領日）と「月末締め翌月末払い」などの支払条件から支払期日を計算し、受領日から60日以内かを確認できる無料ツール。取適法（旧下請法）とフリーランス保護法の60日ルール、月単位の締切制度の扱いも解説します。","applicationCategory":"FinanceApplication","operatingSystem":"Web","inLanguage":"ja","browserRequirements":"Requires JavaScript","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"JPY"},"publisher":{"@type":"Organization","name":"ゼロ請求書"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"月末締め翌月末払いは60日ルールに違反しますか？","acceptedAnswer":{"@type":"Answer","text":"暦の日数では最大で60日を少し超えることがありますが、公正取引委員会の運用では、月単位の締切制度の場合「60日」を「2か月」として扱うため、一般に問題とされません。"}},{"@type":"Question","name":"月末締め翌々月末払いは違法ですか？","acceptedAnswer":{"@type":"Answer","text":"取適法（旧下請法）やフリーランス保護法の対象となる取引では、受領日から60日（2か月）を超えるため認められません。対象外の取引（発注者が従業員のいない個人である場合など）には、この60日ルールは適用されません。"}},{"@type":"Question","name":"60日は請求書の発行日から数えますか？","acceptedAnswer":{"@type":"Answer","text":"いいえ。法律上の60日は、発注者が成果物などを受領した日から起算します。請求書の発行日や検収完了日ではありません。"}},{"@type":"Question","name":"受領日を1日目として数えますか？","acceptedAnswer":{"@type":"Answer","text":"はい。「受領日から起算して60日」は受領日を1日目として数えます。4月1日に受領した場合、60日目は5月30日です。"}},{"@type":"Question","name":"フリーランス保護法は誰に適用されますか？","acceptedAnswer":{"@type":"Answer","text":"従業員を使用しない個人・一人法人のフリーランス（特定受託事業者）に業務を委託する事業者が対象です。支払期日の60日ルールは、従業員を使用する発注事業者（特定業務委託事業者）に課されます。"}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ゼロ請求書","item":"https://example.com/"},{"@type":"ListItem","position":2,"name":"計算ツール","item":"https://example.com/tools/"},{"@type":"ListItem","position":3,"name":"支払期日 計算","item":"https://example.com/tools/shiharai-kijitsu/"}]}</script>
+</head>
+<body>
+<header class="site-header"><div class="wrap"><a class="brand" href="../../">ゼロ請求書</a><nav class="nav"><a href="../../app/">請求書を作る</a><a href="../../tools/">計算ツール</a><a href="../../#pricing">料金</a></nav></div></header>
+<main class="wrap">
+<ol class="crumbs" aria-label="パンくずリスト"><li><a href="../../">ゼロ請求書</a></li><li><a href="../../tools/">計算ツール</a></li><li aria-current="page">支払期日 計算</li></ol>
+<div class="tool-hero"><h1>支払期日 計算ツール（締め日・支払サイト）</h1><p>納品日（相手が成果物を受け取った日）と、締め日・支払日の条件を選ぶと、支払期日と「受領日から何日目か」がわかります。60日ルールの目安チェックにも使えます。</p></div>
+<form class="tool" id="f" autocomplete="off">
+<div class="card">
+<h2>取引の条件</h2>
+<div class="field"><label for="d">納品日・受領日</label><input id="d" name="d" type="date" value=""></div>
+<div class="row2">
+<div class="field"><label for="close">締め日</label><select id="close" name="close"><option value="end" selected>月末締め</option><option value="5">5日締め</option><option value="10">10日締め</option><option value="15">15日締め</option><option value="20">20日締め</option><option value="25">25日締め</option></select></div>
+<div class="field"><label for="months">支払月</label><select id="months" name="months"><option value="0">当月</option><option value="1" selected>翌月</option><option value="2">翌々月</option><option value="3">3か月後</option></select></div>
+</div>
+<div class="field"><label for="pay">支払日</label><select id="pay" name="pay"><option value="end" selected>末日払い</option><option value="5">5日払い</option><option value="10">10日払い</option><option value="15">15日払い</option><option value="20">20日払い</option><option value="25">25日払い</option></select></div>
+<p class="hint" id="terms-label"></p>
+</div>
+<div class="card" aria-live="polite">
+<h2>計算結果</h2>
+<p class="result-main"><span class="label">支払期日</span><span class="big" id="r-due">—</span></p>
+<dl class="rows">
+<div><dt>締め日</dt><dd id="r-close">—</dd></div>
+<div><dt>受領日から数えて</dt><dd id="r-days">—</dd></div>
+<div><dt>受領日から60日目</dt><dd id="r-limit">—</dd></div>
+</dl>
+<p class="note" id="r-verdict"></p>
+<p class="note muted" id="r-holiday"></p>
+<div class="tool-actions"><button type="button" class="btn" data-copy-link>この計算結果のURLをコピー</button></div>
+</div>
+</form>
+<aside class="card cta no-print"><p><strong>この金額で請求書を作る — 登録不要・無料</strong><span class="muted">源泉徴収・消費税（税率ごとの端数処理）・登録番号の記載に対応した適格請求書を、ブラウザだけで作成。データは端末の外に送信されません。</span></p><a class="btn btn-primary" href="../../app/">請求書を作る（無料）</a></aside>
+<article class="article">
+
+<h2>締め日と支払サイトの考え方</h2>
+<p>「月末締め翌月末払い」は、1か月分の取引を月末で締めて、その翌月の末日に支払うという意味です。締め日から支払日までの期間を「支払サイト」と呼び、月末締め翌月末払いなら支払サイトはおよそ30日です。</p>
+<p>フリーランス側から見ると、同じ条件でも<strong>締め日の直後に納品すると入金までの期間が長く</strong>なります。たとえば月末締め翌月末払いで4月1日に納品すると、4月末に締められて5月末の支払いとなり、受領日から約2か月後の入金です。</p>
+<h3>支払条件ごとの計算例（2026年4月の納品）</h3>
+<div class="table-scroll"><table><thead><tr><th>支払条件</th><th>受領日</th><th>締め日</th><th>支払期日</th><th>受領日から</th></tr></thead><tbody>
+<tr><td>月末締め 翌月末払い</td><td>2026年4月1日（水）</td><td>2026年4月30日（木）</td><td>2026年5月31日（日）</td><td>61日目</td></tr>
+<tr><td>月末締め 翌月末払い</td><td>2026年4月30日（木）</td><td>2026年4月30日（木）</td><td>2026年5月31日（日）</td><td>32日目</td></tr>
+<tr><td>月末締め 翌月25日払い</td><td>2026年4月1日（水）</td><td>2026年4月30日（木）</td><td>2026年5月25日（月）</td><td>55日目</td></tr>
+<tr><td>20日締め 翌月10日払い</td><td>2026年4月21日（火）</td><td>2026年5月20日（水）</td><td>2026年6月10日（水）</td><td>51日目</td></tr>
+<tr><td>月末締め 翌々月末払い</td><td>2026年4月1日（水）</td><td>2026年4月30日（木）</td><td>2026年6月30日（火）</td><td>91日目</td></tr>
+<tr><td>15日締め 翌々月15日払い</td><td>2026年4月16日（木）</td><td>2026年5月15日（金）</td><td>2026年7月15日（水）</td><td>91日目</td></tr>
+</tbody></table></div>
+<p class="caption">「受領日から」は受領日を1日目として数えた日数です。土日祝日による順延は考慮していません。</p>
+
+<h2>支払期日の「60日ルール」</h2>
+<p>発注する側の規模や取引の内容によっては、法律で支払期日の上限が決められています。どちらも<strong>成果物などを受け取った日（受領日）から起算して60日以内</strong>、かつできる限り短い期間内で支払期日を定める必要があります。</p>
+<h3>取適法（旧・下請法）</h3>
+<p>下請法は改正され、2026年1月1日から「中小受託取引適正化法（取適法）」として施行されています。一定の資本金・従業員数の要件を満たす事業者間の製造委託・情報成果物作成委託・役務提供委託などが対象で、受領日から60日以内に支払期日を定めることや、支払遅延の禁止などが定められています。改正により、手形による支払いも禁止されました。</p>
+<h3>フリーランス保護法（2024年11月1日施行）</h3>
+<p>「特定受託事業者に係る取引の適正化等に関する法律」（フリーランス・事業者間取引適正化等法）では、従業員を使用する発注事業者がフリーランスに業務を委託する場合、成果物の受領日から60日以内のできる限り短い期間内で支払期日を定め、その期日までに支払わなければなりません。</p>
+<ul>
+<li>支払期日を定めなかった場合は、受領日が支払期日とみなされます。</li>
+<li>60日を超える支払期日を定めた場合は、受領日から起算して60日を経過する日の前日（受領日を1日目として60日目）が支払期日とみなされます。</li>
+<li>元の発注者から受けた業務を再委託する場合で、一定の事項を明示したときは、元委託の支払期日から30日以内とする例外があります。</li>
+</ul>
+
+<h3>月単位の締切制度の扱い</h3>
+<p>公正取引委員会の運用では、「月末締め翌月末払い」のように月単位で締切・支払いをしている場合、「60日」を「2か月」として扱うとされています。そのため、暦の日数で60日を少し超える「月末締め翌月末払い」は問題とされない一方、「月末締め翌々月末払い」は60日（2か月）を超えるため、対象となる取引では認められません。</p>
+<h3>支払期日が土日・祝日にあたる場合</h3>
+<p>支払期日が金融機関の休業日にあたる場合に、支払いを翌営業日に順延すること自体は、順延する期間が2日以内で、あらかじめ当事者間で書面などにより合意していれば、60日を超えても問題としない運用とされています。この計算ツールは祝日を判定していないため、祝日や年末年始はカレンダーで確認してください。</p>
+
+<h2>請求書に支払期日を書くときのポイント</h2>
+<ul>
+<li>契約書や発注書で決めた支払条件と、請求書の支払期日を一致させましょう。</li>
+<li>「受領日」は請求書の発行日ではなく、発注者が成果物を受け取った日（役務提供なら提供した日）です。検収に時間がかかる場合も、原則として受領日から起算します。</li>
+<li>支払期日を過ぎても入金がない場合は、まず取引先に確認の連絡をしましょう。法律の適用がある取引では、公正取引委員会や中小企業庁の相談窓口、フリーランス・トラブル110番なども利用できます。</li>
+</ul>
+<section class="faq"><h2>よくある質問</h2><details><summary>月末締め翌月末払いは60日ルールに違反しますか？</summary><p>暦の日数では最大で60日を少し超えることがありますが、公正取引委員会の運用では、月単位の締切制度の場合「60日」を「2か月」として扱うため、一般に問題とされません。</p></details>
+<details><summary>月末締め翌々月末払いは違法ですか？</summary><p>取適法（旧下請法）やフリーランス保護法の対象となる取引では、受領日から60日（2か月）を超えるため認められません。対象外の取引（発注者が従業員のいない個人である場合など）には、この60日ルールは適用されません。</p></details>
+<details><summary>60日は請求書の発行日から数えますか？</summary><p>いいえ。法律上の60日は、発注者が成果物などを受領した日から起算します。請求書の発行日や検収完了日ではありません。</p></details>
+<details><summary>受領日を1日目として数えますか？</summary><p>はい。「受領日から起算して60日」は受領日を1日目として数えます。4月1日に受領した場合、60日目は5月30日です。</p></details>
+<details><summary>フリーランス保護法は誰に適用されますか？</summary><p>従業員を使用しない個人・一人法人のフリーランス（特定受託事業者）に業務を委託する事業者が対象です。支払期日の60日ルールは、従業員を使用する発注事業者（特定業務委託事業者）に課されます。</p></details></section>
+<p class="disclaimer">本ページの計算結果と解説は、一般的なルールにもとづく目安です。個別の取引への当てはめや特例の有無によって結果が変わることがあります。最終的な判断は税理士・税務署にご確認ください。</p>
+</article>
+<aside class="card cta no-print"><p><strong>計算できたら、そのまま請求書に — 登録不要・無料</strong><span class="muted">源泉徴収・消費税（税率ごとの端数処理）・登録番号の記載に対応した適格請求書を、ブラウザだけで作成。データは端末の外に送信されません。</span></p><a class="btn btn-primary" href="../../app/">請求書を作る（無料）</a></aside>
+</main>
+<footer class="site-footer"><div class="wrap">
+<nav class="footer-links" aria-label="計算ツール"><a href="../../tools/">計算ツール一覧</a><a href="../../tools/gensen/">源泉徴収税 計算</a><a href="../../tools/tedori-gyakusan/">手取りから報酬額を逆算</a><a href="../../tools/shohizei/">消費税 計算（税込⇔税抜）</a><a href="../../tools/inshi/">領収書の収入印紙 計算</a><a href="../../tools/touroku-bangou/">インボイス登録番号チェッカー</a><a href="../../tools/shiharai-kijitsu/">支払期日 計算</a></nav>
+<nav class="footer-links legal" aria-label="規約"><a href="../../">ゼロ請求書 トップ</a><a href="../../app/">請求書を作る</a><a href="../../legal/privacy/">プライバシーポリシー</a><a href="../../legal/tokushoho/">特定商取引法に基づく表記</a><a href="../../legal/terms/">利用規約</a></nav>
+<p>当サイトの計算ツールは一般的なルールに基づく目安です。最終的な判断は税理士・税務署にご確認ください。</p>
+<p>&copy; ゼロ請求書</p>
+</div></footer>
+<script type="module">
+import { dueDate } from '../../lib/tax.js';
+import { bindForm, setupCopyLink, setText } from '../tools.js';
+const form = document.getElementById('f');
+const W = '日月火水木金土';
+const fd = (d) => `${d.getFullYear()}年${d.getMonth() + 1}月${d.getDate()}日（${W[d.getDay()]}）`;
+const last = (y, m) => new Date(y, m + 1, 0).getDate();
+const iso = (d) => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+if (!form.d.value) form.d.value = iso(new Date());
+function parse(v) {
+  const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(v || '');
+  if (!m) return null;
+  const d = new Date(Number(m[1]), Number(m[2]) - 1, Number(m[3]));
+  return isNaN(d) ? null : d;
+}
+function render() {
+  const close = form.close.value === 'end' ? 'end' : Number(form.close.value);
+  const months = Number(form.months.value);
+  const pay = form.pay.value === 'end' ? 'end' : Number(form.pay.value);
+  const cLabel = close === 'end' ? '月末' : close + '日';
+  const mLabel = ['当月', '翌月', '翌々月', '3か月後の月'][months];
+  const pLabel = pay === 'end' ? '末日' : pay + '日';
+  setText('terms-label', `条件：${cLabel}締め ${mLabel}${pLabel}払い`);
+  const rec = parse(form.d.value);
+  if (!rec) {
+    ['r-due','r-close','r-days','r-limit'].forEach((id) => setText(id, '—'));
+    setText('r-verdict', '納品日・受領日を入力してください。'); setText('r-holiday', '');
+    return;
+  }
+  const cd = close === 'end' ? last(rec.getFullYear(), rec.getMonth()) : close;
+  const y = rec.getFullYear();
+  const m = rec.getMonth() + (rec.getDate() > cd ? 1 : 0);
+  const cDate = new Date(y, m, close === 'end' ? last(y, m) : Math.min(close, last(y, m)));
+  const due = dueDate(cDate, { monthsLater: months, day: pay });
+  const days = Math.round((Date.UTC(due.getFullYear(), due.getMonth(), due.getDate()) - Date.UTC(rec.getFullYear(), rec.getMonth(), rec.getDate())) / 86400000) + 1;
+  const limit = new Date(rec.getFullYear(), rec.getMonth(), rec.getDate() + 59);
+  setText('r-due', fd(due));
+  setText('r-close', fd(cDate));
+  setText('r-days', `${days}日目`);
+  setText('r-limit', fd(limit));
+  const v = document.getElementById('r-verdict');
+  v.className = 'note';
+  if (due < cDate) {
+    v.classList.add('warn');
+    v.textContent = '支払日が締め日より前になっています。支払月・支払日の条件を確認してください。';
+  } else if (days <= 60) {
+    v.textContent = '受領日から60日以内です（取適法・フリーランス保護法の60日ルールの目安を満たしています）。';
+  } else if (close === 'end' && pay === 'end' && months <= 1) {
+    v.textContent = '暦の日数では60日を超えますが、月単位の締切制度（月末締め翌月末払い）は「2か月以内」として扱う運用があり、一般に問題とされません。';
+  } else {
+    v.classList.add('warn');
+    v.textContent = `受領日から60日を超えています。取適法（旧下請法）やフリーランス保護法の対象となる取引では、支払期日は${fd(limit)}までにする必要があります。`;
+  }
+  const wd = due.getDay();
+  setText('r-holiday', wd === 0 || wd === 6 ? '支払期日が土日にあたります。金融機関の休業日の扱い（前倒し・順延）を取引先と確認しましょう。祝日は判定していません。' : '祝日・年末年始は判定していません。');
+}
+bindForm(form, render, { always: ['d'] });
+setupCopyLink();
+</script>
+</body>
+</html>
