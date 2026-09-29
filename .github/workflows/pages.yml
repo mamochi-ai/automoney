@@ -29,6 +29,11 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
+      - name: Cache-bust JS/CSS references
+        run: |
+          v="${GITHUB_SHA::8}"
+          find site -type f \( -name '*.html' -o -name '*.js' \) -not -path 'site/lib/vendor/*' -print0 \
+            | xargs -0 sed -i -E "s/\.(js|css)(['\"])/.\1?v=${v}\2/g"
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
