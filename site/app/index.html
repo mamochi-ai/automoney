@@ -46,16 +46,29 @@
 
 <main class="app">
   <form class="editor no-print" id="editor" autocomplete="off" novalidate>
-    <p class="privacy-note">入力内容はこの端末のブラウザ内（localStorage）にだけ保存され、外部には送信されません。</p>
+    <p class="privacy-note">入力内容はこの端末のブラウザ内（localStorage）にだけ保存され、外部には送信されません。<span class="muted">（郵便番号からの住所検索時のみ、上3桁で公開住所データを読み込みます）</span></p>
 
     <section class="ed-card">
       <h2>基本情報</h2>
       <div class="grid2">
-        <div><label for="f-number">番号</label><input id="f-number" name="number" inputmode="text"></div>
+        <div><label for="f-number">番号</label><input id="f-number" name="number" inputmode="text" enterkeyhint="next" autocapitalize="characters" spellcheck="false"></div>
         <div><label for="f-issueDate">発行日</label><input id="f-issueDate" name="issueDate" type="date"></div>
       </div>
-      <div class="field"><label for="f-subject" id="lbl-subject">件名</label><input id="f-subject" name="subject" placeholder="例: 2026年9月分 Webサイト保守"></div>
-      <div class="field"><label for="f-period">取引年月日・対象期間</label><input id="f-period" name="period" placeholder="例: 2026年9月1日〜9月30日（空欄なら発行日を表示）"></div>
+      <div class="field"><label for="f-subject" id="lbl-subject">件名</label><input id="f-subject" name="subject" placeholder="例: 2026年9月分 Webサイト保守" enterkeyhint="next"></div>
+      <fieldset class="field period" id="periodField">
+        <legend>取引年月日・対象期間</legend>
+        <div class="grid2">
+          <div><label for="f-periodStart" class="sub">開始日</label><input id="f-periodStart" name="periodStart" type="date"></div>
+          <div><label for="f-periodEnd" class="sub">終了日（任意）</label><input id="f-periodEnd" name="periodEnd" type="date"></div>
+        </div>
+        <div class="chips" aria-label="取引年月日のプリセット">
+          <button type="button" class="chip" data-period="this">今月</button>
+          <button type="button" class="chip" data-period="last">先月</button>
+          <button type="button" class="chip" data-period="issue">発行日と同じ</button>
+          <button type="button" class="chip chip-ghost" data-period="clear">クリア</button>
+        </div>
+        <p class="hint" id="periodMsg" aria-live="polite"></p>
+      </fieldset>
       <div class="field" id="dueField">
         <label for="f-dueDate" id="lbl-due">支払期日</label>
         <input id="f-dueDate" name="dueDate" type="date">
@@ -70,13 +83,20 @@
     <section class="ed-card">
       <h2>取引先（宛先）</h2>
       <div class="client-row">
-        <div class="grow"><label for="f-clientName">取引先名</label><input id="f-clientName" name="client.name" placeholder="例: 株式会社サンプル" list="clientMaster"></div>
+        <div class="grow"><label for="f-clientName">取引先名</label><input id="f-clientName" name="client.name" placeholder="例: 株式会社サンプル" list="clientMaster" enterkeyhint="next"></div>
         <div class="honorific"><label for="f-honorific">敬称</label>
           <select id="f-honorific" name="client.honorific"><option value="御中">御中</option><option value="様">様</option><option value="">なし</option></select>
         </div>
       </div>
       <datalist id="clientMaster"></datalist>
-      <div class="field"><label for="f-clientAddress">取引先住所（任意）</label><input id="f-clientAddress" name="client.address" placeholder="例: 東京都千代田区…"></div>
+      <div class="field">
+        <label for="f-clientZip">取引先 郵便番号（任意）</label>
+        <div class="zip-row">
+          <input id="f-clientZip" class="zip" name="client.zip" data-zip-for="f-clientAddress" data-zip-msg="clientZipMsg" inputmode="numeric" enterkeyhint="next" placeholder="100-0001" maxlength="10" autocomplete="off">
+          <p class="hint" id="clientZipMsg" aria-live="polite"></p>
+        </div>
+      </div>
+      <div class="field"><label for="f-clientAddress">取引先住所（任意）</label><textarea id="f-clientAddress" name="client.address" rows="2" placeholder="例: 東京都千代田区千代田1-1 ○○ビル3F"></textarea></div>
       <div class="inline-actions">
         <select id="clientPick" aria-label="保存済みの取引先から選ぶ"><option value="">保存済みの取引先から選ぶ…</option></select>
         <button type="button" class="btn btn-sm" id="btnSaveClient">この取引先を保存</button>
@@ -95,6 +115,7 @@
       <datalist id="itemMaster"></datalist>
       <div class="inline-actions">
         <button type="button" class="btn btn-sm" id="btnAddItem">＋ 行を追加</button>
+        <button type="button" class="btn btn-sm" id="btnAddDiscount">− 値引き</button>
         <button type="button" class="btn btn-sm btn-ghost" id="btnMasters">取引先・品目マスタ</button>
       </div>
       <label class="check"><input type="checkbox" name="withholding" id="f-withholding"> 源泉徴収あり（税抜金額に対して10.21%／100万円超の部分は20.42%）</label>
@@ -105,18 +126,27 @@
     <section class="ed-card">
       <h2>発行者（あなた）</h2>
       <p class="muted small">一度入力すると次の書類にも引き継がれます。</p>
-      <div class="field"><label for="f-issuerName">氏名・屋号</label><input id="f-issuerName" name="issuer.name" placeholder="例: 山田デザイン事務所 山田太郎"></div>
-      <div class="field"><label for="f-issuerAddress">住所</label><textarea id="f-issuerAddress" name="issuer.address" rows="2" placeholder="〒100-0001&#10;東京都千代田区…"></textarea></div>
+      <div class="field"><label for="f-issuerName">氏名・屋号</label><input id="f-issuerName" name="issuer.name" placeholder="例: 山田デザイン事務所 山田太郎" autocomplete="organization" enterkeyhint="next"></div>
+      <div class="field">
+        <label for="f-issuerZip">郵便番号</label>
+        <div class="zip-row">
+          <input id="f-issuerZip" class="zip" name="issuer.zip" data-zip-for="f-issuerAddress" data-zip-msg="issuerZipMsg" inputmode="numeric" enterkeyhint="next" placeholder="100-0001" maxlength="10" autocomplete="postal-code">
+          <p class="hint" id="issuerZipMsg" aria-live="polite"></p>
+        </div>
+        <p class="hint note">郵便番号の検索時のみ、郵便番号の上3桁で公開住所データを読み込みます</p>
+      </div>
+      <div class="field"><label for="f-issuerAddress">住所</label><textarea id="f-issuerAddress" name="issuer.address" rows="2" autocomplete="street-address" placeholder="例: 東京都千代田区千代田1-1 ○○ビル3F"></textarea></div>
       <div class="field">
         <label for="f-regNo">登録番号（適格請求書発行事業者）</label>
-        <input id="f-regNo" name="issuer.regNo" placeholder="T1234567890123" inputmode="text" autocapitalize="characters" spellcheck="false">
+        <input id="f-regNo" name="issuer.regNo" placeholder="T1234567890123" inputmode="text" autocapitalize="characters" autocomplete="off" spellcheck="false" enterkeyhint="next">
         <p class="hint" id="regNoMsg" aria-live="polite"></p>
       </div>
       <div class="grid2">
-        <div><label for="f-phone">電話番号</label><input id="f-phone" name="issuer.phone" type="tel"></div>
-        <div><label for="f-email">メール</label><input id="f-email" name="issuer.email" type="email"></div>
+        <div><label for="f-phone">電話番号</label><input id="f-phone" name="issuer.phone" type="tel" inputmode="tel" autocomplete="tel" enterkeyhint="next" placeholder="03-1234-5678"><p class="hint" id="phoneMsg" aria-live="polite"></p></div>
+        <div><label for="f-email">メール</label><input id="f-email" name="issuer.email" type="email" inputmode="email" autocomplete="email" autocapitalize="off" spellcheck="false" enterkeyhint="next" placeholder="info@example.jp"><p class="hint" id="emailMsg" aria-live="polite"></p></div>
       </div>
-      <div class="field" id="bankField"><label for="f-bank">振込先</label><textarea id="f-bank" name="issuer.bank" rows="2" placeholder="例: ○○銀行 △△支店 普通 1234567 ヤマダタロウ"></textarea></div>
+      <div class="field" id="bankField"><label for="f-bank">振込先</label><textarea id="f-bank" name="issuer.bank" rows="3" placeholder="例:&#10;○○銀行 △△支店（店番123）&#10;普通 1234567　口座名義 ヤマダ タロウ"></textarea>
+        <p class="hint">銀行名・支店名・口座種別・口座番号・口座名義（カナ）を記載すると振込ミスを防げます。</p></div>
       <div class="pro-assets">
         <div class="asset">
           <span class="asset-label">ロゴ <span class="pro-tag">PRO</span></span>

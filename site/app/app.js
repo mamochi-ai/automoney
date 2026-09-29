@@ -73,10 +73,24 @@ const parseISO = (s) => {
 };
 const jaDate = (s) => { const d = parseISO(s); return d ? `${d.getFullYear()}年${d.getMonth() + 1}月${d.getDate()}日` : ''; };
 const today = () => toISO(new Date());
-const yen = (n) => `¥${formatYen(n)}`;
+/** マイナスは「−」（U+2212）で表示 */
+const signed = (n) => (Math.round(Number(n) || 0) < 0 ? `−${formatYen(-n)}` : formatYen(n));
+const yen = (n) => (Math.round(Number(n) || 0) < 0 ? `−¥${formatYen(-n)}` : `¥${formatYen(n)}`);
+/** 全角英数記号→半角 */
+const toHalf = (s) => String(s ?? '').replace(/[！-～]/g, (c) => String.fromCharCode(c.charCodeAt(0) - 0xFEE0)).replace(/　/g, ' ');
+/**
+ * 金額・数量の文字列を数値に。全角数字・カンマ・¥/円・空白・各種マイナス記号（−－ー△▲）を許容。
+ * 解釈できなければ NaN。
+ */
+function parseAmount(v) {
+  if (typeof v === 'number') return v;
+  let s = toHalf(v).replace(/[,，、\s円¥￥]/g, '').replace(/^[−ー‐–—△▲]/, '-');
+  if (s === '') return NaN;
+  if (/^[+-]?(\d+\.?\d*|\.\d+)$/.test(s)) return Number(s);
+  return NaN;
+}
 const num = (v) => {
-  const s = String(v ?? '').replace(/[０-９．－]/g, (c) => String.fromCharCode(c.charCodeAt(0) - 0xFEE0)).replace(/[,，\s円¥￥]/g, '');
-  const n = Number(s);
+  const n = parseAmount(v);
   return Number.isFinite(n) ? n : 0;
 };
 /** 同日の翌月（末日は丸める） */
@@ -85,6 +99,136 @@ function addMonths(d, k) {
   return new Date(d.getFullYear(), d.getMonth() + k, Math.min(d.getDate(), last));
 }
 const isMonthEnd = (d) => new Date(d.getFullYear(), d.getMonth() + 1, 0).getDate() === d.getDate();
+/** 1か月後（月末なら翌月末） */
+const nextMonthISO = (iso) => {
+  const d = parseISO(iso);
+  if (!d) return iso || '';
+  return toISO(isMonthEnd(d) ? new Date(d.getFullYear(), d.getMonth() + 2, 0) : addMonths(d, 1));
+};
+
+// ---------- 取引年月日・対象期間 ----------
+/** 「2026年9月1日〜9月30日」（同年なら終了日の年を省略） */
+function periodText(d) {
+  const s = parseISO(d.periodStart);
+  const e = parseISO(d.periodEnd);
+  if (s && e && toISO(s) !== toISO(e)) {
+    const endText = e.getFullYear() === s.getFullYear() ? `${e.getMonth() + 1}月${e.getDate()}日` : jaDate(d.periodEnd);
+    return `${jaDate(d.periodStart)}〜${endText}`;
+  }
+  if (s) return jaDate(d.periodStart);
+  if (e) return jaDate(d.periodEnd);
+  return String(d.period || '').trim() || jaDate(d.issueDate);
+}
+const validYMD = (y, m, dd) => {
+  const d = new Date(y, m - 1, dd);
+  return d.getFullYear() === y && d.getMonth() === m - 1 && d.getDate() === dd ? d : null;
+};
+/**
+ * 旧バージョンの自由入力（例: "09/01〜0930", "2026年9月1日〜9月30日", "2026年9月分"）を
+ * 開始日・終了日に変換。解釈できなければ null（旧テキストをそのまま表示に使う）。
+ */
+function parseLegacyPeriod(text, issueISO) {
+  const src = toHalf(text).replace(/\s+/g, '').replace(/(まで|分)$/, '');
+  if (!src) return null;
+  const baseYear = (parseISO(issueISO) || new Date()).getFullYear();
+  const ym = /^(\d{4})年(\d{1,2})月$/.exec(src);
+  if (ym) {
+    const s = validYMD(Number(ym[1]), Number(ym[2]), 1);
+    return s ? { start: toISO(s), end: toISO(new Date(s.getFullYear(), s.getMonth() + 1, 0)) } : null;
+  }
+  const parts = src.split(/〜|~|から|–|—/);
+  if (parts.length > 2) return null;
+  const one = (p, ctx) => {
+    let m;
+    if ((m = /^(\d{4})[年/.-](\d{1,2})[月/.-](\d{1,2})日?$/.exec(p))) return validYMD(+m[1], +m[2], +m[3]);
+    if ((m = /^(\d{4})(\d{2})(\d{2})$/.exec(p))) return validYMD(+m[1], +m[2], +m[3]);
+    if ((m = /^(\d{1,2})[月/.](\d{1,2})日?$/.exec(p)) || (m = /^(\d{2})(\d{2})$/.exec(p))) {
+      const y = ctx ? ctx.getFullYear() : baseYear;
+      const d = validYMD(y, +m[1], +m[2]);
+      return d && ctx && d < ctx ? validYMD(y + 1, +m[1], +m[2]) : d;
+    }
+    if (ctx && (m = /^(\d{1,2})日$/.exec(p))) return validYMD(ctx.getFullYear(), ctx.getMonth() + 1, +m[1]);
+    return null;
+  };
+  const s = one(parts[0], null);
+  if (!s) return null;
+  if (parts.length === 1) return { start: toISO(s), end: '' };
+  const e = one(parts[1], s);
+  if (!e || e < s) return null;
+  return { start: toISO(s), end: toISO(e) };
+}
+
+// ---------- 郵便番号 ----------
+const PREFS = ['', '北海道', '青森県', '岩手県', '宮城県', '秋田県', '山形県', '福島県', '茨城県', '栃木県', '群馬県', '埼玉県', '千葉県', '東京都', '神奈川県', '新潟県', '富山県', '石川県', '福井県', '山梨県', '長野県', '岐阜県', '静岡県', '愛知県', '三重県', '滋賀県', '京都府', '大阪府', '兵庫県', '奈良県', '和歌山県', '鳥取県', '島根県', '岡山県', '広島県', '山口県', '徳島県', '香川県', '愛媛県', '高知県', '福岡県', '佐賀県', '長崎県', '熊本県', '大分県', '宮崎県', '鹿児島県', '沖縄県'];
+const zipDigits = (v) => toHalf(v).replace(/\D/g, '');
+const formatZip = (v) => {
+  const d = zipDigits(v);
+  return d.length === 7 ? `${d.slice(0, 3)}-${d.slice(3)}` : toHalf(v).replace(/[^\d-]/g, '');
+};
+/** 旧データ：住所の先頭の「〒123-4567」を郵便番号欄へ移す */
+function migrateParty(p) {
+  if (!p || typeof p !== 'object') return p;
+  const out = { zip: '', ...p };
+  if (!out.zip && typeof out.address === 'string') {
+    const m = /^\s*〒\s*([0-9０-９]{3})\s*[-‐－−ー]?\s*([0-9０-９]{4})[ \t　]*(?:\r?\n)?/.exec(out.address);
+    if (m) {
+      out.zip = formatZip(m[1] + m[2]);
+      out.address = out.address.slice(m[0].length).replace(/^\s+/, '');
+    }
+  }
+  return out;
+}
+const zipCache = new Map();
+let zipQueue = Promise.resolve();
+/**
+ * yubinbango の公開データ（郵便番号上3桁ごとのJSONP）から住所を引く。
+ * 送信されるのは上3桁を含むファイル名のみ。
+ */
+function lookupZip(zip) {
+  const d = zipDigits(zip);
+  if (d.length !== 7) return Promise.resolve(null);
+  const prefix = d.slice(0, 3);
+  const get = () => {
+    if (zipCache.has(prefix)) return Promise.resolve(zipCache.get(prefix));
+    return new Promise((resolve, reject) => {
+      const s = document.createElement('script');
+      const done = () => { clearTimeout(timer); s.remove(); };
+      const timer = setTimeout(() => { done(); reject(new Error('timeout')); }, 8000);
+      window.$yubin = (data) => { zipCache.set(prefix, data || {}); };
+      s.src = `https://yubinbango.github.io/yubinbango-data/data/${prefix}.js`;
+      s.async = true;
+      s.onload = () => { done(); zipCache.has(prefix) ? resolve(zipCache.get(prefix)) : reject(new Error('no data')); };
+      s.onerror = () => { done(); reject(new Error('load')); };
+      document.head.append(s);
+    });
+  };
+  // 同時に複数読み込むと $yubin が競合するので直列化
+  const p = zipQueue.then(get);
+  zipQueue = p.catch(() => {});
+  return p.then((data) => {
+    const r = data[d];
+    if (!r) return null;
+    return `${PREFS[Number(r[0])] || ''}${r[1] || ''}${r[2] || ''}${r[3] || ''}`;
+  });
+}
+
+// ---------- 電話・メール ----------
+const normalizePhone = (v) => toHalf(v).replace(/[ー−‐―–—]/g, '-').trim();
+function phoneProblem(v) {
+  const s = normalizePhone(v);
+  if (!s) return '';
+  if (/[^\d\-+() ]/.test(s)) return '電話番号に使えない文字が含まれています';
+  const d = s.replace(/\D/g, '');
+  if (s.startsWith('+')) return d.length >= 9 && d.length <= 15 ? '' : '電話番号の桁数を確認してください';
+  if (!d.startsWith('0') || d.length < 10 || d.length > 11) return '電話番号の桁数を確認してください（市外局番から10〜11桁）';
+  return '';
+}
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@.]{2,}$/;
+const emailProblem = (v) => (!String(v || '').trim() || EMAIL_RE.test(String(v).trim()) ? '' : 'メールアドレスの形式を確認してください');
+const normalizeRegNo = (v) => {
+  const s = toHalf(v).toUpperCase().replace(/[\s\-‐－−ー]/g, '');
+  return /^\d{13}$/.test(s) ? `T${s}` : s;
+};
 
 let toastTimer;
 function toast(msg) {
@@ -102,10 +246,11 @@ const store = {
   docs: load(KEY.docs, []),
   clients: load(KEY.clients, []),
   items: load(KEY.items, []),
-  profile: load(KEY.profile, {}),
+  profile: load(KEY.profile, {}) || {},
   counters: load(KEY.counters, {}),
   assets: load(KEY.assets, {}),
 };
+if (store.profile.issuer) store.profile.issuer = migrateParty(store.profile.issuer);
 let pro = false;
 let doc;
 
@@ -133,9 +278,11 @@ function newDoc(type = 'invoice') {
     dueDate: TYPES[type].showDue ? toISO(type === 'estimate' ? addMonths(new Date(), 1) : dueDate(new Date(), { monthsLater: 1 })) : '',
     duePreset: type === 'estimate' ? '' : 'm1',
     subject: '',
-    period: '',
-    client: { name: '', honorific: '御中', address: '' },
-    issuer: { name: '', address: '', regNo: '', phone: '', email: '', bank: '', ...(p.issuer || {}) },
+    period: '', // 旧バージョンの自由入力（解釈できなかったものだけ表示用に残す）
+    periodStart: '',
+    periodEnd: '',
+    client: { name: '', honorific: '御中', zip: '', address: '' },
+    issuer: { name: '', zip: '', address: '', regNo: '', phone: '', email: '', bank: '', ...(p.issuer || {}) },
     items: [emptyItem()],
     priceMode: p.priceMode || 'exclusive',
     rounding: p.rounding || 'floor',
@@ -149,8 +296,16 @@ function newDoc(type = 'invoice') {
 function normalizeDoc(d) {
   const base = newDoc(TYPES[d?.type] ? d.type : 'invoice');
   const out = { ...base, ...d };
-  out.client = { ...base.client, ...(d?.client || {}) };
-  out.issuer = { ...base.issuer, ...(d?.issuer || {}) };
+  // 旧データ（郵便番号欄なし）は書類自身の住所から分離する（プロフィールの郵便番号と混ざらないように先に移行）
+  out.client = { ...base.client, ...(d?.client ? migrateParty(d.client) : {}) };
+  out.issuer = { ...base.issuer, ...(d?.issuer ? migrateParty(d.issuer) : {}) };
+  out.period = typeof out.period === 'string' ? out.period : '';
+  out.periodStart = out.periodStart || '';
+  out.periodEnd = out.periodEnd || '';
+  if (!out.periodStart && !out.periodEnd && out.period.trim()) {
+    const r = parseLegacyPeriod(out.period, out.issueDate);
+    if (r) { out.periodStart = r.start; out.periodEnd = r.end; out.period = ''; }
+  }
   out.items = Array.isArray(d?.items) && d.items.length ? d.items.map((it) => ({ ...emptyItem(), ...it, rate: String(it.rate ?? '10') })) : [emptyItem()];
   return out;
 }
@@ -238,7 +393,10 @@ function fillForm() {
   }
   applyTypeUI();
   updateRegNoMsg();
+  updateContactMsgs(false);
+  for (const z of $$('input.zip')) setZipMsg(z, '');
   markDuePreset();
+  updatePeriodUI();
 }
 
 function applyTypeUI() {
@@ -252,25 +410,87 @@ function applyTypeUI() {
   document.title = `${t.label}作成 | ゼロ請求書 — インボイス対応・登録不要・無料`;
 }
 
+function setHint(el, input, cls, text) {
+  el.className = cls ? `hint ${cls}` : 'hint';
+  el.textContent = text;
+  input?.classList.toggle('bad', cls === 'bad');
+}
+
 function updateRegNoMsg() {
   const el = $('#regNoMsg');
   const input = $('#f-regNo');
-  const v = (doc.issuer.regNo || '').trim();
-  input.classList.remove('bad');
+  const v = normalizeRegNo(doc.issuer.regNo || '');
   if (!v) {
-    el.className = 'hint';
-    el.textContent = '適格請求書（インボイス）には登録番号の記載が必要です。未登録（免税事業者）の場合は空欄のままで構いません。';
+    setHint(el, input, '', '適格請求書（インボイス）には登録番号の記載が必要です。未登録（免税事業者）の場合は空欄のままで構いません。');
     return;
   }
   const r = validateRegistrationNumber(v);
   if (r.valid) {
-    el.className = 'hint ok';
-    el.textContent = '✓ 登録番号の形式・チェックデジットはOKです';
+    setHint(el, input, 'ok', '✓ 登録番号の形式・チェックデジットはOKです');
   } else {
-    el.className = 'hint bad';
-    input.classList.add('bad');
-    el.textContent = `⚠ ${r.reason}`;
+    const digits = v.replace(/^T/, '');
+    const extra = /^\d+$/.test(digits) && digits.length !== 13 ? `（数字が${digits.length}桁です）` : '';
+    setHint(el, input, 'bad', `⚠ ${r.reason}${extra}`);
   }
+}
+
+/** 電話・メールの形式チェック（保存は妨げない）。strict=false のときは「直したら消す」だけ */
+function updateContactMsgs(strict = true) {
+  for (const [id, msgId, fn] of [['#f-phone', '#phoneMsg', phoneProblem], ['#f-email', '#emailMsg', emailProblem]]) {
+    const input = $(id);
+    const msg = $(msgId);
+    const problem = fn(input.value);
+    if (!problem) setHint(msg, input, '', '');
+    else if (strict || input.classList.contains('bad')) setHint(msg, input, 'bad', `⚠ ${problem}`);
+  }
+}
+
+// ---------- 取引年月日 ----------
+function updatePeriodUI() {
+  const msg = $('#periodMsg');
+  const s = doc.periodStart;
+  const e = doc.periodEnd;
+  const legacy = String(doc.period || '').trim();
+  for (const c of $$('[data-period]')) c.classList.remove('on');
+  if (s && e && e < s) {
+    setHint(msg, $('#f-periodEnd'), 'bad', '⚠ 終了日が開始日より前になっています');
+    return;
+  }
+  $('#f-periodEnd').classList.remove('bad');
+  if (!s && !e && legacy) {
+    setHint(msg, null, '', `以前の入力「${legacy}」をそのまま表示しています。日付を選ぶと置き換わります。`);
+    return;
+  }
+  const shown = periodText(doc);
+  setHint(msg, null, '', s || e ? `書類の表示：${shown}` : `空欄の場合は発行日（${shown || '未入力'}）を表示します。終了日を入れると期間になります。`);
+  const preset = periodPreset(doc.issueDate);
+  for (const c of $$('[data-period]')) {
+    const p = preset[c.dataset.period];
+    c.classList.toggle('on', !!p && !!p.start && p.start === s && p.end === e);
+  }
+}
+function periodPreset(issueISO) {
+  const d = parseISO(issueISO) || new Date();
+  const y = d.getFullYear(), m = d.getMonth();
+  return {
+    this: { start: toISO(new Date(y, m, 1)), end: toISO(new Date(y, m + 1, 0)) },
+    last: { start: toISO(new Date(y, m - 1, 1)), end: toISO(new Date(y, m, 0)) },
+    issue: { start: toISO(d), end: '' },
+    clear: { start: '', end: '' },
+  };
+}
+for (const c of $$('[data-period]')) {
+  c.addEventListener('click', () => {
+    const p = periodPreset(doc.issueDate)[c.dataset.period];
+    doc.periodStart = p.start;
+    doc.periodEnd = p.end;
+    if (p.start) doc.period = '';
+    $('#f-periodStart').value = p.start;
+    $('#f-periodEnd').value = p.end;
+    updatePeriodUI();
+    render();
+    scheduleAutosave();
+  });
 }
 
 function markDuePreset() {
@@ -284,35 +504,119 @@ function computeDue(preset, issueISO) {
   return null;
 }
 
+function saveIssuerProfile() {
+  store.profile.issuer = { ...doc.issuer };
+  save(KEY.profile, store.profile);
+}
+
+// ---------- 郵便番号 → 住所 ----------
+const zipAuto = new Map(); // 住所欄id → 直前に自動入力した住所
+const zipLast = new Map(); // 郵便番号欄id → 直前に検索した7桁
+function setZipMsg(input, text, cls = '') {
+  const msg = document.getElementById(input.dataset.zipMsg);
+  if (msg) setHint(msg, null, cls, text);
+}
+function onZipInput(el) {
+  const raw = el.value;
+  const d = zipDigits(raw);
+  // 全角・ハイフンなしでも 123-4567 に整形
+  const shown = d.length === 7 ? formatZip(raw) : toHalf(raw).replace(/[^\d-]/g, '');
+  if (shown !== raw) el.value = shown;
+  setPath(doc, el.name, el.value);
+  if (d.length !== 7) {
+    zipLast.delete(el.id);
+    setZipMsg(el, d.length > 7 ? '⚠ 郵便番号は7桁です' : '', d.length > 7 ? 'bad' : '');
+    return;
+  }
+  if (zipLast.get(el.id) === d) return;
+  zipLast.set(el.id, d);
+  setZipMsg(el, '住所を検索しています…');
+  lookupZip(d).then((addr) => {
+    if (zipDigits(el.value) !== d) return; // 検索中に変更された
+    if (!addr) { setZipMsg(el, '該当する住所が見つかりませんでした（手入力してください）'); return; }
+    const target = document.getElementById(el.dataset.zipFor);
+    const cur = target.value.trim();
+    if (!cur || cur === zipAuto.get(target.id)) {
+      target.value = addr;
+      zipAuto.set(target.id, addr);
+      setPath(doc, target.name, addr);
+      if (target.name.startsWith('issuer.')) saveIssuerProfile();
+      setZipMsg(el, '住所を自動入力しました（番地を追記してください）', 'ok');
+      render();
+      scheduleAutosave();
+    } else if (!cur.startsWith(addr)) {
+      setZipMsg(el, `この郵便番号の住所：${addr}（入力済みの住所は変更していません）`);
+    } else {
+      setZipMsg(el, '');
+    }
+  }).catch(() => {
+    zipLast.delete(el.id);
+    setZipMsg(el, '住所を自動取得できませんでした（手入力してください）');
+  });
+}
+
 form.addEventListener('submit', (e) => e.preventDefault());
 form.addEventListener('input', (e) => {
   const el = e.target;
   if (el.closest('#items')) return onItemInput(e);
   if (!el.name) return;
-  const v = el.type === 'checkbox' ? el.checked : el.value;
-  setPath(doc, el.name, v);
+  const prevIssue = doc.issueDate;
+  if (el.classList.contains('zip')) onZipInput(el);
+  else setPath(doc, el.name, el.type === 'checkbox' ? el.checked : el.value);
+  const v = getPath(doc, el.name);
   if (el.name.startsWith('issuer.')) {
-    store.profile.issuer = { ...doc.issuer };
-    save(KEY.profile, store.profile);
+    saveIssuerProfile();
     if (el.name === 'issuer.regNo') updateRegNoMsg();
+    if (el.name === 'issuer.phone' || el.name === 'issuer.email') updateContactMsgs(false);
   }
   if (['priceMode', 'rounding', 'withholding'].includes(el.name)) {
     store.profile[el.name] = v;
     save(KEY.profile, store.profile);
     if (el.name === 'priceMode') renderItemsEditor();
   }
-  if (el.name === 'issueDate' && doc.duePreset) {
-    const due = computeDue(doc.duePreset, doc.issueDate);
-    if (due) { doc.dueDate = due; $('#f-dueDate').value = due; }
+  if (el.name === 'issueDate') {
+    if (doc.duePreset) {
+      const due = computeDue(doc.duePreset, doc.issueDate);
+      if (due) { doc.dueDate = due; $('#f-dueDate').value = due; }
+    }
+    // 「発行日と同じ」にしていた取引年月日は発行日に追従
+    if (prevIssue && doc.periodStart === prevIssue && !doc.periodEnd && doc.issueDate) {
+      doc.periodStart = doc.issueDate;
+      $('#f-periodStart').value = doc.issueDate;
+    }
+    updatePeriodUI();
+  }
+  if (el.name === 'periodStart' || el.name === 'periodEnd') {
+    if (doc.periodStart || doc.periodEnd) doc.period = '';
+    updatePeriodUI();
   }
   if (el.name === 'dueDate') { doc.duePreset = ''; markDuePreset(); }
   render();
   scheduleAutosave();
 });
-// 入力確定時の登録番号の正規化（全角→半角・大文字）
-$('#f-regNo').addEventListener('change', (e) => {
-  const v = e.target.value.replace(/[Ａ-Ｚａ-ｚ０-９]/g, (c) => String.fromCharCode(c.charCodeAt(0) - 0xFEE0)).toUpperCase().replace(/[\s-]/g, '');
-  if (v !== e.target.value) { e.target.value = v; e.target.dispatchEvent(new Event('input', { bubbles: true })); }
+// 入力確定時の正規化（全角→半角など）
+function normalizeField(el, fn) {
+  el.addEventListener('change', () => {
+    const v = fn(el.value);
+    if (v !== el.value) { el.value = v; el.dispatchEvent(new Event('input', { bubbles: true })); }
+  });
+}
+normalizeField($('#f-regNo'), normalizeRegNo);
+normalizeField($('#f-phone'), normalizePhone);
+normalizeField($('#f-email'), (v) => toHalf(v).replace(/\s/g, ''));
+normalizeField($('#f-number'), (v) => toHalf(v).trim());
+for (const id of ['#f-phone', '#f-email']) $(id).addEventListener('change', () => updateContactMsgs(true));
+
+// Enter（iPadの「次へ」）で次の入力欄へ。IME変換中は何もしない
+form.addEventListener('keydown', (e) => {
+  if (e.key !== 'Enter' || e.isComposing || e.keyCode === 229) return;
+  const el = e.target;
+  if (el.tagName !== 'INPUT' || ['checkbox', 'button', 'file'].includes(el.type)) return;
+  e.preventDefault();
+  const fields = $$('input:not([type=checkbox]):not([type=file]):not([hidden]),select,textarea', form)
+    .filter((x) => !x.disabled && x.offsetParent !== null);
+  const next = fields[fields.indexOf(el) + 1];
+  if (next) next.focus(); else el.blur();
 });
 
 for (const c of $$('[data-due]')) {
@@ -347,26 +651,46 @@ for (const b of $$('.doctype button')) {
 // ---------------------------------------------------------------------------
 // 明細エディタ
 // ---------------------------------------------------------------------------
+function formatQty(q) {
+  const n = parseAmount(q);
+  if (!Number.isFinite(n)) return String(q ?? '');
+  const s = Math.abs(n).toLocaleString('ja-JP', { maximumFractionDigits: 3 });
+  return n < 0 ? `−${s}` : s;
+}
+/** 入力欄の表示用（空欄・解釈できない入力はそのまま） */
+function amountDisplay(v, kind) {
+  if (v === '' || v == null) return '';
+  const n = parseAmount(v);
+  if (!Number.isFinite(n)) return String(v);
+  return kind === 'qty' ? formatQty(n) : signed(n);
+}
+/** 編集用（カンマなし・半角） */
+function amountRaw(v) {
+  const n = parseAmount(v);
+  return Number.isFinite(n) ? String(n) : String(v ?? '');
+}
+
 function renderItemsEditor() {
   const box = $('#items');
   const c = calc();
   const priceLabel = doc.priceMode === 'inclusive' ? '単価（税込）' : '単価（税抜）';
   box.replaceChildren(...doc.items.map((it, i) => {
     const id = (k) => `it-${i}-${k}`;
-    return h('div', { class: 'item', dataset: { i } },
+    return h('div', { class: 'item' + (num(it.unitPrice) < 0 ? ' discount' : ''), dataset: { i } },
       h('div', { class: 'item-top' },
         h('span', { class: 'item-no', 'aria-hidden': 'true' }, i + 1),
-        h('input', { id: id('name'), 'aria-label': `${i + 1}行目 品目`, placeholder: '品目・内容', value: it.name, list: 'itemMaster', dataset: { k: 'name' } })),
+        h('input', { id: id('name'), 'aria-label': `${i + 1}行目 品目`, placeholder: '品目・内容', value: it.name, list: 'itemMaster', enterkeyhint: 'next', dataset: { k: 'name' } })),
       h('div', { class: 'item-grid' },
-        h('div', null, h('label', { for: id('qty') }, '数量'), h('input', { id: id('qty'), class: 'num', inputmode: 'decimal', value: it.qty, dataset: { k: 'qty' } })),
-        h('div', null, h('label', { for: id('unit') }, '単位'), h('input', { id: id('unit'), value: it.unit, placeholder: '式', dataset: { k: 'unit' } })),
-        h('div', null, h('label', { for: id('price') }, priceLabel), h('input', { id: id('price'), class: 'num', inputmode: 'numeric', value: it.unitPrice, dataset: { k: 'unitPrice' } })),
+        h('div', null, h('label', { for: id('qty') }, '数量'), h('input', { id: id('qty'), type: 'text', class: 'num amt', inputmode: 'decimal', enterkeyhint: 'next', autocomplete: 'off', value: amountDisplay(it.qty, 'qty'), dataset: { k: 'qty' } })),
+        h('div', null, h('label', { for: id('unit') }, '単位'), h('input', { id: id('unit'), value: it.unit, placeholder: '式', enterkeyhint: 'next', dataset: { k: 'unit' } })),
+        h('div', null, h('label', { for: id('price') }, priceLabel), h('input', { id: id('price'), type: 'text', class: 'num amt', inputmode: 'numeric', enterkeyhint: 'next', autocomplete: 'off', placeholder: '0', value: amountDisplay(it.unitPrice, 'price'), dataset: { k: 'unitPrice' } })),
         h('div', null, h('label', { for: id('rate') }, '税率'),
           h('select', { id: id('rate'), dataset: { k: 'rate' } },
             RATE_OPTIONS.map((o) => h('option', { value: o.value, selected: String(it.rate) === o.value }, o.label))))),
       h('div', { class: 'item-foot' },
         h('span', { class: 'item-amt', dataset: { amt: i } }, `金額 ${yen(c.lines[i])}`),
         h('div', { class: 'item-btns' },
+          h('button', { type: 'button', class: 'ibtn', title: '単価の符号を反転（値引き ⇄ 通常）', 'aria-label': `${i + 1}行目の単価の符号を反転`, onclick: () => flipSign(i) }, '±'),
           h('button', { type: 'button', class: 'ibtn', title: '上へ', 'aria-label': `${i + 1}行目を上へ`, disabled: i === 0, onclick: () => moveItem(i, -1) }, '↑'),
           h('button', { type: 'button', class: 'ibtn', title: '下へ', 'aria-label': `${i + 1}行目を下へ`, disabled: i === doc.items.length - 1, onclick: () => moveItem(i, 1) }, '↓'),
           h('button', { type: 'button', class: 'ibtn', title: '品目マスタに登録', onclick: () => saveItemMaster(i) }, '登録'),
@@ -380,6 +704,10 @@ function onItemInput(e) {
   if (!row || !el.dataset.k) return;
   const i = Number(row.dataset.i);
   doc.items[i][el.dataset.k] = el.value;
+  if (el.classList.contains('amt')) {
+    el.classList.toggle('bad', el.value.trim() !== '' && !Number.isFinite(parseAmount(el.value)) && !/^[−ー‐–—△▲-]$/.test(el.value.trim()));
+    row.classList.toggle('discount', num(doc.items[i].unitPrice) < 0);
+  }
   if (el.dataset.k === 'name') {
     const m = store.items.find((x) => x.name === el.value);
     if (m && e.inputType !== 'insertText' && e.inputType !== 'deleteContentBackward') {
@@ -392,9 +720,40 @@ function onItemInput(e) {
   render();
   scheduleAutosave();
 }
+// 数量・単価：フォーカスでカンマを外して全選択（上書きしやすく）、確定でカンマ付きに整形
+$('#items').addEventListener('focusin', (e) => {
+  const el = e.target;
+  if (!el.classList?.contains('amt')) return;
+  const raw = amountRaw(el.value);
+  if (raw !== el.value) el.value = raw;
+  // iOS Safari はフォーカス直後の選択が解除されるため遅延させる
+  setTimeout(() => { if (document.activeElement === el) { try { el.setSelectionRange(0, el.value.length); } catch { el.select(); } } }, 0);
+});
+$('#items').addEventListener('focusout', (e) => {
+  const el = e.target;
+  if (!el.classList?.contains('amt')) return;
+  const row = el.closest('.item');
+  const i = Number(row.dataset.i);
+  const k = el.dataset.k;
+  const n = parseAmount(el.value);
+  if (Number.isFinite(n)) doc.items[i][k] = n;
+  else if (el.value.trim() === '' || /^[−ー‐–—△▲-]$/.test(el.value.trim())) doc.items[i][k] = k === 'qty' ? '' : 0;
+  el.value = amountDisplay(doc.items[i][k], k === 'qty' ? 'qty' : 'price');
+  el.classList.toggle('bad', el.value !== '' && !Number.isFinite(parseAmount(el.value)));
+  updateLineAmounts();
+  render();
+  scheduleAutosave();
+});
 function updateLineAmounts() {
   const c = calc();
   for (const el of $$('[data-amt]')) el.textContent = `金額 ${yen(c.lines[Number(el.dataset.amt)] || 0)}`;
+}
+function flipSign(i) {
+  const n = num(doc.items[i].unitPrice);
+  doc.items[i].unitPrice = n ? -n : 0;
+  renderItemsEditor();
+  render();
+  scheduleAutosave();
 }
 function moveItem(i, dir) {
   const j = i + dir;
@@ -411,13 +770,30 @@ function removeItem(i) {
   render();
   scheduleAutosave();
 }
-$('#btnAddItem').addEventListener('click', () => {
+function addRow(extra) {
   const last = doc.items.at(-1);
-  doc.items.push({ ...emptyItem(), rate: last ? last.rate : '10' });
+  doc.items.push({ ...emptyItem(), rate: last ? last.rate : '10', ...extra });
+  return doc.items.length - 1;
+}
+$('#btnAddItem').addEventListener('click', () => {
+  const i = addRow();
   renderItemsEditor();
   render();
   scheduleAutosave();
-  $(`#it-${doc.items.length - 1}-name`)?.focus();
+  $(`#it-${i}-name`)?.focus();
+});
+$('#btnAddDiscount').addEventListener('click', () => {
+  const i = addRow({ name: '値引き', qty: 1, unit: '式', unitPrice: 0 });
+  renderItemsEditor();
+  render();
+  scheduleAutosave();
+  // 単価欄に「-」を入れておき、続けて数字を打つだけで負の金額になるように
+  const el = $(`#it-${i}-price`);
+  if (el) {
+    el.focus();
+    setTimeout(() => { el.value = '-'; el.setSelectionRange(1, 1); }, 0);
+  }
+  toast('値引き行を追加しました（単価はマイナスで入力。±ボタンで符号を反転できます）');
 });
 
 // ---------------------------------------------------------------------------
@@ -446,7 +822,7 @@ $('#btnSaveClient').addEventListener('click', () => {
   const c = doc.client;
   if (!c.name.trim()) { toast('取引先名を入力してください'); $('#f-clientName').focus(); return; }
   const i = store.clients.findIndex((x) => x.name === c.name);
-  const rec = { name: c.name, honorific: c.honorific, address: c.address || '' };
+  const rec = { name: c.name, honorific: c.honorific, zip: c.zip || '', address: c.address || '' };
   if (i >= 0) store.clients[i] = rec; else store.clients.push(rec);
   save(KEY.clients, store.clients);
   renderMasters();
@@ -462,7 +838,7 @@ $('#f-clientName').addEventListener('change', (e) => {
   if (c) applyClient(c);
 });
 function applyClient(c) {
-  doc.client = { name: c.name, honorific: c.honorific ?? '御中', address: c.address || '' };
+  doc.client = migrateParty({ name: c.name, honorific: c.honorific ?? '御中', zip: c.zip || '', address: c.address || '' });
   fillForm();
   render();
   scheduleAutosave();
@@ -510,7 +886,7 @@ function render() {
     h('div', { class: 'd-client' },
       h('span', { class: clientName ? '' : 'd-empty-hint' }, clientName || '（取引先名）'),
       h('span', { class: 'hon' }, doc.client.honorific || '')),
-    doc.client.address ? h('div', { class: 'd-caddr' }, doc.client.address) : null);
+    doc.client.zip || doc.client.address ? h('div', { class: 'd-caddr' }, [doc.client.zip ? `〒${doc.client.zip}` : '', doc.client.address].filter(Boolean).join('\n')) : null);
 
   if (doc.type === 'receipt') {
     to.append(
@@ -524,24 +900,24 @@ function render() {
     to.append(
       h('p', { class: 'd-lead' }, t.lead),
       h('div', { class: 'd-subject' }, h('span', { class: 'k' }, '件名'), h('span', { class: 'v' }, doc.subject || '')),
-      h('div', { class: 'd-subject' }, h('span', { class: 'k' }, '取引年月日'), h('span', { class: 'v' }, doc.period.trim() || jaDate(doc.issueDate))),
+      h('div', { class: 'd-subject' }, h('span', { class: 'k' }, '取引年月日'), h('span', { class: 'v' }, periodText(doc))),
       t.showDue ? h('div', { class: 'd-subject' }, h('span', { class: 'k' }, t.dueLabel), h('span', { class: 'v' }, jaDate(doc.dueDate))) : null,
       h('div', { class: 'd-amount' },
         h('div', { class: 'k' }, t.amountLabel),
         h('div', { class: 'v' }, yen(amountDue), h('small', null, '（税込）'))));
   }
   if (doc.type === 'receipt') {
-    to.append(h('div', { class: 'd-subject', style: 'margin-top:3mm' }, h('span', { class: 'k' }, '取引年月日'), h('span', { class: 'v' }, doc.period.trim() || jaDate(doc.issueDate))));
+    to.append(h('div', { class: 'd-subject', style: 'margin-top:3mm' }, h('span', { class: 'k' }, '取引年月日'), h('span', { class: 'v' }, periodText(doc))));
   }
 
   // 発行者ブロック
   const from = h('div', { class: 'd-from' },
     logo ? h('img', { class: 'd-logo', src: logo, alt: '' }) : null,
     h('div', { class: 'd-iname' + (is.name ? '' : ' d-empty-hint') }, is.name || '（発行者名）'),
-    is.address ? h('div', { class: 'd-iaddr' }, is.address) : null,
+    is.zip || is.address ? h('div', { class: 'd-iaddr' }, [is.zip ? `〒${is.zip}` : '', is.address].filter(Boolean).join('\n')) : null,
     is.phone ? h('div', null, `TEL ${is.phone}`) : null,
     is.email ? h('div', null, is.email) : null,
-    is.regNo ? h('div', { class: 'd-reg' }, h('span', { class: 'k' }, '登録番号 '), String(is.regNo).trim().toUpperCase()) : null,
+    is.regNo ? h('div', { class: 'd-reg' }, h('span', { class: 'k' }, '登録番号 '), normalizeRegNo(is.regNo)) : null,
     seal ? h('img', { class: 'd-seal', src: seal, alt: '' }) : null);
 
   // 明細表
@@ -551,9 +927,9 @@ function render() {
     h('td', null, it.name, String(it.rate) === '8' ? h('span', { class: 'mark' }, '※') : null),
     h('td', { class: 'n' }, it.qty === '' ? '' : formatQty(it.qty)),
     h('td', { class: 'c' }, it.unit),
-    h('td', { class: 'n' }, formatYen(num(it.unitPrice))),
+    h('td', { class: 'n' }, signed(num(it.unitPrice))),
     h('td', { class: 'c' }, rateLabel(it.rate)),
-    h('td', { class: 'n' }, formatYen(c.lines[i]))));
+    h('td', { class: 'n' }, signed(c.lines[i]))));
   for (let k = rows.length; k < minRows; k++) rows.push(h('tr', { class: 'empty' }, Array.from({ length: 7 }, () => h('td'))));
   const table = h('table', { class: 'd-items' },
     h('colgroup', null, h('col', { class: 'no' }), h('col'), h('col', { class: 'qty' }), h('col', { class: 'unit' }), h('col', { class: 'price' }), h('col', { class: 'rate' }), h('col', { class: 'amt' })),
@@ -610,22 +986,22 @@ function render() {
   fitPreview();
 }
 
-function formatQty(q) {
-  const n = num(q);
-  return Number.isInteger(n) ? n.toLocaleString('ja-JP') : String(n);
-}
 
 function renderSummary(c) {
   const t = TYPES[doc.type];
-  const lines = [
-    ['小計（税抜）', yen(c.subtotal)],
-    ['消費税', yen(c.tax)],
-    ['合計（税込）', yen(c.total)],
+  const row = (cls, k, v) => h('div', { class: cls || null }, h('span', null, k), h('span', null, v));
+  const taxed = ['10', '8'].filter((k) => c.byRate[k]);
+  const out = [
+    row('', doc.priceMode === 'inclusive' ? '小計（税抜換算）' : '小計（税抜）', yen(c.subtotal)),
+    row('', '消費税', yen(c.tax)),
   ];
-  if (c.withholding) lines.push(['源泉徴収税額', `−${yen(c.withholding)}`]);
-  $('#sumMini').replaceChildren(
-    ...lines.map(([k, v]) => h('div', null, h('span', null, k), h('span', null, v))),
-    h('div', { class: 'grand' }, h('span', null, c.withholding ? t.amountLabel : '合計（税込）'), h('span', null, yen(c.billed))));
+  if (taxed.length > 1) out.push(h('div', { class: 'sub' }, taxed.map((k) => `${k}%: ${yen(c.byRate[k].tax)}`).join(' ／ ')));
+  out.push(row(c.withholding ? 'total' : 'grand', '合計（税込）', yen(c.total)));
+  if (c.withholding) {
+    out.push(row('neg', '源泉徴収税額', `−${yen(c.withholding)}`));
+    out.push(row('grand', doc.type === 'invoice' ? '差引ご請求額' : `差引${t.amountLabel}`, yen(c.billed)));
+  }
+  $('#sumMini').replaceChildren(...out);
 
   const note = $('#stampNote');
   if (doc.type !== 'receipt') { note.hidden = true; return; }
@@ -696,6 +1072,8 @@ function duplicate(src) {
   }
   d.subject = bumpMonthText(d.subject);
   d.period = bumpMonthText(d.period);
+  if (d.periodStart) d.periodStart = nextMonthISO(d.periodStart);
+  if (d.periodEnd) d.periodEnd = nextMonthISO(d.periodEnd);
   d.issuer = { ...d.issuer, ...(store.profile.issuer || {}) };
   d.createdAt = d.updatedAt = Date.now();
   setDoc(d);

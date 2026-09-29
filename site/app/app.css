@@ -37,10 +37,25 @@
 .field{margin-top:10px}
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .grid2 + .field{margin-top:10px}
+.grid2>*,.item-grid>*,.zip-row>*{min-width:0}
+/* 日付入力：iOS Safariは固有のmin-widthと中央寄せがあり、カードからはみ出すため揃える */
+input[type="date"]{display:block;width:100%;min-width:0;max-width:100%;-webkit-appearance:none;appearance:none;text-align:left;height:calc(1.7em + 20px);min-height:calc(1.7em + 20px);line-height:1.7}
+input[type="date"]::-webkit-date-and-time-value{text-align:left;margin:0;min-height:1.7em}
+input[type="date"]::-webkit-datetime-edit{padding:0}
+fieldset.field{border:0;padding:0;margin:10px 0 0;min-width:0}
+fieldset.field legend{padding:0;font-size:.85rem;color:var(--muted);margin-bottom:4px}
+label.sub{font-size:.75rem;margin-bottom:2px}
+.chip-ghost{color:var(--muted)}
+.zip-row{display:flex;flex-wrap:wrap;gap:4px 10px;align-items:center}
+.zip-row input.zip{width:9.5em;flex:none;font-variant-numeric:tabular-nums}
+.zip-row .hint{margin:0;flex:1 1 12em}
+.hint.note{font-size:.72rem}
+.hint:empty{display:none}
+.privacy-note .muted{font-size:.75rem}
 .hint{margin:4px 0 0;font-size:.78rem;color:var(--muted);line-height:1.5}
 .hint.ok{color:var(--accent)}
 .hint.bad{color:var(--warn)}
-input.bad{border-color:var(--warn)}
+input.bad,textarea.bad{border-color:var(--warn)}
 .chips{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
 .chip{border:1px solid var(--line);background:var(--bg);color:var(--text);border-radius:99px;padding:3px 11px;font:inherit;font-size:.8rem;cursor:pointer}
 .chip:hover,.chip.on{border-color:var(--accent);color:var(--accent)}
@@ -72,7 +87,11 @@ input.bad{border-color:var(--warn)}
 
 .sum-mini{margin-top:14px;border-top:1px dashed var(--line);padding-top:10px;font-size:.85rem;font-variant-numeric:tabular-nums}
 .sum-mini div{display:flex;justify-content:space-between;gap:8px}
-.sum-mini .grand{font-weight:700;font-size:1rem;margin-top:4px}
+.sum-mini .total{font-weight:700;font-size:1rem;margin-top:4px;padding-top:4px;border-top:1px solid var(--line)}
+.sum-mini .sub{font-size:.78rem;color:var(--muted);justify-content:flex-end}
+.sum-mini .neg span:last-child{color:var(--warn)}
+.sum-mini .grand{font-weight:700;font-size:1.05rem;margin-top:4px;padding-top:4px;border-top:1px solid var(--line)}
+.item.discount{border-style:dashed}
 .stamp-note{margin-top:12px;padding:10px 12px;border-radius:8px;border:1px solid var(--line);background:var(--bg);font-size:.8rem;line-height:1.6}
 .stamp-note strong{color:var(--accent);font-size:.95rem}
 
