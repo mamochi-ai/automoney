@@ -1,0 +1,24 @@
+:root{--bg:#fbfaf7;--surface:#fff;--text:#1d1d1f;--muted:#6b6b70;--line:#e4e2dc;--accent:#0f6e5a;--accent-ink:#fff;--accent-soft:#e3f1ec;--warn:#b54708;--radius:10px;--font:"Hiragino Sans","Noto Sans JP","Yu Gothic UI",system-ui,sans-serif}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#141516;--surface:#1d1f21;--text:#ececec;--muted:#a0a0a6;--line:#2e3134;--accent:#3fb893;--accent-ink:#0b1a15;--accent-soft:#16302a;--warn:#f0a35b}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:var(--font);line-height:1.7;-webkit-font-smoothing:antialiased}
+a{color:var(--accent)}
+.wrap{max-width:1040px;margin:0 auto;padding:0 16px}
+.site-header{border-bottom:1px solid var(--line);background:var(--surface)}
+.site-header .wrap{display:flex;align-items:center;justify-content:space-between;height:56px;gap:12px}
+.brand{font-weight:700;text-decoration:none;color:var(--text);font-size:1.05rem}
+.nav{display:flex;gap:16px;font-size:.9rem;flex-wrap:wrap}
+.nav a{color:var(--muted);text-decoration:none}.nav a:hover{color:var(--text)}
+.site-footer{border-top:1px solid var(--line);margin-top:64px;padding:24px 0;color:var(--muted);font-size:.85rem}
+.site-footer a{color:var(--muted)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:10px 18px;border-radius:var(--radius);border:1px solid var(--line);background:var(--surface);color:var(--text);font:inherit;font-weight:600;cursor:pointer;text-decoration:none}
+.btn-primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:20px}
+label{display:block;font-size:.85rem;color:var(--muted);margin-bottom:4px}
+input,select,textarea{width:100%;padding:9px 11px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--text);font:inherit}
+input:focus,select:focus,textarea:focus{outline:2px solid var(--accent);outline-offset:-1px}
+.num{font-variant-numeric:tabular-nums;text-align:right}
+.muted{color:var(--muted)}.warn{color:var(--warn)}
+table{border-collapse:collapse;width:100%}
+th,td{padding:8px;border-bottom:1px solid var(--line);text-align:left}
+@media print{.no-print{display:none!important}body{background:#fff;color:#000}}
