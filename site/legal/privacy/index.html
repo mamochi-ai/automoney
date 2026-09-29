@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>プライバシーポリシー | ゼロ請求書</title>
+<meta name="description" content="ゼロ請求書のプライバシーポリシー。入力データはブラウザ内にのみ保存され、サーバーに送信されません。">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../assets/style.css">
+<style>
+.legal{max-width:760px;padding-top:40px}
+.legal h1{font-size:1.7rem;line-height:1.4;margin:0 0 6px}
+.legal .updated{color:var(--muted);font-size:.85rem;margin:0 0 28px}
+.legal h2{font-size:1.1rem;margin:36px 0 10px;padding-top:4px;border-top:1px solid var(--line);padding-top:24px}
+.legal p,.legal li{font-size:.95rem}
+.legal ol,.legal ul{padding-left:1.4em}
+.legal li{margin:4px 0}
+.fill{background:color-mix(in srgb,var(--warn) 14%,transparent);color:var(--warn);font-weight:700;padding:1px 6px;border-radius:4px}
+.box{border:1px dashed var(--warn);border-radius:var(--radius);padding:14px 16px;margin:16px 0;font-size:.9rem;background:color-mix(in srgb,var(--warn) 6%,transparent)}
+.kv th{width:32%;vertical-align:top;font-weight:600;color:var(--muted);font-size:.9rem}
+.kv td{font-size:.95rem}
+@media (max-width:560px){.kv th,.kv td{display:block;width:auto;border:0;padding:4px 0}.kv tr{display:block;border-bottom:1px solid var(--line);padding:10px 0}}
+</style>
+</head>
+<body>
+<header class="site-header"><div class="wrap"><a class="brand" href="../../">ゼロ請求書</a><nav class="nav"><a href="../../app/">請求書を作る</a><a href="../../tools/">計算ツール</a><a href="../../#pricing">料金</a></nav></div></header>
+<main class="wrap legal">
+
+<h1>プライバシーポリシー</h1>
+<p class="updated">制定日：2026年10月1日 <span class="fill">【要確認：公開日に合わせて修正】</span></p>
+<p>ゼロ請求書（以下「本サービス」）の運営者（以下「運営者」）は、利用者の個人情報およびデータを以下のとおり取り扱います。</p>
+
+<h2>1. 書類データの取り扱い（ブラウザ内保存）</h2>
+<p>本サービスで入力した請求書・見積書・納品書・領収書の内容、取引先・品目、ロゴ・印影画像、設定などのデータは、利用者のブラウザの保存領域（localStorage）にのみ保存されます。これらのデータが運営者のサーバーに送信されることはなく、運営者が閲覧・取得することはできません。</p>
+<ul>
+<li>データはブラウザ・端末ごとに保存されます。ブラウザのサイトデータを削除すると、データも削除されます。</li>
+<li>JSONバックアップで書き出したファイルは、利用者ご自身の責任で管理してください。</li>
+<li>共用の端末でご利用の場合は、利用後にデータを削除するなどご注意ください。</li>
+</ul>
+
+<h2>2. 決済情報（Stripe）</h2>
+<p>Pro版の購入時の決済は、Stripe, Inc. が提供する決済サービス（Stripe Payment Links / Checkout）で処理されます。クレジットカード番号等の決済情報、メールアドレス等の購入者情報はStripeが取得・管理し、運営者のサーバーやブラウザ内の本サービスがカード番号を取得することはありません。Stripeにおける取り扱いは <a href="https://stripe.com/jp/privacy" rel="noopener">Stripeのプライバシーポリシー</a> をご確認ください。</p>
+<p>運営者は、Stripeの管理画面を通じて、取引の管理・返金対応・お問い合わせ対応・法令遵守のために必要な範囲で、購入者の氏名・メールアドレス・決済履歴等を確認することがあります。</p>
+
+<h2>3. ライセンス発行サーバー</h2>
+<p>購入完了後のライセンスキー発行のため、ブラウザから運営者のライセンス発行サーバー（Cloudflare Workers）に、Stripeの決済セッションID（checkout session id）のみを送信します。サーバーはこのIDを使ってStripeに決済完了を確認し、署名付きのライセンスキーを返します。書類データや入力内容は送信されません。</p>
+<p>サーバーの運用上、Cloudflareのインフラによりアクセス日時・IPアドレス等が一時的に処理・記録される場合があります。</p>
+
+<h2>4. アクセス解析・広告</h2>
+<p>本サービスは、現時点でアクセス解析ツール・広告・トラッキング用のCookieを使用していません。</p>
+<div class="box"><strong>【運営者向け・要記入】</strong> アクセス解析（例：Cloudflare Web Analytics、Google Analytics 等）を導入する場合は、この節を書き換え、利用するツール名・取得する情報（閲覧ページ、参照元、端末情報等）・Cookieの利用有無・オプトアウト方法を明記してください。導入しない場合はこの枠を削除してください。</div>
+
+<h2>5. ホスティング</h2>
+<p>本サービスのWebページは静的ホスティングサービス <span class="fill">【要記入：GitHub Pages または Cloudflare Pages】</span> から配信されます。配信の過程で、ホスティング事業者によりアクセスログ（IPアドレス、日時、ユーザーエージェント等）が記録される場合があります。</p>
+
+<h2>6. 第三者提供</h2>
+<p>運営者は、法令に基づく場合を除き、取得した個人情報を本人の同意なく第三者に提供しません。</p>
+
+<h2>7. お問い合わせ</h2>
+<p>本ポリシーに関するお問い合わせ：<a data-contact href="mailto:support@example.com">support@example.com</a></p>
+
+<h2>8. 改定</h2>
+<p>運営者は、必要に応じて本ポリシーを改定することがあります。改定後の内容は本ページに掲載した時点から効力を生じます。</p>
+</main>
+<footer class="site-footer"><div class="wrap">
+<a href="../../">トップ</a> ・ <a href="../terms/">利用規約</a> ・ <a href="../privacy/">プライバシーポリシー</a> ・ <a href="../tokushoho/">特定商取引法に基づく表記</a>
+<p style="margin:8px 0 0">&copy; ゼロ請求書</p>
+</div></footer>
+<script type="module">
+import { CONFIG } from '../../config.js';
+document.querySelectorAll('[data-price]').forEach((el) => { el.textContent = Number(CONFIG.priceJPY).toLocaleString('ja-JP'); });
+document.querySelectorAll('[data-contact]').forEach((a) => { a.textContent = CONFIG.contactEmail; if (a.tagName === 'A') a.href = 'mailto:' + CONFIG.contactEmail; });
+</script>
+</body>
+</html>

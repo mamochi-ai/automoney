@@ -1,0 +1,508 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ゼロ請求書 | 登録不要・無料のインボイス対応請求書作成ツール</title>
+<meta name="description" content="インボイス制度（適格請求書）対応の請求書を、登録不要・インストール不要・無料でブラウザだけで作成。源泉徴収の自動計算、税率ごとの消費税、見積書・納品書・領収書にも対応。データはサーバーに送信されません。">
+<link rel="canonical" href="https://example.com/">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#0f6e5a">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ゼロ請求書">
+<meta property="og:title" content="ゼロ請求書 | 登録不要・無料のインボイス対応請求書作成ツール">
+<meta property="og:description" content="フリーランス・個人事業主のための請求書ツール。登録不要、データはブラウザの中だけ。源泉徴収も税率ごとの消費税も自動計算。">
+<meta property="og:url" content="https://example.com/">
+<meta property="og:image" content="https://example.com/assets/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="ゼロ請求書 | 登録不要・無料のインボイス対応請求書作成ツール">
+<meta name="twitter:description" content="登録不要、データはブラウザの中だけ。源泉徴収も税率ごとの消費税も自動計算。">
+<meta name="twitter:image" content="https://example.com/assets/og.png">
+<link rel="stylesheet" href="assets/style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "ゼロ請求書",
+  "alternateName": "ZeroInvoice",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "Web browser",
+  "inLanguage": "ja",
+  "url": "https://example.com/",
+  "description": "インボイス制度（適格請求書）対応の請求書・見積書・納品書・領収書を、登録不要・無料でブラウザだけで作成できるツール。",
+  "offers": [
+    {"@type": "Offer", "name": "無料版", "price": "0", "priceCurrency": "JPY"},
+    {"@type": "Offer", "name": "Pro（買い切り）", "price": "1480", "priceCurrency": "JPY"}
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type": "Question", "name": "本当に無料で使えますか？", "acceptedAnswer": {"@type": "Answer", "text": "はい。登録不要で、請求書・見積書・納品書・領収書の作成とPDF保存まで無料で使えます。無料版は保存できる書類が5件までで、PDFに小さく「ゼロ請求書で作成」と表記されます。"}},
+    {"@type": "Question", "name": "入力したデータはどこに保存されますか？", "acceptedAnswer": {"@type": "Answer", "text": "お使いのブラウザの中（localStorage）だけに保存され、サーバーには送信されません。別の端末で使いたい場合や万一に備えて、JSON形式でバックアップを書き出せます。"}},
+    {"@type": "Question", "name": "インボイス制度（適格請求書）に対応していますか？", "acceptedAnswer": {"@type": "Answer", "text": "登録番号の記載とチェックデジット検証、税率ごと（10%・8%軽減）の対価の合計額と消費税額の表示に対応しています。消費税の端数処理は1請求書につき税率ごとに1回行います。"}},
+    {"@type": "Question", "name": "PDFで保存するにはどうすればいいですか？", "acceptedAnswer": {"@type": "Answer", "text": "作成画面の印刷ボタンからブラウザの印刷機能を開き、保存先で「PDFに保存」を選んでください。追加のソフトは不要です。"}},
+    {"@type": "Question", "name": "Proはサブスクリプションですか？", "acceptedAnswer": {"@type": "Answer", "text": "いいえ。1回払いの買い切りで、月額料金はかかりません。Stripeで決済するとその場でライセンスキーが発行され、アプリに入力するとすぐに有効になります。"}},
+    {"@type": "Question", "name": "ブラウザのデータを消去するとどうなりますか？", "acceptedAnswer": {"@type": "Answer", "text": "ブラウザの閲覧データ（サイトデータ）を削除すると、保存した書類も消えます。定期的にJSONバックアップを書き出して保管することをおすすめします。"}},
+    {"@type": "Question", "name": "計算結果は税務上そのまま使えますか？", "acceptedAnswer": {"@type": "Answer", "text": "一般的なルールに沿って計算していますが、税務上の助言ではありません。個別の取引の扱いは税理士や税務署にご確認ください。"}}
+  ]
+}
+</script>
+<style>
+:root{--check:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4.5 8.2l2.2 2.2 4.8-5' fill='none' stroke='%230f6e5a' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");--ink-soft:#3b3b40;--paper:#fff;--paper-ink:#1d1d1f;--paper-line:#e8e6e0;--hero-glow:rgba(15,110,90,.10);--shadow:0 1px 2px rgba(20,20,20,.04),0 12px 32px -8px rgba(20,40,30,.16)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--check:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4.5 8.2l2.2 2.2 4.8-5' fill='none' stroke='%233fb893' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");--ink-soft:#c9c9ce;--hero-glow:rgba(63,184,147,.12);--shadow:0 1px 2px rgba(0,0,0,.4),0 16px 40px -8px rgba(0,0,0,.6)}}
+html{scroll-behavior:smooth}
+body{overflow-x:hidden}
+.site-header{position:sticky;top:0;z-index:10;background:color-mix(in srgb,var(--surface) 88%,transparent);backdrop-filter:saturate(1.4) blur(10px);-webkit-backdrop-filter:saturate(1.4) blur(10px)}
+.brand{display:inline-flex;align-items:center;gap:8px}
+.brand::before{content:"";width:22px;height:22px;border-radius:6px;background:var(--accent) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M7 6h10M7 10h10M7 14h6' stroke='white' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E") center/16px no-repeat;flex:none}
+@media (max-width:420px){.nav{gap:12px;font-size:.82rem}.brand{font-size:.98rem}}
+section{padding:72px 0}
+.eyebrow{display:inline-block;font-size:.8rem;font-weight:700;letter-spacing:.06em;color:var(--accent);margin:0 0 10px}
+h1,h2,h3{line-height:1.35;letter-spacing:.01em;margin:0;word-break:auto-phrase}
+h2{font-size:clamp(1.45rem,1.1rem + 1.6vw,2rem);margin-bottom:14px}
+.lead{color:var(--muted);font-size:1.02rem;max-width:40em;margin:0}
+.sec-head{margin-bottom:36px}
+.sec-head.center{text-align:center}.sec-head.center .lead{margin:0 auto}
+
+/* Hero */
+.hero{position:relative;padding:64px 0 80px;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:-20% -10% auto auto;width:720px;height:720px;background:radial-gradient(closest-side,var(--hero-glow),transparent);pointer-events:none}
+.hero-grid{position:relative;display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center}
+.pill{display:inline-flex;align-items:center;gap:8px;padding:5px 12px;border-radius:999px;background:var(--accent-soft);color:var(--accent);font-size:.82rem;font-weight:700;margin-bottom:18px}
+.pill i{width:7px;height:7px;border-radius:50%;background:var(--accent);display:block}
+.hero h1{font-size:clamp(1.9rem,1.2rem + 3vw,3.05rem);font-weight:800;letter-spacing:-.005em;margin-bottom:18px}
+.hero h1 em{font-style:normal;color:var(--accent)}
+.hero h1 .ln{display:inline-block}
+.hero .lead{font-size:1.08rem;color:var(--ink-soft);margin-bottom:28px}
+.cta-row{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.btn-lg{padding:14px 24px;font-size:1.02rem;border-radius:12px}
+.btn-primary{box-shadow:0 6px 18px -6px color-mix(in srgb,var(--accent) 70%,transparent);transition:transform .15s,box-shadow .15s}
+.btn-primary:hover{transform:translateY(-1px);box-shadow:0 10px 24px -8px color-mix(in srgb,var(--accent) 75%,transparent)}
+.btn-ghost{background:transparent}
+.btn-ghost:hover{background:var(--surface)}
+.checks{list-style:none;padding:0;margin:24px 0 0;display:flex;flex-wrap:wrap;gap:8px 20px;font-size:.9rem;color:var(--muted)}
+.checks li{display:flex;align-items:center;gap:6px}
+.checks li::before{content:"";width:16px;height:16px;flex:none;border-radius:50%;background:var(--accent-soft) var(--check) center/12px no-repeat}
+
+/* Invoice mock */
+.mock-wrap{position:relative;padding:8px}
+.paper{position:relative;background:var(--paper);color:var(--paper-ink);border-radius:8px;box-shadow:var(--shadow);padding:28px 26px 24px;font-size:11.5px;line-height:1.55;transform:rotate(1.2deg);border:1px solid var(--paper-line)}
+.paper .num{font-variant-numeric:tabular-nums}
+.p-top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:14px}
+.p-title{font-size:20px;font-weight:800;letter-spacing:.3em}
+.p-meta{text-align:right;color:#6b6b70;font-size:10.5px}
+.p-parties{display:flex;justify-content:space-between;gap:16px;margin-bottom:14px}
+.p-to{font-size:14px;font-weight:700;border-bottom:1.5px solid #1d1d1f;padding-bottom:2px;align-self:flex-start}
+.p-from{text-align:right;font-size:10.5px;color:#3b3b40;position:relative;padding-right:50px;min-height:44px}
+.p-from b{display:block;font-size:12px;color:#1d1d1f}
+.p-reg{display:inline-block;white-space:nowrap;margin-top:3px;padding:1px 6px;border-radius:4px;background:#e3f1ec;color:#0f6e5a;font-weight:700;font-size:10px}
+.p-seal{position:absolute;right:0;top:0;width:40px;height:40px;border:2px solid rgba(200,40,40,.55);color:rgba(200,40,40,.6);border-radius:4px;display:grid;place-items:center;font-size:9px;font-weight:700;line-height:1.1;text-align:center;transform:rotate(-6deg)}
+.p-total{display:flex;justify-content:space-between;align-items:baseline;background:#f4f7f5;border-radius:6px;padding:9px 12px;margin-bottom:12px}
+.p-total strong{font-size:19px;letter-spacing:.01em}
+.paper table{width:100%;border-collapse:collapse;margin-bottom:10px}
+.paper th{font-weight:600;color:#6b6b70;font-size:10px;border-bottom:1px solid #1d1d1f;padding:4px 4px}
+.paper td{padding:5px 4px;border-bottom:1px solid #eeece6}
+.paper th,.paper td{text-align:left}.paper .r{text-align:right}
+.p-sum{margin-left:auto;width:62%;min-width:190px}
+.p-sum div{display:flex;justify-content:space-between;padding:2px 0}
+.p-sum .rate{color:#0f6e5a;font-weight:600}
+.p-sum .wh{color:#b54708}
+.p-sum .grand{border-top:1.5px solid #1d1d1f;margin-top:4px;padding-top:5px;font-weight:800;font-size:12.5px}
+.p-foot{margin-top:12px;font-size:9.5px;color:#8a8a90;display:flex;justify-content:space-between;gap:8px}
+.callout{position:absolute;background:var(--surface);color:var(--text);border:1px solid var(--line);border-radius:10px;padding:7px 11px;font-size:.78rem;font-weight:700;box-shadow:var(--shadow);display:flex;align-items:center;gap:7px;white-space:nowrap}
+.callout i{width:8px;height:8px;border-radius:50%;background:var(--accent);display:block}
+.callout.c1{left:-12px;top:-10px}
+.callout.c2{right:-8px;bottom:-12px}
+.callout.c2 i{background:var(--warn)}
+
+/* Pains */
+.pains{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.pain{padding:24px;position:relative}
+.pain .q{font-size:.92rem;color:var(--muted);margin:0 0 14px;padding-left:12px;border-left:3px solid var(--line)}
+.pain h3{font-size:1.08rem;margin-bottom:8px}
+.pain p{margin:0;color:var(--ink-soft);font-size:.94rem}
+.pain .tag{display:inline-block;font-size:.72rem;font-weight:700;color:var(--accent);background:var(--accent-soft);padding:2px 8px;border-radius:999px;margin-bottom:10px}
+
+/* Features */
+.alt{background:var(--surface);border-block:1px solid var(--line)}
+.features{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--line);gap:1px}
+.feat{background:var(--surface);padding:24px 22px}
+.feat .ic{width:38px;height:38px;border-radius:10px;background:var(--accent-soft);color:var(--accent);display:grid;place-items:center;margin-bottom:14px}
+.feat .ic svg{width:20px;height:20px}
+.feat h3{font-size:1rem;margin-bottom:6px}
+.feat p{margin:0;font-size:.9rem;color:var(--muted)}
+.feat .pro{font-size:.68rem;font-weight:800;color:var(--accent-ink);background:var(--accent);padding:1px 6px;border-radius:4px;margin-left:6px;vertical-align:2px;letter-spacing:.04em}
+
+/* Why */
+.why{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.why .card{padding:28px}
+.why h3{font-size:1.15rem;margin-bottom:10px}
+.why p{margin:0 0 10px;color:var(--ink-soft);font-size:.95rem}
+.flow{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:18px 0 6px;font-size:.82rem;font-weight:700}
+.flow span{padding:6px 10px;border-radius:8px;background:var(--accent-soft);color:var(--accent)}
+.flow .x{background:transparent;color:var(--muted);text-decoration:line-through;font-weight:600;padding:6px 0}
+.flow b{color:var(--muted);font-weight:400}
+
+/* Compare */
+.table-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid var(--line);border-radius:14px;background:var(--surface)}
+.compare{min-width:560px;font-size:.93rem}
+.compare th,.compare td{padding:14px 16px;vertical-align:top}
+.compare thead th{font-size:.85rem;color:var(--muted);font-weight:700;background:var(--bg)}
+.compare thead th.us{color:var(--accent);background:var(--accent-soft)}
+.compare td.us{background:color-mix(in srgb,var(--accent-soft) 45%,transparent);font-weight:600}
+.compare tbody th{font-weight:600;white-space:nowrap;color:var(--ink-soft)}
+.compare tr:last-child>*{border-bottom:0}
+.note{font-size:.84rem;color:var(--muted);margin-top:14px}
+
+/* Pricing */
+.plans{display:grid;grid-template-columns:1fr 1fr;gap:20px;max-width:860px;margin:0 auto}
+.plan{padding:30px 28px;display:flex;flex-direction:column;border-radius:16px}
+.plan.pro{border:2px solid var(--accent);position:relative}
+.plan .badge{position:absolute;top:-12px;left:28px;background:var(--accent);color:var(--accent-ink);font-size:.75rem;font-weight:800;padding:3px 10px;border-radius:999px}
+.plan h3{font-size:1.1rem}
+.price{font-size:2.4rem;font-weight:800;margin:10px 0 2px;letter-spacing:-.01em;font-variant-numeric:tabular-nums}
+.price small{font-size:.95rem;font-weight:600;color:var(--muted);margin-left:4px}
+.plan .sub{color:var(--muted);font-size:.88rem;margin:0 0 18px}
+.plan ul{list-style:none;padding:0;margin:0 0 24px;flex:1}
+.plan li{padding:7px 0 7px 26px;position:relative;font-size:.94rem;border-bottom:1px dashed var(--line)}
+.plan li:last-child{border-bottom:0}
+.plan li::before{content:"";position:absolute;left:0;top:11px;width:16px;height:16px;border-radius:50%;background:var(--accent-soft) var(--check) center/12px no-repeat}
+.plan li.limit::before{background:linear-gradient(var(--muted),var(--muted)) center/8px 2px no-repeat,var(--line)}
+.plan li.limit{color:var(--muted)}
+.plan .btn{width:100%}
+.pay-note{text-align:center;font-size:.84rem;color:var(--muted);margin-top:18px}
+
+/* FAQ */
+.faq{max-width:780px;margin:0 auto}
+.faq details{border-bottom:1px solid var(--line)}
+.faq summary{list-style:none;cursor:pointer;padding:18px 36px 18px 0;font-weight:700;position:relative}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"";position:absolute;right:6px;top:50%;width:10px;height:10px;border-right:2px solid var(--muted);border-bottom:2px solid var(--muted);transform:translateY(-70%) rotate(45deg);transition:transform .2s}
+.faq details[open] summary::after{transform:translateY(-30%) rotate(-135deg)}
+.faq details p{margin:0 0 18px;color:var(--ink-soft)}
+
+/* Final CTA */
+.final{text-align:center;padding:64px 24px;border-radius:20px;background:linear-gradient(135deg,var(--accent),color-mix(in srgb,var(--accent) 70%,#062a22));color:#fff}
+.final h2{color:#fff}
+.final p{color:rgba(255,255,255,.85);margin:0 0 26px}
+.final .btn{background:#fff;color:#0f6e5a;border-color:#fff}
+
+/* Footer */
+.foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:28px}
+.foot-grid h4{margin:0 0 8px;font-size:.85rem;color:var(--text)}
+.foot-grid ul{list-style:none;padding:0;margin:0}
+.foot-grid li{padding:3px 0}
+.foot-grid a{text-decoration:none}.foot-grid a:hover{text-decoration:underline}
+.copy{margin-top:24px;padding-top:16px;border-top:1px solid var(--line);font-size:.8rem}
+
+@media (max-width:880px){
+  .hero-grid{grid-template-columns:1fr;gap:40px}
+  .mock-wrap{max-width:520px;margin:0 auto;width:100%}
+  .pains,.features{grid-template-columns:1fr 1fr}
+  .why{grid-template-columns:1fr}
+}
+@media (max-width:640px){
+  section{padding:52px 0}
+  .hero{padding:36px 0 52px}
+  .pains,.features,.plans,.foot-grid{grid-template-columns:1fr}
+  .paper{padding:20px 16px 18px;font-size:10.5px;transform:none}
+  .p-title{font-size:17px}
+  .callout.c1{left:-4px}
+  .callout.c2{right:-4px}
+  .p-from{padding-right:0;padding-top:46px}
+  .p-seal{right:0;top:0}
+  .p-parties{align-items:flex-start}
+  .cta-row .btn-lg{width:100%}
+  .plan .badge{left:20px}
+  .final{padding:44px 20px}
+  .compare{min-width:0;font-size:.84rem}
+  .compare th,.compare td{padding:11px 10px}
+  .compare tbody th{white-space:normal;width:28%}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.btn-primary{transition:none}}
+</style>
+</head>
+<body>
+<header class="site-header"><div class="wrap"><a class="brand" href="./">ゼロ請求書</a><nav class="nav"><a href="app/">請求書を作る</a><a href="tools/">計算ツール</a><a href="#pricing">料金</a></nav></div></header>
+
+<main>
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="pill"><i></i>インボイス制度（適格請求書）対応</span>
+      <h1><span class="ln">源泉徴収も消費税も、</span><span class="ln"><em>自動で正しく。</em></span><span class="ln">請求書が1分で完成。</span></h1>
+      <p class="lead">フリーランス・個人事業主のための、登録不要の請求書ツール。ブラウザで開いてすぐ作成、PDFで保存。入力した内容は<strong>あなたのブラウザの外に出ません。</strong></p>
+      <div class="cta-row">
+        <a class="btn btn-primary btn-lg" href="app/">無料で請求書を作る — 登録不要</a>
+        <a class="btn btn-ghost btn-lg" href="#features">できることを見る</a>
+      </div>
+      <ul class="checks">
+        <li>アカウント登録なし</li>
+        <li>インストールなし</li>
+        <li>データはサーバーに送信しない</li>
+      </ul>
+    </div>
+
+    <div class="mock-wrap" aria-label="作成できる請求書の見本" role="img">
+      <div class="paper" aria-hidden="true">
+        <div class="p-top">
+          <div class="p-title">請求書</div>
+          <div class="p-meta">No. 2026-018<br>発行日 2026年9月30日<br>お支払期限 2026年10月31日</div>
+        </div>
+        <div class="p-parties">
+          <div class="p-to">株式会社サンプル 御中</div>
+          <div class="p-from">
+            <b>山田 デザイン事務所</b>
+            山田 花子<br>
+            <span class="p-reg">登録番号 T4801234567890</span>
+            <span class="p-seal">山田<br>之印</span>
+          </div>
+        </div>
+        <div class="p-total"><span>ご請求金額</span><strong class="num">¥329,307</strong></div>
+        <table>
+          <thead><tr><th>品目</th><th class="r">数量</th><th class="r">単価</th><th class="r">金額</th></tr></thead>
+          <tbody>
+            <tr><td>Webサイト制作</td><td class="r num">1式</td><td class="r num">250,000</td><td class="r num">250,000</td></tr>
+            <tr><td>撮影ディレクション</td><td class="r num">2日</td><td class="r num">25,000</td><td class="r num">50,000</td></tr>
+            <tr><td>保守（10月分）</td><td class="r num">1月</td><td class="r num">30,000</td><td class="r num">30,000</td></tr>
+          </tbody>
+        </table>
+        <div class="p-sum num">
+          <div><span>小計（税抜）</span><span>330,000</span></div>
+          <div class="rate"><span>10%対象 330,000 / 消費税</span><span>33,000</span></div>
+          <div><span>合計（税込）</span><span>363,000</span></div>
+          <div class="wh"><span>源泉徴収税額（10.21%）</span><span>−33,693</span></div>
+          <div class="grand"><span>差引ご請求額</span><span>¥329,307</span></div>
+        </div>
+        <div class="p-foot"><span>振込先：〇〇銀行 △△支店 普通 1234567</span><span>ゼロ請求書で作成</span></div>
+      </div>
+      <div class="callout c1" aria-hidden="true"><i></i>税率ごとに端数処理1回</div>
+      <div class="callout c2" aria-hidden="true"><i></i>源泉徴収を自動計算</div>
+    </div>
+  </div>
+</section>
+
+<section id="pains">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">こんな「請求書の面倒」を解決</p>
+      <h2>月末の請求書づくりで、もう迷わない。</h2>
+    </div>
+    <div class="pains">
+      <article class="card pain">
+        <p class="q">「源泉徴収っていくら引けばいいんだっけ…」</p>
+        <span class="tag">自動計算</span>
+        <h3>源泉徴収税額を自動で差し引き</h3>
+        <p>100万円以下は10.21%、超える部分は20.42%。報酬額を入れるだけで、源泉徴収税額と差引請求額が計算されます。</p>
+      </article>
+      <article class="card pain">
+        <p class="q">「インボイスの書き方、これで合ってる？」</p>
+        <span class="tag">インボイス対応</span>
+        <h3>適格請求書の記載に沿った形式</h3>
+        <p>登録番号はチェックデジットで打ち間違いを検出。10%と8%（軽減税率）を分けて合計・税額を表示し、端数処理は税率ごとに1回です。</p>
+      </article>
+      <article class="card pain">
+        <p class="q">「請求書を作るだけなのに、月額料金と登録が…」</p>
+        <span class="tag">登録不要・無料</span>
+        <h3>開いたらすぐ作れて、無料</h3>
+        <p>メールアドレスもパスワードも不要。先月の請求書を複製して日付と金額を直すだけで、毎月の請求が終わります。</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="features" class="alt">
+  <div class="wrap">
+    <div class="sec-head center">
+      <p class="eyebrow">機能</p>
+      <h2>個人の請求業務に必要なものを、ひとつに。</h2>
+      <p class="lead">請求書だけでなく、見積書・納品書・領収書まで同じ画面で。</p>
+    </div>
+    <div class="features">
+      <div class="feat"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg></div><h3>請求書・見積書・納品書・領収書</h3><p>4種類の書類を作成。領収書には必要な収入印紙の額も表示します。</p></div>
+      <div class="feat"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4"/><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z"/></svg></div><h3>インボイス制度に対応</h3><p>登録番号のチェックデジット検証、税率ごと（10%/8%）の合計と消費税額。</p></div>
+      <div class="feat"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 7h8M8 11h2M14 11h2M8 15h2M14 15h2"/></svg></div><h3>源泉徴収の自動計算</h3><p>10.21%／20.42%を自動で適用。差引請求額まで一度に出ます。</p></div>
+      <div class="feat"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18"/></svg></div><h3>支払期日プリセット</h3><p>「月末締め翌月末払い」などをワンタップで設定できます。</p></div>
+      <div class="feat"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg></div><h3>取引先・品目の保存と複製</h3><p>よく使う取引先や品目を保存。書類の複製で毎月の請求がすぐ終わります。</p></div>
+      <div class="feat"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V3h12v6"/><rect x="3" y="9" width="18" height="8" rx="2"/><path d="M6 14h12v7H6z"/></svg></div><h3>PDFで保存</h3><p>ブラウザの印刷機能から「PDFに保存」。ソフトのインストールは不要です。</p></div>
+      <div class="feat"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5"/><path d="M5 21h14"/></svg></div><h3>JSONバックアップ</h3><p>データをファイルに書き出して保管・別の端末へ移行できます。</p></div>
+      <div class="feat"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><path d="M12 8v8M9 11h6"/></svg></div><h3>ロゴと角印<span class="pro">PRO</span></h3><p>ロゴ画像と角印（印影画像）を書類に配置できます。</p></div>
+      <div class="feat"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M9 4v16"/></svg></div><h3>CSV出力<span class="pro">PRO</span></h3><p>書類の一覧をCSVで出力。帳簿づけや集計に使えます。</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="why">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">なぜ無料？なぜ安全？</p>
+      <h2>サーバーを持たないから、無料で、安全。</h2>
+      <p class="lead">ゼロ請求書はあなたのブラウザの中だけで動くツールです。</p>
+    </div>
+    <div class="why">
+      <div class="card">
+        <h3>データはあなたのブラウザの中だけ</h3>
+        <p>取引先名や金額などの入力内容は、ブラウザの保存領域（localStorage）に保存されます。私たちのサーバーには送信されず、運営者が見ることもできません。</p>
+        <div class="flow" aria-label="データの流れ"><span>入力</span><b>→</b><span>あなたのブラウザに保存</span><b>→</b><span>PDF</span><span class="x">サーバー送信</span></div>
+        <p class="muted" style="font-size:.86rem;margin:10px 0 0">ブラウザのデータを消去すると書類も消えるため、JSONバックアップをおすすめします。</p>
+      </div>
+      <div class="card">
+        <h3>無料で続けられる理由</h3>
+        <p>サーバーでデータを預からないので、運営コストがほとんどかかりません。だから基本機能は無料のまま提供できます。</p>
+        <p>運営を支えるのは、保存無制限やロゴ・角印が使える<strong>Pro（<span data-price>1,480</span>円・買い切り）</strong>です。広告で稼ぐためにデータを集めることはしません。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="compare" class="alt">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">比較</p>
+      <h2>クラウド会計の請求書機能との違い</h2>
+      <p class="lead">「請求書を作って送る」だけなら、もっと身軽でいい。</p>
+    </div>
+    <div class="table-scroll">
+      <table class="compare">
+        <thead><tr><th scope="col"></th><th scope="col" class="us">ゼロ請求書</th><th scope="col">一般的なクラウド会計の請求書機能</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">料金</th><td class="us">無料／Pro <span data-price>1,480</span>円 買い切り</td><td>月額課金が一般的</td></tr>
+          <tr><th scope="row">アカウント登録</th><td class="us">不要</td><td>必要</td></tr>
+          <tr><th scope="row">データの保存先</th><td class="us">自分のブラウザの中</td><td>サービス事業者のクラウド</td></tr>
+          <tr><th scope="row">使い始めるまで</th><td class="us">ページを開くだけ</td><td>登録・初期設定が必要</td></tr>
+          <tr><th scope="row">源泉徴収・インボイス</th><td class="us">対応</td><td>対応していることが多い</td></tr>
+          <tr><th scope="row">複数端末での同期</th><td class="us">JSONバックアップで手動移行</td><td>自動で同期できる</td></tr>
+          <tr><th scope="row">帳簿・確定申告</th><td class="us">対象外（CSV出力はPro）</td><td>まとめて管理できる</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note">帳簿づけから確定申告まで一括で管理したい方には、クラウド会計サービスが向いています。請求書の作成を手軽に・無料で済ませたい方には、ゼロ請求書が向いています。</p>
+  </div>
+</section>
+
+<section id="pricing">
+  <div class="wrap">
+    <div class="sec-head center">
+      <p class="eyebrow">料金</p>
+      <h2>基本は無料。必要になったら、買い切りで。</h2>
+      <p class="lead">月額料金も自動更新もありません。</p>
+    </div>
+    <div class="plans">
+      <div class="card plan">
+        <h3>無料</h3>
+        <div class="price">0<small>円</small></div>
+        <p class="sub">登録不要ですぐ使える</p>
+        <ul>
+          <li>請求書・見積書・納品書・領収書</li>
+          <li>インボイス対応・源泉徴収の自動計算</li>
+          <li>取引先・品目の保存、書類の複製</li>
+          <li>PDF保存・JSONバックアップ</li>
+          <li class="limit">保存できる書類は5件まで</li>
+          <li class="limit">PDFに小さく「ゼロ請求書で作成」と表記</li>
+        </ul>
+        <a class="btn btn-lg" href="app/">無料で使いはじめる</a>
+      </div>
+      <div class="card plan pro">
+        <span class="badge">買い切り</span>
+        <h3>Pro</h3>
+        <div class="price"><span data-price>1,480</span><small>円（税込）</small></div>
+        <p class="sub">1回払い・サブスクなし</p>
+        <ul>
+          <li>無料版のすべての機能</li>
+          <li>保存できる書類が無制限</li>
+          <li>PDFの「ゼロ請求書で作成」表記なし</li>
+          <li>ロゴと角印（印影画像）の配置</li>
+          <li>CSV出力</li>
+        </ul>
+        <a class="btn btn-primary btn-lg" data-stripe href="app/" rel="noopener">Proを購入する（<span data-price>1,480</span>円）</a>
+      </div>
+    </div>
+    <p class="pay-note">決済はStripeで安全に処理されます。購入後その場でライセンスキーが発行され、アプリに入力するとすぐに有効になります。<br><a href="legal/tokushoho/">特定商取引法に基づく表記</a></p>
+  </div>
+</section>
+
+<section id="faq" class="alt">
+  <div class="wrap">
+    <div class="sec-head center">
+      <p class="eyebrow">よくある質問</p>
+      <h2>FAQ</h2>
+    </div>
+    <div class="faq">
+      <details open><summary>本当に無料で使えますか？</summary><p>はい。登録不要で、請求書・見積書・納品書・領収書の作成とPDF保存まで無料で使えます。無料版は保存できる書類が5件までで、PDFに小さく「ゼロ請求書で作成」と表記されます。</p></details>
+      <details><summary>入力したデータはどこに保存されますか？</summary><p>お使いのブラウザの中（localStorage）だけに保存され、サーバーには送信されません。別の端末で使いたい場合や万一に備えて、JSON形式でバックアップを書き出せます。</p></details>
+      <details><summary>インボイス制度（適格請求書）に対応していますか？</summary><p>登録番号の記載とチェックデジット検証、税率ごと（10%・8%軽減）の対価の合計額と消費税額の表示に対応しています。消費税の端数処理は1請求書につき税率ごとに1回行います。</p></details>
+      <details><summary>PDFで保存するにはどうすればいいですか？</summary><p>作成画面の印刷ボタンからブラウザの印刷機能を開き、保存先で「PDFに保存」を選んでください。追加のソフトは不要です。</p></details>
+      <details><summary>Proはサブスクリプションですか？</summary><p>いいえ。1回払いの買い切りで、月額料金はかかりません。Stripeで決済するとその場でライセンスキーが発行され、アプリに入力するとすぐに有効になります。</p></details>
+      <details><summary>ブラウザのデータを消去するとどうなりますか？</summary><p>ブラウザの閲覧データ（サイトデータ）を削除すると、保存した書類も消えます。定期的にJSONバックアップを書き出して保管することをおすすめします。</p></details>
+      <details><summary>計算結果は税務上そのまま使えますか？</summary><p>一般的なルールに沿って計算していますが、税務上の助言ではありません。個別の取引の扱いは税理士や税務署にご確認ください。</p></details>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="final">
+      <h2>次の請求書は、ゼロ請求書で。</h2>
+      <p>登録なし。ダウンロードなし。今すぐブラウザで作れます。</p>
+      <a class="btn btn-lg" href="app/">無料で請求書を作る — 登録不要</a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <h4>ゼロ請求書</h4>
+        <p style="margin:0">登録不要・無料で使える、インボイス対応の請求書作成ツール。データはあなたのブラウザの中だけに保存されます。</p>
+        <p style="margin:8px 0 0">お問い合わせ：<a data-contact href="mailto:support@example.com">support@example.com</a></p>
+      </div>
+      <div>
+        <h4>無料の計算ツール</h4>
+        <ul>
+          <li><a href="tools/gensen/">源泉徴収税額の計算</a></li>
+          <li><a href="tools/tedori-gyakusan/">手取りから額面を逆算</a></li>
+          <li><a href="tools/shohizei/">消費税の計算</a></li>
+          <li><a href="tools/inshi/">収入印紙の金額</a></li>
+          <li><a href="tools/touroku-bangou/">登録番号チェック</a></li>
+          <li><a href="tools/shiharai-kijitsu/">支払期日の計算</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>サービス</h4>
+        <ul>
+          <li><a href="app/">請求書を作る</a></li>
+          <li><a href="#pricing">料金</a></li>
+          <li><a href="legal/terms/">利用規約</a></li>
+          <li><a href="legal/privacy/">プライバシーポリシー</a></li>
+          <li><a href="legal/tokushoho/">特定商取引法に基づく表記</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="copy">&copy; <span id="year">2026</span> ゼロ請求書 ／ 計算結果は一般的なルールに基づくもので、税務上の助言ではありません。</p>
+  </div>
+</footer>
+
+<script type="module">
+import { CONFIG } from './config.js';
+const price = Number(CONFIG.priceJPY).toLocaleString('ja-JP');
+document.querySelectorAll('[data-price]').forEach((el) => { el.textContent = price; });
+const link = CONFIG.stripePaymentLink;
+if (link && !/REPLACE_ME/.test(link)) {
+  document.querySelectorAll('[data-stripe]').forEach((a) => { a.href = link; });
+}
+if (CONFIG.contactEmail) {
+  document.querySelectorAll('[data-contact]').forEach((a) => { a.href = 'mailto:' + CONFIG.contactEmail; a.textContent = CONFIG.contactEmail; });
+}
+document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>

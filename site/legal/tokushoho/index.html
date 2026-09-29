@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>特定商取引法に基づく表記 | ゼロ請求書</title>
+<meta name="description" content="ゼロ請求書 Pro版の特定商取引法に基づく表記。">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../assets/style.css">
+<style>
+.legal{max-width:760px;padding-top:40px}
+.legal h1{font-size:1.7rem;line-height:1.4;margin:0 0 6px}
+.legal .updated{color:var(--muted);font-size:.85rem;margin:0 0 28px}
+.legal h2{font-size:1.1rem;margin:36px 0 10px;padding-top:4px;border-top:1px solid var(--line);padding-top:24px}
+.legal p,.legal li{font-size:.95rem}
+.legal ol,.legal ul{padding-left:1.4em}
+.legal li{margin:4px 0}
+.fill{background:color-mix(in srgb,var(--warn) 14%,transparent);color:var(--warn);font-weight:700;padding:1px 6px;border-radius:4px}
+.box{border:1px dashed var(--warn);border-radius:var(--radius);padding:14px 16px;margin:16px 0;font-size:.9rem;background:color-mix(in srgb,var(--warn) 6%,transparent)}
+.kv th{width:32%;vertical-align:top;font-weight:600;color:var(--muted);font-size:.9rem}
+.kv td{font-size:.95rem}
+@media (max-width:560px){.kv th,.kv td{display:block;width:auto;border:0;padding:4px 0}.kv tr{display:block;border-bottom:1px solid var(--line);padding:10px 0}}
+</style>
+</head>
+<body>
+<header class="site-header"><div class="wrap"><a class="brand" href="../../">ゼロ請求書</a><nav class="nav"><a href="../../app/">請求書を作る</a><a href="../../tools/">計算ツール</a><a href="../../#pricing">料金</a></nav></div></header>
+<main class="wrap legal">
+
+<h1>特定商取引法に基づく表記</h1>
+<p class="updated">最終更新：2026年10月1日</p>
+<div class="box"><strong>運営者向け：</strong>公開前に【要記入】をすべて埋め、この枠を削除してください。個人事業主の場合、住所・電話番号は「請求があった場合には遅滞なく開示いたします」と記載する方法があります（消費者庁のガイドラインで認められた方法）。その場合も、請求を受けたら実際に遅滞なく開示できるよう準備してください。</div>
+<table class="kv">
+<tbody>
+<tr><th>販売事業者名</th><td><span class="fill">【要記入：氏名または屋号・法人名】</span></td></tr>
+<tr><th>運営統括責任者</th><td><span class="fill">【要記入：氏名】</span></td></tr>
+<tr><th>所在地</th><td><span class="fill">【要記入：住所】</span><br><span class="muted">個人の場合の記載例：「請求があった場合には遅滞なく開示いたします」</span></td></tr>
+<tr><th>電話番号</th><td><span class="fill">【要記入：電話番号】</span><br><span class="muted">個人の場合の記載例：「請求があった場合には遅滞なく開示いたします」</span></td></tr>
+<tr><th>メールアドレス</th><td><a data-contact href="mailto:support@example.com">support@example.com</a></td></tr>
+<tr><th>販売価格</th><td>ゼロ請求書 Pro（ライセンス）：<span data-price>1,480</span>円（税込）</td></tr>
+<tr><th>商品代金以外の必要料金</th><td>なし（インターネット接続料金・通信料金はお客様のご負担となります）</td></tr>
+<tr><th>支払方法</th><td>クレジットカード等（Stripeの決済画面に表示される方法）</td></tr>
+<tr><th>支払時期</th><td>ご購入手続き完了時にお支払いが確定します。</td></tr>
+<tr><th>商品の引渡時期</th><td>決済完了後、画面上に即時にライセンスキーを発行します。</td></tr>
+<tr><th>返品・キャンセル</th><td>デジタル商品の性質上、購入後の返品・返金はお受けしておりません。ただし、重複購入・誤った二重決済、または当方の不具合によりライセンスが有効化できない場合は、お問い合わせいただければ返金その他の対応をいたします。</td></tr>
+<tr><th>動作環境</th><td>最新版のGoogle Chrome、Microsoft Edge、Safari、Firefox等のブラウザ。購入前に無料版で動作をご確認ください。</td></tr>
+</tbody>
+</table>
+</main>
+<footer class="site-footer"><div class="wrap">
+<a href="../../">トップ</a> ・ <a href="../terms/">利用規約</a> ・ <a href="../privacy/">プライバシーポリシー</a> ・ <a href="../tokushoho/">特定商取引法に基づく表記</a>
+<p style="margin:8px 0 0">&copy; ゼロ請求書</p>
+</div></footer>
+<script type="module">
+import { CONFIG } from '../../config.js';
+document.querySelectorAll('[data-price]').forEach((el) => { el.textContent = Number(CONFIG.priceJPY).toLocaleString('ja-JP'); });
+document.querySelectorAll('[data-contact]').forEach((a) => { a.textContent = CONFIG.contactEmail; if (a.tagName === 'A') a.href = 'mailto:' + CONFIG.contactEmail; });
+</script>
+</body>
+</html>
