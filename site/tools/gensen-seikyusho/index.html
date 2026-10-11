@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>源泉徴収ありの請求書の書き方（見本つき）｜税抜・消費税・差引ご請求額の記載例</title>
+<meta name="description" content="フリーランスが源泉徴収される報酬の請求書を作るときの書き方を、見本つきで解説。報酬（税抜）・消費税・源泉徴収税額・差引ご請求額の並べ方、税抜額で源泉徴収してもらうための区分記載、1円未満の端数処理、振込手数料の扱い、よくある間違いまでまとめました。">
+<link rel="canonical" href="https://mamochi-ai.github.io/automoney/tools/gensen-seikyusho/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="ゼロ請求書">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:title" content="源泉徴収ありの請求書の書き方（見本つき）｜税抜・消費税・差引ご請求額の記載例">
+<meta property="og:description" content="報酬（税抜）・消費税・源泉徴収税額・差引ご請求額の書き方を見本つきで解説。税抜額で源泉徴収してもらうための区分記載、端数処理、振込手数料、よくある間違いも。">
+<meta property="og:url" content="https://mamochi-ai.github.io/automoney/tools/gensen-seikyusho/">
+<meta property="og:image" content="https://mamochi-ai.github.io/automoney/assets/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="源泉徴収ありの請求書の書き方（見本つき）｜税抜・消費税・差引ご請求額の記載例">
+<meta name="twitter:description" content="報酬（税抜）・消費税・源泉徴収税額・差引ご請求額の書き方を見本つきで解説。税抜額で源泉徴収してもらうための区分記載、端数処理、振込手数料、よくある間違いも。">
+<meta name="theme-color" content="#0f6e5a">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../assets/style.css">
+<link rel="stylesheet" href="../../tools/tools.css">
+<style>
+/* 請求書の見本（紙は常に白地） */
+.sample{margin:8px 0 0}
+.paper{background:#fff;color:#1d1d1f;border:1px solid #e8e6e0;border-radius:8px;box-shadow:0 1px 2px rgba(20,20,20,.04),0 12px 32px -8px rgba(20,40,30,.16);padding:24px 22px 20px;font-size:12.5px;line-height:1.6;max-width:640px}
+.paper .num{font-variant-numeric:tabular-nums}
+.p-top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:14px;flex-wrap:wrap}
+.p-title{font-size:21px;font-weight:800;letter-spacing:.3em}
+.p-meta{text-align:right;color:#6b6b70;font-size:11px}
+.p-parties{display:flex;justify-content:space-between;gap:12px 16px;margin-bottom:12px;flex-wrap:wrap}
+.p-to{font-size:14px;font-weight:700;border-bottom:1.5px solid #1d1d1f;padding-bottom:2px;align-self:flex-start}
+.p-from{text-align:right;font-size:11px;color:#3b3b40;margin-left:auto}
+.p-from b{display:block;font-size:12.5px;color:#1d1d1f}
+.p-reg{display:inline-block;white-space:nowrap;margin-top:3px;padding:1px 6px;border-radius:4px;background:#e3f1ec;color:#0f6e5a;font-weight:700;font-size:10.5px}
+.p-lead{margin:0 0 8px;font-size:11.5px}
+.p-total{display:flex;justify-content:space-between;align-items:baseline;gap:8px;background:#f4f7f5;border-radius:6px;padding:9px 12px;margin-bottom:12px}
+.p-total strong{font-size:20px}
+.paper table{width:100%;border-collapse:collapse;margin-bottom:10px}
+.paper th{font-weight:600;color:#6b6b70;font-size:10.5px;border-bottom:1px solid #1d1d1f;padding:4px;background:none}
+.paper td{padding:5px 4px;border-bottom:1px solid #eeece6;color:#1d1d1f}
+.paper th,.paper td{text-align:left}.paper .r{text-align:right}
+.p-sum{margin-left:auto;width:100%;max-width:340px}
+.p-sum div{display:flex;justify-content:space-between;gap:8px;padding:3px 0}
+.p-sum .rate{color:#0f6e5a;font-weight:600}
+.p-sum .wh{color:#b54708;font-weight:600}
+.p-sum .grand{border-top:1.5px solid #1d1d1f;margin-top:4px;padding-top:5px;font-weight:800;font-size:13.5px}
+.p-foot{margin-top:12px;font-size:10.5px;color:#55555a}
+.mk{display:inline-grid;place-items:center;width:1.45em;height:1.45em;border-radius:50%;background:#0f6e5a;color:#fff;font-size:10px;font-weight:700;margin-right:4px;vertical-align:1px;flex:none}
+.p-sum .wh .mk{background:#b54708}
+.steps{counter-reset:none;padding-left:0;list-style:none}
+.steps li{display:flex;gap:10px;align-items:flex-start;margin:10px 0}
+.steps .mk{font-size:.8rem;width:1.7em;height:1.7em;margin-top:.15em}
+@media (max-width:480px){.paper{padding:18px 14px 16px;font-size:11.5px}.p-title{font-size:18px}}
+</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"源泉徴収ありの請求書の書き方（見本つき）","description":"報酬（税抜）・消費税・源泉徴収税額・差引ご請求額の書き方を見本つきで解説。税抜額で源泉徴収してもらうための区分記載、端数処理、振込手数料、よくある間違いも。","url":"https://mamochi-ai.github.io/automoney/tools/gensen-seikyusho/","inLanguage":"ja","datePublished":"2026-10-11","dateModified":"2026-10-11","author":{"@type":"Organization","name":"ゼロ請求書"},"publisher":{"@type":"Organization","name":"ゼロ請求書"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"源泉徴収税額は請求書に書かないといけませんか？","acceptedAnswer":{"@type":"Answer","text":"源泉徴収税額の記載は法律上の必須事項ではありません。ただ、源泉徴収税額と差引ご請求額を書いておくと、取引先が支払額を確認しやすく、入金額との照合も簡単になるため、記載するのが一般的です。"}},{"@type":"Question","name":"ご請求金額欄には税込合計と差引額のどちらを書きますか？","acceptedAnswer":{"@type":"Answer","text":"決まりはありませんが、実際に振り込まれる「差引ご請求額」を書くと、入金額と一致して分かりやすくなります。内訳欄に、報酬（税抜）・消費税・合計（税込）・源泉徴収税額をあわせて書いておきましょう。"}},{"@type":"Question","name":"消費税込みの金額に源泉徴収されることはありますか？","acceptedAnswer":{"@type":"Answer","text":"あります。源泉徴収の対象は原則として消費税込みの支払金額です。請求書で報酬の額と消費税の額を明確に区分して記載していれば、税抜の報酬額だけを対象にして差し支えないとされています。"}},{"@type":"Question","name":"源泉徴収税額の1円未満はどう処理しますか？","acceptedAnswer":{"@type":"Answer","text":"源泉徴収税額に1円未満の端数が出たときは切り捨てます。四捨五入や切り上げはしません。"}},{"@type":"Question","name":"振込手数料を差し引かれた場合、源泉徴収税額は変わりますか？","acceptedAnswer":{"@type":"Answer","text":"一般的には変わりません。源泉徴収税額は報酬額をもとに計算し、振込手数料はその後の支払い方法の問題として扱われます。手数料をどちらが負担するかは、事前に取引先と取り決めておきましょう。"}},{"@type":"Question","name":"インボイス（適格請求書）でも同じ書き方でいいですか？","acceptedAnswer":{"@type":"Answer","text":"はい。適格請求書の記載事項（登録番号、税率ごとに区分した合計額と消費税額など）を満たしたうえで、源泉徴収税額と差引ご請求額を追加で書けば問題ありません。国税庁も、インボイス制度の開始後も税抜額を源泉徴収の対象にできる取扱いは変わらないとしています。"}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ゼロ請求書","item":"https://mamochi-ai.github.io/automoney/"},{"@type":"ListItem","position":2,"name":"計算ツール","item":"https://mamochi-ai.github.io/automoney/tools/"},{"@type":"ListItem","position":3,"name":"源泉徴収ありの請求書の書き方","item":"https://mamochi-ai.github.io/automoney/tools/gensen-seikyusho/"}]}</script>
+</head>
+<body>
+<header class="site-header"><div class="wrap"><a class="brand" href="../../">ゼロ請求書</a><nav class="nav"><a href="../../app/">請求書を作る</a><a href="../../tools/">計算ツール</a><a href="../../#pricing">料金</a></nav></div></header>
+<main class="wrap">
+<ol class="crumbs" aria-label="パンくずリスト"><li><a href="../../">ゼロ請求書</a></li><li><a href="../../tools/">計算ツール</a></li><li aria-current="page">源泉徴収ありの請求書の書き方</li></ol>
+<div class="tool-hero"><h1>源泉徴収ありの請求書の書き方（見本つき）</h1><p>原稿料・デザイン料・講演料など、取引先に源泉徴収される報酬を請求するときの書き方を、見本をもとに1行ずつ解説します。ポイントは「報酬（税抜）」「消費税」「源泉徴収税額」「差引ご請求額」を分けて書くことです。</p></div>
+
+<section aria-labelledby="sample-h">
+<h2 id="sample-h" style="font-size:1.3rem;margin:24px 0 4px">源泉徴収ありの請求書の見本</h2>
+<p class="caption">報酬30万円（税抜）に消費税10%を上乗せし、税抜額に対して源泉徴収される場合の例です。</p>
+<div class="sample" role="img" aria-label="請求書の見本：報酬300,000円、消費税30,000円、合計330,000円、源泉徴収税額30,630円、差引ご請求額299,370円">
+<div class="paper" aria-hidden="true">
+<div class="p-top"><div class="p-title">請求書</div><div class="p-meta">No. INV-0012<br>発行日 2026年10月31日<br>お支払期限 2026年11月30日</div></div>
+<div class="p-parties"><div class="p-to">株式会社サンプル 御中</div><div class="p-from"><b>山田 花子（屋号：やまだ制作室）</b>東京都〇〇区〇〇 1-2-3<br><span class="p-reg">登録番号 T1234567890123</span></div></div>
+<p class="p-lead">下記のとおりご請求申し上げます。</p>
+<div class="p-total"><span><span class="mk">⑥</span>差引ご請求金額</span><strong class="num">¥299,370</strong></div>
+<table>
+<thead><tr><th>品目</th><th class="r">数量</th><th class="r">単価</th><th class="r">金額</th></tr></thead>
+<tbody>
+<tr><td><span class="mk">①</span>記事執筆（原稿料）</td><td class="r num">5本</td><td class="r num">40,000</td><td class="r num">200,000</td></tr>
+<tr><td>ロゴデザイン</td><td class="r num">1式</td><td class="r num">100,000</td><td class="r num">100,000</td></tr>
+</tbody>
+</table>
+<div class="p-sum num">
+<div><span><span class="mk">②</span>小計（税抜）</span><span>300,000</span></div>
+<div class="rate"><span><span class="mk">③</span>10%対象 300,000 / 消費税</span><span>30,000</span></div>
+<div><span><span class="mk">④</span>合計（税込）</span><span>330,000</span></div>
+<div class="wh"><span><span class="mk">⑤</span>源泉徴収税額（10.21%）</span><span>−30,630</span></div>
+<div class="grand"><span>差引ご請求額</span><span>¥299,370</span></div>
+</div>
+<div class="p-foot">振込先：〇〇銀行 △△支店 普通 1234567 ヤマダ ハナコ<br>※源泉徴収税額は、税抜金額 300,000円 に対して計算しています。</div>
+</div>
+</div>
+</section>
+
+<aside class="card cta cta-big no-print"><p><strong>この形の請求書を、今すぐ無料で作れます</strong><span class="muted">金額を入れるだけで源泉徴収税額と差引ご請求額を自動計算。登録不要、データはブラウザの外に送信されません。</span></p><a class="btn btn-primary" href="../../app/?withholding=1">源泉徴収ありの請求書を今すぐ作る</a></aside>
+
+<article class="article">
+<h2>見本の各項目の書き方</h2>
+<ol class="steps">
+<li><span class="mk">①</span><div><strong>品目・金額（税抜）</strong>：原稿料、デザイン料など何に対する報酬かが分かるように書きます。単価・金額は消費税を含まない額にしておくと、あとの計算がシンプルになります。</div></li>
+<li><span class="mk">②</span><div><strong>小計（税抜）</strong>：報酬の合計です。<strong>源泉徴収税額はこの金額をもとに計算</strong>します（消費税を区分して記載している場合）。</div></li>
+<li><span class="mk">③</span><div><strong>消費税</strong>：税率ごとの対象額と消費税額を書きます。インボイス（適格請求書）では、消費税の端数処理は1枚の請求書につき税率ごとに1回です。</div></li>
+<li><span class="mk">④</span><div><strong>合計（税込）</strong>：小計＋消費税。源泉徴収がなければ、これがそのままご請求金額です。</div></li>
+<li><span class="mk">⑤</span><div><strong>源泉徴収税額</strong>：小計（税抜）× 10.21%（100万円を超える部分は20.42%）。1円未満は切り捨てます。見本では 300,000 × 10.21% ＝ 30,630円です。マイナス表記にすると差し引く金額であることが伝わります。</div></li>
+<li><span class="mk">⑥</span><div><strong>差引ご請求額</strong>：合計（税込）− 源泉徴収税額。330,000 − 30,630 ＝ <strong>299,370円</strong>。実際に振り込んでもらう金額なので、請求書の一番目立つ「ご請求金額」欄にはこの金額を書くと、入金額と一致して確認が楽になります。</div></li>
+</ol>
+
+<h2>計算の手順（4ステップ）</h2>
+<ol>
+<li>報酬の合計（税抜）を出す：200,000 ＋ 100,000 ＝ 300,000円</li>
+<li>消費税を計算する：300,000 × 10% ＝ 30,000円（合計 330,000円）</li>
+<li>源泉徴収税額を計算する：300,000 × 10.21% ＝ 30,630円（1円未満切り捨て）</li>
+<li>差引ご請求額を出す：330,000 − 30,630 ＝ 299,370円</li>
+</ol>
+<p>報酬額ごとの源泉徴収税額は<a href="../gensen-hayamihyo/">源泉徴収税額 早見表</a>、任意の金額は<a href="../gensen/">源泉徴収税 計算ツール</a>で確認できます。</p>
+
+<h2>税込・税抜で源泉徴収の対象が変わる</h2>
+<p>源泉徴収の対象は、原則として<strong>消費税を含めた支払金額</strong>です。ただし、請求書などで<strong>報酬の額と消費税の額が明確に区分されている</strong>場合は、税抜の報酬額だけを源泉徴収の対象にして差し支えないとされています（国税庁の通達「消費税法等の施行に伴う源泉所得税の取扱いについて」（平成元年1月30日付 直法6-1）による取扱い。タックスアンサーNo.2792・No.2795でも案内されています）。</p>
+<div class="table-scroll"><table><thead><tr><th>請求書の書き方</th><th>源泉徴収の対象</th><th class="num">源泉徴収税額</th><th class="num">差引ご請求額</th></tr></thead><tbody>
+<tr><td>報酬 300,000円／消費税 30,000円 と区分して記載</td><td>税抜 300,000円</td><td class="num">30,630円</td><td class="num">299,370円</td></tr>
+<tr><td>報酬 330,000円（税込）とだけ記載</td><td>税込 330,000円</td><td class="num">33,693円</td><td class="num">296,307円</td></tr>
+</tbody></table></div>
+<p>同じ報酬でも、区分して書くかどうかで源泉徴収税額が3,063円変わります。源泉徴収税は確定申告で精算されますが、入金額を増やせるので、報酬と消費税は分けて書くのがおすすめです。国税庁は、インボイス制度の開始後もこの取扱いは変わらないとしています。</p>
+
+<h2>端数処理は「1円未満切り捨て」</h2>
+<p>源泉徴収税額の計算で1円未満の端数が出たときは切り捨てます。たとえば報酬55,000円なら 55,000 × 10.21% ＝ 5,615.5円 → <strong>5,615円</strong> です。四捨五入（5,616円）にすると、取引先の計算と1円ずれる原因になります。</p>
+<p>なお、消費税の端数処理（切り捨て・四捨五入・切り上げ）は事業者が選べますが、源泉徴収税額の端数は切り捨てで固定です。混同しないようにしましょう。</p>
+
+<h2>振込手数料の扱い</h2>
+<p>振込手数料をどちらが負担するかは、税金のルールではなく取引条件の問題です。一般的には、次のように考えます。</p>
+<ul>
+<li>源泉徴収税額は、振込手数料を差し引く前の<strong>報酬額をもとに計算</strong>するのが一般的です。手数料を引かれても、源泉徴収税額は変わりません。</li>
+<li>取引先負担にしてほしい場合は、請求書の備考に「お振込手数料は貴社にてご負担くださいますようお願いいたします」などと書き、契約時にも確認しておきます。</li>
+<li>手数料を差し引いて振り込まれた場合は、差し引かれた金額を支払手数料などとして記帳します。インボイス制度のもとでの処理方法（売上値引きとして扱うかどうか等）は、顧問税理士などに確認すると安心です。</li>
+</ul>
+
+<h2>よくある間違い</h2>
+<ul>
+<li><strong>税込合計に10.21%をかけてしまう</strong>：消費税を区分して記載しているなら、源泉徴収の計算は税抜の小計で行えます。見本の場合、税込で計算すると33,693円になり、3,063円多く差し引かれてしまいます。</li>
+<li><strong>税率を10%で計算する</strong>：所得税10%に付加税が加わるため、正しくは10.21%です（100万円を超える部分は20.42%）。</li>
+<li><strong>100万円を超えたら全額に20.42%をかける</strong>：20.42%は100万円を超えた部分だけです。（支払金額 − 100万円）× 20.42% ＋ 102,100円 で計算します。</li>
+<li><strong>端数を四捨五入する</strong>：源泉徴収税額の1円未満は切り捨てです。</li>
+<li><strong>源泉徴収の対象でない取引で差し引いてしまう</strong>：取引先が源泉徴収義務のない個人（給与を支払っていない個人など）の場合や、報酬が源泉徴収の対象でない種類（プログラミングの報酬など）の場合は、源泉徴収税額を書く必要はありません。判断の目安は<a href="../gensen-taisho/">源泉徴収が必要な報酬・不要なケース</a>をご覧ください。迷ったら、取引先に源泉徴収をするかどうかを確認しましょう。</li>
+<li><strong>交通費を別扱いにしてしまう</strong>：報酬と一緒に受け取る交通費・宿泊費も、原則として源泉徴収の対象に含まれます（取引先が交通機関やホテルに直接支払う場合などを除く）。</li>
+</ul>
+
+<section class="faq"><h2>よくある質問</h2>
+<details><summary>源泉徴収税額は請求書に書かないといけませんか？</summary><p>源泉徴収税額の記載は法律上の必須事項ではありません。ただ、源泉徴収税額と差引ご請求額を書いておくと、取引先が支払額を確認しやすく、入金額との照合も簡単になるため、記載するのが一般的です。</p></details>
+<details><summary>ご請求金額欄には税込合計と差引額のどちらを書きますか？</summary><p>決まりはありませんが、実際に振り込まれる「差引ご請求額」を書くと、入金額と一致して分かりやすくなります。内訳欄に、報酬（税抜）・消費税・合計（税込）・源泉徴収税額をあわせて書いておきましょう。</p></details>
+<details><summary>消費税込みの金額に源泉徴収されることはありますか？</summary><p>あります。源泉徴収の対象は原則として消費税込みの支払金額です。請求書で報酬の額と消費税の額を明確に区分して記載していれば、税抜の報酬額だけを対象にして差し支えないとされています。</p></details>
+<details><summary>源泉徴収税額の1円未満はどう処理しますか？</summary><p>源泉徴収税額に1円未満の端数が出たときは切り捨てます。四捨五入や切り上げはしません。</p></details>
+<details><summary>振込手数料を差し引かれた場合、源泉徴収税額は変わりますか？</summary><p>一般的には変わりません。源泉徴収税額は報酬額をもとに計算し、振込手数料はその後の支払い方法の問題として扱われます。手数料をどちらが負担するかは、事前に取引先と取り決めておきましょう。</p></details>
+<details><summary>インボイス（適格請求書）でも同じ書き方でいいですか？</summary><p>はい。適格請求書の記載事項（登録番号、税率ごとに区分した合計額と消費税額など）を満たしたうえで、源泉徴収税額と差引ご請求額を追加で書けば問題ありません。国税庁も、インボイス制度の開始後も税抜額を源泉徴収の対象にできる取扱いは変わらないとしています。</p></details>
+</section>
+<h2>参考</h2>
+<ul class="refs">
+<li>国税庁 タックスアンサー <a href="https://www.nta.go.jp/taxes/shiraberu/taxanswer/gensen/2795.htm" rel="noopener" target="_blank">No.2795 原稿料や講演料等を支払ったとき</a></li>
+<li>国税庁 タックスアンサー <a href="https://www.nta.go.jp/taxes/shiraberu/taxanswer/gensen/2792.htm" rel="noopener" target="_blank">No.2792 源泉徴収が必要な報酬・料金等とは</a></li>
+<li>国税庁 タックスアンサー <a href="https://www.nta.go.jp/taxes/shiraberu/taxanswer/shohi/6929.htm" rel="noopener" target="_blank">No.6929 消費税等と源泉所得税および復興特別所得税</a></li>
+</ul>
+<p class="disclaimer">本ページの解説と記載例は、一般的なルールにもとづく目安です。取引の内容や契約条件によって扱いが変わることがあります。最終的な判断は税理士・税務署にご確認ください。</p>
+</article>
+<aside class="card cta cta-big no-print"><p><strong>源泉徴収ありの請求書を、見本どおりに — 登録不要・無料</strong><span class="muted">報酬（税抜）・消費税・源泉徴収税額・差引ご請求額を自動で計算して並べます。適格請求書の記載事項にも対応。</span></p><a class="btn btn-primary" href="../../app/?withholding=1">源泉徴収ありの請求書を今すぐ作る</a></aside>
+<!-- related:start -->
+<section class="related no-print" aria-labelledby="related-h"><h2 id="related-h">関連ページ（源泉徴収）</h2><ul class="tool-list">
+<li><a class="card" href="../gensen/"><h3>源泉徴収税 計算</h3><p>報酬額を入れるだけで、源泉徴収税額・手取り・振込額を計算できます。</p></a></li>
+<li><a class="card" href="../gensen-hayamihyo/"><h3>源泉徴収税額 早見表</h3><p>報酬1万円〜300万円の源泉徴収税額・差引額・振込額を一覧で確認。</p></a></li>
+<li><a class="card" href="../gensen-taisho/"><h3>源泉徴収が必要な報酬・不要なケース</h3><p>対象になる報酬の種類と、源泉徴収が不要になるケースを確認できます。</p></a></li>
+<li><a class="card" href="../tedori-gyakusan/"><h3>手取りから報酬額を逆算</h3><p>「手取りで○円ほしい」から、請求すべき報酬額を1円単位で逆算。</p></a></li>
+</ul></section>
+<!-- related:end -->
+</main>
+<footer class="site-footer"><div class="wrap">
+<nav class="footer-links" aria-label="計算ツール"><a href="../../tools/">計算ツール一覧</a><a href="../../tools/gensen/">源泉徴収税 計算</a><a href="../../tools/gensen-hayamihyo/">源泉徴収税額 早見表</a><a href="../../tools/gensen-seikyusho/">源泉徴収ありの請求書の書き方</a><a href="../../tools/gensen-taisho/">源泉徴収が必要な報酬・不要なケース</a><a href="../../tools/tedori-gyakusan/">手取りから報酬額を逆算</a><a href="../../tools/shohizei/">消費税 計算（税込⇔税抜）</a><a href="../../tools/inshi/">領収書の収入印紙 計算</a><a href="../../tools/touroku-bangou/">インボイス登録番号チェッカー</a><a href="../../tools/shiharai-kijitsu/">支払期日 計算</a></nav>
+<nav class="footer-links legal" aria-label="規約"><a href="../../">ゼロ請求書 トップ</a><a href="../../app/">請求書を作る</a><a href="../../legal/privacy/">プライバシーポリシー</a><a href="../../legal/tokushoho/">特定商取引法に基づく表記</a><a href="../../legal/terms/">利用規約</a></nav>
+<p>当サイトの計算ツールは一般的なルールに基づく目安です。最終的な判断は税理士・税務署にご確認ください。</p>
+<p>&copy; ゼロ請求書</p>
+</div></footer>
+</body>
+</html>

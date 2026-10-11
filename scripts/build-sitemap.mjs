@@ -37,15 +37,20 @@ const pages = walk(siteDir)
   .sort((a, b) => a.path.split('/').length - b.path.split('/').length || a.path.localeCompare(b.path));
 
 // canonical / og:url / og:image / JSON-LD のホストを CONFIG.siteUrl に揃える（tools 配下のみ）
+// siteUrl がパス付き（例: https://x.github.io/automoney）の場合、既存URLに付いているそのパスもまとめて置き換える。
+// （ホストだけを置き換えると実行のたびに /automoney/automoney/... と重複していくため）
+const basePath = new URL(base).pathname.replace(/\/+$/, '');
+const origin = `https?:\\/\\/[^/"]+${basePath ? `(?:${basePath.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})*` : ''}`;
+const hostRe = (prefix) => new RegExp(`(${prefix})${origin}`, 'g');
 let rewritten = 0;
 for (const p of pages) {
   if (!p.path.startsWith('tools/')) continue;
   const html = readFileSync(p.file, 'utf8');
   const next = html
-    .replace(/(<link rel="canonical" href=")https?:\/\/[^/"]+/g, `$1${base}`)
-    .replace(/(<meta property="og:url" content=")https?:\/\/[^/"]+/g, `$1${base}`)
-    .replace(/(<meta property="og:image" content=")https?:\/\/[^/"]+/g, `$1${base}`)
-    .replace(/("(?:url|item)":")https?:\/\/[^/"]+/g, `$1${base}`);
+    .replace(hostRe('<link rel="canonical" href="'), `$1${base}`)
+    .replace(hostRe('<meta property="og:url" content="'), `$1${base}`)
+    .replace(hostRe('<meta property="og:image" content="'), `$1${base}`)
+    .replace(hostRe('"(?:url|item)":"'), `$1${base}`);
   if (next !== html) { writeFileSync(p.file, next); rewritten++; }
 }
 

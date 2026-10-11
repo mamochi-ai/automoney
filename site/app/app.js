@@ -1323,6 +1323,15 @@ function init() {
   const params = new URLSearchParams(location.search);
   const qt = params.get('type');
   if (TYPES[qt] && (!cur || !hasContent(doc))) doc = newDoc(qt);
+  // 計算ツールからのディープリンク（?withholding=1）: 表示中の書類で源泉徴収をオンにする
+  if (params.get('withholding') === '1') doc.withholding = true;
+  // 再読み込みで再適用されないよう、処理したパラメータはURLから外す
+  if (params.has('type') || params.has('withholding')) {
+    params.delete('type');
+    params.delete('withholding');
+    const qs = params.toString();
+    try { history.replaceState(history.state, '', location.pathname + (qs ? `?${qs}` : '') + location.hash); } catch { /* file:// など */ }
+  }
 
   fillForm();
   renderItemsEditor();

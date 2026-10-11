@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://mamochi-ai.github.io/automoney/</loc>
-    <lastmod>2026-09-29</lastmod>
+    <lastmod>2026-10-11</lastmod>
   </url>
   <url>
     <loc>https://mamochi-ai.github.io/automoney/app/</loc>
@@ -10,7 +10,7 @@
   </url>
   <url>
     <loc>https://mamochi-ai.github.io/automoney/tools/</loc>
-    <lastmod>2026-09-29</lastmod>
+    <lastmod>2026-10-11</lastmod>
   </url>
   <url>
     <loc>https://mamochi-ai.github.io/automoney/legal/privacy/</loc>
@@ -25,27 +25,39 @@
     <lastmod>2026-09-29</lastmod>
   </url>
   <url>
+    <loc>https://mamochi-ai.github.io/automoney/tools/gensen-hayamihyo/</loc>
+    <lastmod>2026-10-11</lastmod>
+  </url>
+  <url>
+    <loc>https://mamochi-ai.github.io/automoney/tools/gensen-seikyusho/</loc>
+    <lastmod>2026-10-11</lastmod>
+  </url>
+  <url>
+    <loc>https://mamochi-ai.github.io/automoney/tools/gensen-taisho/</loc>
+    <lastmod>2026-10-11</lastmod>
+  </url>
+  <url>
     <loc>https://mamochi-ai.github.io/automoney/tools/gensen/</loc>
-    <lastmod>2026-09-29</lastmod>
+    <lastmod>2026-10-11</lastmod>
   </url>
   <url>
     <loc>https://mamochi-ai.github.io/automoney/tools/inshi/</loc>
-    <lastmod>2026-09-29</lastmod>
+    <lastmod>2026-10-11</lastmod>
   </url>
   <url>
     <loc>https://mamochi-ai.github.io/automoney/tools/shiharai-kijitsu/</loc>
-    <lastmod>2026-09-29</lastmod>
+    <lastmod>2026-10-11</lastmod>
   </url>
   <url>
     <loc>https://mamochi-ai.github.io/automoney/tools/shohizei/</loc>
-    <lastmod>2026-09-29</lastmod>
+    <lastmod>2026-10-11</lastmod>
   </url>
   <url>
     <loc>https://mamochi-ai.github.io/automoney/tools/tedori-gyakusan/</loc>
-    <lastmod>2026-09-29</lastmod>
+    <lastmod>2026-10-11</lastmod>
   </url>
   <url>
     <loc>https://mamochi-ai.github.io/automoney/tools/touroku-bangou/</loc>
-    <lastmod>2026-09-29</lastmod>
+    <lastmod>2026-10-11</lastmod>
   </url>
 </urlset>

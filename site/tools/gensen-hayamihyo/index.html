@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>源泉徴収税額 早見表（報酬1万円〜300万円）｜10.21%・20.42%の差引額と振込額</title>
+<meta name="description" content="フリーランスの報酬1万円〜300万円の源泉徴収税額（10.21%／100万円超は20.42%）を一覧にした早見表。報酬から源泉税を引いた差引額と、消費税10%を上乗せして請求したときの振込額もひと目で分かります。金額を入れると該当する行にジャンプできます。">
+<link rel="canonical" href="https://mamochi-ai.github.io/automoney/tools/gensen-hayamihyo/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ゼロ請求書">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:title" content="源泉徴収税額 早見表（報酬1万円〜300万円）｜10.21%・20.42%の差引額と振込額">
+<meta property="og:description" content="フリーランスの報酬1万円〜300万円の源泉徴収税額（10.21%／100万円超は20.42%）を一覧にした早見表。報酬から源泉税を引いた差引額と、消費税10%を上乗せして請求したときの振込額もひと目で分かります。">
+<meta property="og:url" content="https://mamochi-ai.github.io/automoney/tools/gensen-hayamihyo/">
+<meta property="og:image" content="https://mamochi-ai.github.io/automoney/assets/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="源泉徴収税額 早見表（報酬1万円〜300万円）｜10.21%・20.42%の差引額と振込額">
+<meta name="twitter:description" content="フリーランスの報酬1万円〜300万円の源泉徴収税額（10.21%／100万円超は20.42%）を一覧にした早見表。報酬から源泉税を引いた差引額と、消費税10%を上乗せして請求したときの振込額もひと目で分かります。">
+<meta name="theme-color" content="#0f6e5a">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../assets/style.css">
+<link rel="stylesheet" href="../../tools/tools.css">
+<style>
+.lookup{display:grid;gap:16px;grid-template-columns:minmax(0,1fr)}
+@media (min-width:800px){.lookup{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}}
+.lookup-row{display:flex;gap:8px}
+.lookup-row input{flex:1;min-width:0}
+.lookup-row .btn{flex:none}
+.hayami-nav{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:.9rem;margin:8px 0 0;padding:0;list-style:none}
+.hayami th{white-space:normal;line-height:1.35;vertical-align:bottom}
+.hayami tbody th{font-weight:600;background:transparent}
+.hayami td,.hayami tbody th{font-variant-numeric:tabular-nums;white-space:nowrap}
+.hayami tbody tr:nth-child(even){background:color-mix(in srgb,var(--line) 22%,transparent)}
+.hayami tr.hl,.hayami tr.hl:nth-child(even){background:var(--accent-soft);outline:2px solid var(--accent);outline-offset:-2px}
+.hayami tr{scroll-margin-top:80px}
+@media (max-width:480px){.hayami{font-size:.82rem!important}.hayami th,.hayami td{padding:7px 5px}}
+</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"源泉徴収税額 早見表（報酬1万円〜300万円）","url":"https://mamochi-ai.github.io/automoney/tools/gensen-hayamihyo/","description":"フリーランスの報酬1万円〜300万円の源泉徴収税額（10.21%／100万円超は20.42%）と、差引額・消費税10%込みで請求したときの振込額の早見表。","inLanguage":"ja","publisher":{"@type":"Organization","name":"ゼロ請求書"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"報酬10万円の源泉徴収税額はいくらですか？","acceptedAnswer":{"@type":"Answer","text":"10万円×10.21%＝10,210円です。差引額は89,790円、消費税10%（10,000円）を区分して上乗せ請求した場合の振込額は99,790円になります。"}},{"@type":"Question","name":"早見表にない金額はどう計算しますか？","acceptedAnswer":{"@type":"Answer","text":"100万円以下なら「報酬額×10.21%」、100万円を超えるなら「（報酬額−100万円）×20.42%＋102,100円」で計算し、1円未満を切り捨てます。ページ上部の検索ボックスに金額を入れると、その金額の計算結果も表示されます。"}},{"@type":"Question","name":"税込金額で源泉徴収される場合はこの表を使えますか？","acceptedAnswer":{"@type":"Answer","text":"請求書で報酬と消費税を区分していない場合は、税込の支払金額が源泉徴収の対象になります。その場合は、表の「報酬額」の列を税込金額に読み替えると源泉徴収税額を確認できます（差引額・振込額の列は当てはまりません）。"}},{"@type":"Question","name":"2027年から防衛特別所得税が始まると税率は変わりますか？","acceptedAnswer":{"@type":"Answer","text":"国税庁の案内では、2027年（令和9年）1月以後は防衛特別所得税1%と復興特別所得税1.1%が所得税に上乗せされますが、合計の上乗せ率は2.1%のままで、源泉徴収税額の計算方法（10.21%・20.42%）に変更はないとされています。"}},{"@type":"Question","name":"司法書士などの報酬もこの表で計算できますか？","acceptedAnswer":{"@type":"Answer","text":"司法書士・土地家屋調査士・海事代理士の報酬は、1回の支払金額から1万円を差し引いた残額に10.21%をかけるなど、計算方法が異なります。この表は原稿料・デザイン料・講演料などの一般的な報酬・料金を前提としています。"}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ゼロ請求書","item":"https://mamochi-ai.github.io/automoney/"},{"@type":"ListItem","position":2,"name":"計算ツール","item":"https://mamochi-ai.github.io/automoney/tools/"},{"@type":"ListItem","position":3,"name":"源泉徴収税額 早見表","item":"https://mamochi-ai.github.io/automoney/tools/gensen-hayamihyo/"}]}</script>
+</head>
+<body>
+<header class="site-header"><div class="wrap"><a class="brand" href="../../">ゼロ請求書</a><nav class="nav"><a href="../../app/">請求書を作る</a><a href="../../tools/">計算ツール</a><a href="../../#pricing">料金</a></nav></div></header>
+<main class="wrap">
+<ol class="crumbs" aria-label="パンくずリスト"><li><a href="../../">ゼロ請求書</a></li><li><a href="../../tools/">計算ツール</a></li><li aria-current="page">源泉徴収税額 早見表</li></ol>
+<div class="tool-hero"><h1>源泉徴収税額 早見表（報酬1万円〜300万円）</h1><p>フリーランスに支払う原稿料・デザイン料・講演料などの報酬について、源泉徴収税額（10.21%／100万円を超える部分は20.42%）と、差し引き後の金額・振込額をまとめました。金額を入力すると該当する行にジャンプします。</p></div>
+
+<form class="lookup" id="f" autocomplete="off">
+<div class="card">
+<h2 style="font-size:1rem;margin:0 0 14px">金額から探す</h2>
+<div class="field"><label for="amount">報酬額（税抜・円）</label>
+<div class="lookup-row"><input id="amount" name="amount" class="amount-input" type="text" inputmode="numeric" value="" placeholder="例: 120000" aria-describedby="amount-hint"><button type="submit" class="btn btn-primary">表で探す</button></div>
+<p class="hint" id="amount-hint">カンマ・全角数字も入力できます。表にない金額でも計算結果を表示します。</p></div>
+<ul class="hayami-nav" aria-label="金額帯へ移動"><li><a href="#t1">1万〜10万円</a></li><li><a href="#t2">10万〜50万円</a></li><li><a href="#t3">50万〜100万円</a></li><li><a href="#t4">100万〜300万円</a></li></ul>
+</div>
+<div class="card" aria-live="polite">
+<h2 style="font-size:1rem;margin:0 0 14px">入力した金額の計算結果</h2>
+<dl class="rows">
+<div><dt>源泉徴収税額</dt><dd id="r-wh">—</dd></div>
+<div><dt>差引額（報酬 − 源泉税）</dt><dd id="r-net">—</dd></div>
+<div class="total"><dt>振込額（消費税10%込みで請求）</dt><dd id="r-pay">—</dd></div>
+</dl>
+<p class="formula" id="r-formula">金額を入力すると、計算式と表の該当行を表示します。</p>
+</div>
+</form>
+
+<section aria-labelledby="hayami-h">
+<h2 id="hayami-h" style="font-size:1.3rem;margin:32px 0 4px">源泉徴収税額の早見表</h2>
+<p class="caption" style="margin-bottom:8px">報酬額は消費税抜き。消費税（10%）・源泉徴収税額とも1円未満切り捨て。振込額＝報酬額＋消費税10%−源泉徴収税額。</p>
+<!-- hayami:start -->
+<h3 id="t1" style="font-size:1.05rem;margin:24px 0 0">報酬1万円〜10万円（5千円刻み）</h3>
+<div class="table-scroll"><table class="hayami"><thead><tr><th class="num" scope="col">報酬額（税抜）</th><th class="num" scope="col">源泉徴収税額</th><th class="num" scope="col">差引額<br>（報酬−源泉）</th><th class="num" scope="col">振込額<br>（消費税10%込みで請求）</th></tr></thead><tbody data-from="10000" data-to="100000" data-step="5000">
+<tr id="h-10000" data-amount="10000"><th class="num" scope="row">10,000円</th><td class="num">1,021円</td><td class="num">8,979円</td><td class="num">9,979円</td></tr>
+<tr id="h-15000" data-amount="15000"><th class="num" scope="row">15,000円</th><td class="num">1,531円</td><td class="num">13,469円</td><td class="num">14,969円</td></tr>
+<tr id="h-20000" data-amount="20000"><th class="num" scope="row">20,000円</th><td class="num">2,042円</td><td class="num">17,958円</td><td class="num">19,958円</td></tr>
+<tr id="h-25000" data-amount="25000"><th class="num" scope="row">25,000円</th><td class="num">2,552円</td><td class="num">22,448円</td><td class="num">24,948円</td></tr>
+<tr id="h-30000" data-amount="30000"><th class="num" scope="row">30,000円</th><td class="num">3,063円</td><td class="num">26,937円</td><td class="num">29,937円</td></tr>
+<tr id="h-35000" data-amount="35000"><th class="num" scope="row">35,000円</th><td class="num">3,573円</td><td class="num">31,427円</td><td class="num">34,927円</td></tr>
+<tr id="h-40000" data-amount="40000"><th class="num" scope="row">40,000円</th><td class="num">4,084円</td><td class="num">35,916円</td><td class="num">39,916円</td></tr>
+<tr id="h-45000" data-amount="45000"><th class="num" scope="row">45,000円</th><td class="num">4,594円</td><td class="num">40,406円</td><td class="num">44,906円</td></tr>
+<tr id="h-50000" data-amount="50000"><th class="num" scope="row">50,000円</th><td class="num">5,105円</td><td class="num">44,895円</td><td class="num">49,895円</td></tr>
+<tr id="h-55000" data-amount="55000"><th class="num" scope="row">55,000円</th><td class="num">5,615円</td><td class="num">49,385円</td><td class="num">54,885円</td></tr>
+<tr id="h-60000" data-amount="60000"><th class="num" scope="row">60,000円</th><td class="num">6,126円</td><td class="num">53,874円</td><td class="num">59,874円</td></tr>
+<tr id="h-65000" data-amount="65000"><th class="num" scope="row">65,000円</th><td class="num">6,636円</td><td class="num">58,364円</td><td class="num">64,864円</td></tr>
+<tr id="h-70000" data-amount="70000"><th class="num" scope="row">70,000円</th><td class="num">7,147円</td><td class="num">62,853円</td><td class="num">69,853円</td></tr>
+<tr id="h-75000" data-amount="75000"><th class="num" scope="row">75,000円</th><td class="num">7,657円</td><td class="num">67,343円</td><td class="num">74,843円</td></tr>
+<tr id="h-80000" data-amount="80000"><th class="num" scope="row">80,000円</th><td class="num">8,168円</td><td class="num">71,832円</td><td class="num">79,832円</td></tr>
+<tr id="h-85000" data-amount="85000"><th class="num" scope="row">85,000円</th><td class="num">8,678円</td><td class="num">76,322円</td><td class="num">84,822円</td></tr>
+<tr id="h-90000" data-amount="90000"><th class="num" scope="row">90,000円</th><td class="num">9,189円</td><td class="num">80,811円</td><td class="num">89,811円</td></tr>
+<tr id="h-95000" data-amount="95000"><th class="num" scope="row">95,000円</th><td class="num">9,699円</td><td class="num">85,301円</td><td class="num">94,801円</td></tr>
+<tr id="h-100000" data-amount="100000"><th class="num" scope="row">100,000円</th><td class="num">10,210円</td><td class="num">89,790円</td><td class="num">99,790円</td></tr>
+</tbody></table></div>
+<h3 id="t2" style="font-size:1.05rem;margin:24px 0 0">報酬11万円〜50万円（1万円刻み）</h3>
+<div class="table-scroll"><table class="hayami"><thead><tr><th class="num" scope="col">報酬額（税抜）</th><th class="num" scope="col">源泉徴収税額</th><th class="num" scope="col">差引額<br>（報酬−源泉）</th><th class="num" scope="col">振込額<br>（消費税10%込みで請求）</th></tr></thead><tbody data-from="110000" data-to="500000" data-step="10000">
+<tr id="h-110000" data-amount="110000"><th class="num" scope="row">110,000円</th><td class="num">11,231円</td><td class="num">98,769円</td><td class="num">109,769円</td></tr>
+<tr id="h-120000" data-amount="120000"><th class="num" scope="row">120,000円</th><td class="num">12,252円</td><td class="num">107,748円</td><td class="num">119,748円</td></tr>
+<tr id="h-130000" data-amount="130000"><th class="num" scope="row">130,000円</th><td class="num">13,273円</td><td class="num">116,727円</td><td class="num">129,727円</td></tr>
+<tr id="h-140000" data-amount="140000"><th class="num" scope="row">140,000円</th><td class="num">14,294円</td><td class="num">125,706円</td><td class="num">139,706円</td></tr>
+<tr id="h-150000" data-amount="150000"><th class="num" scope="row">150,000円</th><td class="num">15,315円</td><td class="num">134,685円</td><td class="num">149,685円</td></tr>
+<tr id="h-160000" data-amount="160000"><th class="num" scope="row">160,000円</th><td class="num">16,336円</td><td class="num">143,664円</td><td class="num">159,664円</td></tr>
+<tr id="h-170000" data-amount="170000"><th class="num" scope="row">170,000円</th><td class="num">17,357円</td><td class="num">152,643円</td><td class="num">169,643円</td></tr>
+<tr id="h-180000" data-amount="180000"><th class="num" scope="row">180,000円</th><td class="num">18,378円</td><td class="num">161,622円</td><td class="num">179,622円</td></tr>
+<tr id="h-190000" data-amount="190000"><th class="num" scope="row">190,000円</th><td class="num">19,399円</td><td class="num">170,601円</td><td class="num">189,601円</td></tr>
+<tr id="h-200000" data-amount="200000"><th class="num" scope="row">200,000円</th><td class="num">20,420円</td><td class="num">179,580円</td><td class="num">199,580円</td></tr>
+<tr id="h-210000" data-amount="210000"><th class="num" scope="row">210,000円</th><td class="num">21,441円</td><td class="num">188,559円</td><td class="num">209,559円</td></tr>
+<tr id="h-220000" data-amount="220000"><th class="num" scope="row">220,000円</th><td class="num">22,462円</td><td class="num">197,538円</td><td class="num">219,538円</td></tr>
+<tr id="h-230000" data-amount="230000"><th class="num" scope="row">230,000円</th><td class="num">23,483円</td><td class="num">206,517円</td><td class="num">229,517円</td></tr>
+<tr id="h-240000" data-amount="240000"><th class="num" scope="row">240,000円</th><td class="num">24,504円</td><td class="num">215,496円</td><td class="num">239,496円</td></tr>
+<tr id="h-250000" data-amount="250000"><th class="num" scope="row">250,000円</th><td class="num">25,525円</td><td class="num">224,475円</td><td class="num">249,475円</td></tr>
+<tr id="h-260000" data-amount="260000"><th class="num" scope="row">260,000円</th><td class="num">26,546円</td><td class="num">233,454円</td><td class="num">259,454円</td></tr>
+<tr id="h-270000" data-amount="270000"><th class="num" scope="row">270,000円</th><td class="num">27,567円</td><td class="num">242,433円</td><td class="num">269,433円</td></tr>
+<tr id="h-280000" data-amount="280000"><th class="num" scope="row">280,000円</th><td class="num">28,588円</td><td class="num">251,412円</td><td class="num">279,412円</td></tr>
+<tr id="h-290000" data-amount="290000"><th class="num" scope="row">290,000円</th><td class="num">29,609円</td><td class="num">260,391円</td><td class="num">289,391円</td></tr>
+<tr id="h-300000" data-amount="300000"><th class="num" scope="row">300,000円</th><td class="num">30,630円</td><td class="num">269,370円</td><td class="num">299,370円</td></tr>
+<tr id="h-310000" data-amount="310000"><th class="num" scope="row">310,000円</th><td class="num">31,651円</td><td class="num">278,349円</td><td class="num">309,349円</td></tr>
+<tr id="h-320000" data-amount="320000"><th class="num" scope="row">320,000円</th><td class="num">32,672円</td><td class="num">287,328円</td><td class="num">319,328円</td></tr>
+<tr id="h-330000" data-amount="330000"><th class="num" scope="row">330,000円</th><td class="num">33,693円</td><td class="num">296,307円</td><td class="num">329,307円</td></tr>
+<tr id="h-340000" data-amount="340000"><th class="num" scope="row">340,000円</th><td class="num">34,714円</td><td class="num">305,286円</td><td class="num">339,286円</td></tr>
+<tr id="h-350000" data-amount="350000"><th class="num" scope="row">350,000円</th><td class="num">35,735円</td><td class="num">314,265円</td><td class="num">349,265円</td></tr>
+<tr id="h-360000" data-amount="360000"><th class="num" scope="row">360,000円</th><td class="num">36,756円</td><td class="num">323,244円</td><td class="num">359,244円</td></tr>
+<tr id="h-370000" data-amount="370000"><th class="num" scope="row">370,000円</th><td class="num">37,777円</td><td class="num">332,223円</td><td class="num">369,223円</td></tr>
+<tr id="h-380000" data-amount="380000"><th class="num" scope="row">380,000円</th><td class="num">38,798円</td><td class="num">341,202円</td><td class="num">379,202円</td></tr>
+<tr id="h-390000" data-amount="390000"><th class="num" scope="row">390,000円</th><td class="num">39,819円</td><td class="num">350,181円</td><td class="num">389,181円</td></tr>
+<tr id="h-400000" data-amount="400000"><th class="num" scope="row">400,000円</th><td class="num">40,840円</td><td class="num">359,160円</td><td class="num">399,160円</td></tr>
+<tr id="h-410000" data-amount="410000"><th class="num" scope="row">410,000円</th><td class="num">41,861円</td><td class="num">368,139円</td><td class="num">409,139円</td></tr>
+<tr id="h-420000" data-amount="420000"><th class="num" scope="row">420,000円</th><td class="num">42,882円</td><td class="num">377,118円</td><td class="num">419,118円</td></tr>
+<tr id="h-430000" data-amount="430000"><th class="num" scope="row">430,000円</th><td class="num">43,903円</td><td class="num">386,097円</td><td class="num">429,097円</td></tr>
+<tr id="h-440000" data-amount="440000"><th class="num" scope="row">440,000円</th><td class="num">44,924円</td><td class="num">395,076円</td><td class="num">439,076円</td></tr>
+<tr id="h-450000" data-amount="450000"><th class="num" scope="row">450,000円</th><td class="num">45,945円</td><td class="num">404,055円</td><td class="num">449,055円</td></tr>
+<tr id="h-460000" data-amount="460000"><th class="num" scope="row">460,000円</th><td class="num">46,966円</td><td class="num">413,034円</td><td class="num">459,034円</td></tr>
+<tr id="h-470000" data-amount="470000"><th class="num" scope="row">470,000円</th><td class="num">47,987円</td><td class="num">422,013円</td><td class="num">469,013円</td></tr>
+<tr id="h-480000" data-amount="480000"><th class="num" scope="row">480,000円</th><td class="num">49,008円</td><td class="num">430,992円</td><td class="num">478,992円</td></tr>
+<tr id="h-490000" data-amount="490000"><th class="num" scope="row">490,000円</th><td class="num">50,029円</td><td class="num">439,971円</td><td class="num">488,971円</td></tr>
+<tr id="h-500000" data-amount="500000"><th class="num" scope="row">500,000円</th><td class="num">51,050円</td><td class="num">448,950円</td><td class="num">498,950円</td></tr>
+</tbody></table></div>
+<h3 id="t3" style="font-size:1.05rem;margin:24px 0 0">報酬55万円〜100万円（5万円刻み）</h3>
+<div class="table-scroll"><table class="hayami"><thead><tr><th class="num" scope="col">報酬額（税抜）</th><th class="num" scope="col">源泉徴収税額</th><th class="num" scope="col">差引額<br>（報酬−源泉）</th><th class="num" scope="col">振込額<br>（消費税10%込みで請求）</th></tr></thead><tbody data-from="550000" data-to="1000000" data-step="50000">
+<tr id="h-550000" data-amount="550000"><th class="num" scope="row">550,000円</th><td class="num">56,155円</td><td class="num">493,845円</td><td class="num">548,845円</td></tr>
+<tr id="h-600000" data-amount="600000"><th class="num" scope="row">600,000円</th><td class="num">61,260円</td><td class="num">538,740円</td><td class="num">598,740円</td></tr>
+<tr id="h-650000" data-amount="650000"><th class="num" scope="row">650,000円</th><td class="num">66,365円</td><td class="num">583,635円</td><td class="num">648,635円</td></tr>
+<tr id="h-700000" data-amount="700000"><th class="num" scope="row">700,000円</th><td class="num">71,470円</td><td class="num">628,530円</td><td class="num">698,530円</td></tr>
+<tr id="h-750000" data-amount="750000"><th class="num" scope="row">750,000円</th><td class="num">76,575円</td><td class="num">673,425円</td><td class="num">748,425円</td></tr>
+<tr id="h-800000" data-amount="800000"><th class="num" scope="row">800,000円</th><td class="num">81,680円</td><td class="num">718,320円</td><td class="num">798,320円</td></tr>
+<tr id="h-850000" data-amount="850000"><th class="num" scope="row">850,000円</th><td class="num">86,785円</td><td class="num">763,215円</td><td class="num">848,215円</td></tr>
+<tr id="h-900000" data-amount="900000"><th class="num" scope="row">900,000円</th><td class="num">91,890円</td><td class="num">808,110円</td><td class="num">898,110円</td></tr>
+<tr id="h-950000" data-amount="950000"><th class="num" scope="row">950,000円</th><td class="num">96,995円</td><td class="num">853,005円</td><td class="num">948,005円</td></tr>
+<tr id="h-1000000" data-amount="1000000"><th class="num" scope="row">1,000,000円</th><td class="num">102,100円</td><td class="num">897,900円</td><td class="num">997,900円</td></tr>
+</tbody></table></div>
+<h3 id="t4" style="font-size:1.05rem;margin:24px 0 0">報酬110万円〜300万円（10万円刻み・100万円超の部分は20.42%）</h3>
+<div class="table-scroll"><table class="hayami"><thead><tr><th class="num" scope="col">報酬額（税抜）</th><th class="num" scope="col">源泉徴収税額</th><th class="num" scope="col">差引額<br>（報酬−源泉）</th><th class="num" scope="col">振込額<br>（消費税10%込みで請求）</th></tr></thead><tbody data-from="1100000" data-to="3000000" data-step="100000">
+<tr id="h-1100000" data-amount="1100000"><th class="num" scope="row">1,100,000円</th><td class="num">122,520円</td><td class="num">977,480円</td><td class="num">1,087,480円</td></tr>
+<tr id="h-1200000" data-amount="1200000"><th class="num" scope="row">1,200,000円</th><td class="num">142,940円</td><td class="num">1,057,060円</td><td class="num">1,177,060円</td></tr>
+<tr id="h-1300000" data-amount="1300000"><th class="num" scope="row">1,300,000円</th><td class="num">163,360円</td><td class="num">1,136,640円</td><td class="num">1,266,640円</td></tr>
+<tr id="h-1400000" data-amount="1400000"><th class="num" scope="row">1,400,000円</th><td class="num">183,780円</td><td class="num">1,216,220円</td><td class="num">1,356,220円</td></tr>
+<tr id="h-1500000" data-amount="1500000"><th class="num" scope="row">1,500,000円</th><td class="num">204,200円</td><td class="num">1,295,800円</td><td class="num">1,445,800円</td></tr>
+<tr id="h-1600000" data-amount="1600000"><th class="num" scope="row">1,600,000円</th><td class="num">224,620円</td><td class="num">1,375,380円</td><td class="num">1,535,380円</td></tr>
+<tr id="h-1700000" data-amount="1700000"><th class="num" scope="row">1,700,000円</th><td class="num">245,040円</td><td class="num">1,454,960円</td><td class="num">1,624,960円</td></tr>
+<tr id="h-1800000" data-amount="1800000"><th class="num" scope="row">1,800,000円</th><td class="num">265,460円</td><td class="num">1,534,540円</td><td class="num">1,714,540円</td></tr>
+<tr id="h-1900000" data-amount="1900000"><th class="num" scope="row">1,900,000円</th><td class="num">285,880円</td><td class="num">1,614,120円</td><td class="num">1,804,120円</td></tr>
+<tr id="h-2000000" data-amount="2000000"><th class="num" scope="row">2,000,000円</th><td class="num">306,300円</td><td class="num">1,693,700円</td><td class="num">1,893,700円</td></tr>
+<tr id="h-2100000" data-amount="2100000"><th class="num" scope="row">2,100,000円</th><td class="num">326,720円</td><td class="num">1,773,280円</td><td class="num">1,983,280円</td></tr>
+<tr id="h-2200000" data-amount="2200000"><th class="num" scope="row">2,200,000円</th><td class="num">347,140円</td><td class="num">1,852,860円</td><td class="num">2,072,860円</td></tr>
+<tr id="h-2300000" data-amount="2300000"><th class="num" scope="row">2,300,000円</th><td class="num">367,560円</td><td class="num">1,932,440円</td><td class="num">2,162,440円</td></tr>
+<tr id="h-2400000" data-amount="2400000"><th class="num" scope="row">2,400,000円</th><td class="num">387,980円</td><td class="num">2,012,020円</td><td class="num">2,252,020円</td></tr>
+<tr id="h-2500000" data-amount="2500000"><th class="num" scope="row">2,500,000円</th><td class="num">408,400円</td><td class="num">2,091,600円</td><td class="num">2,341,600円</td></tr>
+<tr id="h-2600000" data-amount="2600000"><th class="num" scope="row">2,600,000円</th><td class="num">428,820円</td><td class="num">2,171,180円</td><td class="num">2,431,180円</td></tr>
+<tr id="h-2700000" data-amount="2700000"><th class="num" scope="row">2,700,000円</th><td class="num">449,240円</td><td class="num">2,250,760円</td><td class="num">2,520,760円</td></tr>
+<tr id="h-2800000" data-amount="2800000"><th class="num" scope="row">2,800,000円</th><td class="num">469,660円</td><td class="num">2,330,340円</td><td class="num">2,610,340円</td></tr>
+<tr id="h-2900000" data-amount="2900000"><th class="num" scope="row">2,900,000円</th><td class="num">490,080円</td><td class="num">2,409,920円</td><td class="num">2,699,920円</td></tr>
+<tr id="h-3000000" data-amount="3000000"><th class="num" scope="row">3,000,000円</th><td class="num">510,500円</td><td class="num">2,489,500円</td><td class="num">2,789,500円</td></tr>
+</tbody></table></div>
+<!-- hayami:end -->
+</section>
+
+<aside class="card cta no-print"><p><strong>この金額で源泉徴収ありの請求書を作る — 登録不要・無料</strong><span class="muted">源泉徴収税額と差引ご請求額を自動計算。消費税（税率ごとの端数処理）・登録番号の記載に対応した適格請求書を、ブラウザだけで作成できます。</span></p><a class="btn btn-primary" href="../../app/?withholding=1">源泉徴収ありの請求書を作る（無料）</a></aside>
+
+<article class="article">
+<h2>早見表の見方</h2>
+<ul>
+<li><strong>報酬額（税抜）</strong>：消費税を含まない報酬の金額です。請求書で報酬と消費税を分けて書いている場合、源泉徴収はこの金額に対して行われます。</li>
+<li><strong>源泉徴収税額</strong>：取引先（支払う側）が報酬から差し引いて、代わりに国へ納める所得税等の金額です。</li>
+<li><strong>差引額（報酬−源泉）</strong>：消費税を上乗せしない場合に受け取る金額であり、消費税を除いた「手取り」にあたります。</li>
+<li><strong>振込額（消費税10%込みで請求）</strong>：報酬に消費税10%を上乗せして請求したときに、実際に口座へ振り込まれる金額です（振込手数料を差し引かれる場合は、さらにその分が少なくなります）。</li>
+</ul>
+
+<h2>源泉徴収税額の計算式</h2>
+<p>報酬・料金の源泉徴収税額は、1回に支払う金額によって次のように計算します。</p>
+<div class="table-scroll"><table><thead><tr><th>1回に支払う金額</th><th>源泉徴収税額</th></tr></thead><tbody>
+<tr><td>100万円以下</td><td>支払金額 × 10.21%</td></tr>
+<tr><td>100万円超</td><td>（支払金額 − 100万円）× 20.42% ＋ 102,100円</td></tr>
+</tbody></table></div>
+<p>計算結果に1円未満の端数があるときは切り捨てます。たとえば報酬55,000円なら 55,000 × 10.21% ＝ 5,615.5円 → <strong>5,615円</strong> です。</p>
+<p>100万円を超える場合も、20.42%がかかるのは100万円を超えた部分だけです。報酬150万円なら（150万円 − 100万円）× 20.42% ＋ 102,100円 ＝ 204,200円 になります。</p>
+<h3>10.21%の内訳と2027年以降の扱い</h3>
+<p>10.21%は所得税10%に、その2.1%にあたる付加税を加えた税率です。2026年（令和8年）分までは復興特別所得税2.1%、2027年（令和9年）1月以後は防衛特別所得税1%と復興特別所得税1.1%が上乗せされます。国税庁の案内では、合計の上乗せ率は2.1%のままで、源泉徴収税額の計算方法に変更はないとされています。</p>
+
+<h2>早見表にない金額を調べるには</h2>
+<p>ページ上部の「金額から探す」に報酬額を入れると、その金額ちょうどの源泉徴収税額・差引額・振込額を表示し、表の近い行をハイライトします。消費税の扱い（税込で源泉徴収する場合など）を切り替えて計算したいときは、<a href="../gensen/">源泉徴収税 計算ツール</a>を使ってください。「手取りで○円ほしい」から逆算したい場合は<a href="../tedori-gyakusan/">手取りから報酬額を逆算</a>が便利です。</p>
+
+<h2>税込金額で源泉徴収される場合</h2>
+<p>源泉徴収の対象は、原則として消費税を含めた支払金額です。ただし、請求書などで報酬の額と消費税の額が明確に区分されていれば、税抜の報酬額だけを対象にして差し支えないとされています。この早見表は、消費税を区分して記載し、税抜額に対して源泉徴収される場合を前提にしています。</p>
+<p>税込金額だけを書いた請求書の場合は、税込額全体に10.21%がかかります。たとえば報酬10万円・消費税1万円を「11万円（税込）」とだけ書くと、源泉徴収税額は11,231円になり、区分した場合（10,210円）より1,021円多く差し引かれます。区分した書き方は<a href="../gensen-seikyusho/">源泉徴収ありの請求書の書き方</a>で見本つきで解説しています。</p>
+
+<h2>この表が当てはまらないケース</h2>
+<ul>
+<li><strong>源泉徴収の対象にならない報酬</strong>：プログラミングの報酬や物品の販売代金など、所得税法で源泉徴収の対象として定められていない支払いには源泉徴収は行われません。判断の目安は<a href="../gensen-taisho/">源泉徴収が必要な報酬・不要なケース</a>をご覧ください。</li>
+<li><strong>司法書士・土地家屋調査士などの報酬</strong>：1回の支払金額から1万円を差し引いてから10.21%をかけるなど、計算方法が異なります。</li>
+<li><strong>ホステス等の報酬や、外交員報酬など</strong>：一定の控除額を差し引く特別な計算方法が定められています。</li>
+</ul>
+
+<section class="faq"><h2>よくある質問</h2>
+<details><summary>報酬10万円の源泉徴収税額はいくらですか？</summary><p>10万円×10.21%＝10,210円です。差引額は89,790円、消費税10%（10,000円）を区分して上乗せ請求した場合の振込額は99,790円になります。</p></details>
+<details><summary>早見表にない金額はどう計算しますか？</summary><p>100万円以下なら「報酬額×10.21%」、100万円を超えるなら「（報酬額−100万円）×20.42%＋102,100円」で計算し、1円未満を切り捨てます。ページ上部の検索ボックスに金額を入れると、その金額の計算結果も表示されます。</p></details>
+<details><summary>税込金額で源泉徴収される場合はこの表を使えますか？</summary><p>請求書で報酬と消費税を区分していない場合は、税込の支払金額が源泉徴収の対象になります。その場合は、表の「報酬額」の列を税込金額に読み替えると源泉徴収税額を確認できます（差引額・振込額の列は当てはまりません）。</p></details>
+<details><summary>2027年から防衛特別所得税が始まると税率は変わりますか？</summary><p>国税庁の案内では、2027年（令和9年）1月以後は防衛特別所得税1%と復興特別所得税1.1%が所得税に上乗せされますが、合計の上乗せ率は2.1%のままで、源泉徴収税額の計算方法（10.21%・20.42%）に変更はないとされています。</p></details>
+<details><summary>司法書士などの報酬もこの表で計算できますか？</summary><p>司法書士・土地家屋調査士・海事代理士の報酬は、1回の支払金額から1万円を差し引いた残額に10.21%をかけるなど、計算方法が異なります。この表は原稿料・デザイン料・講演料などの一般的な報酬・料金を前提としています。</p></details>
+</section>
+<h2>参考</h2>
+<ul class="refs">
+<li>国税庁 タックスアンサー <a href="https://www.nta.go.jp/taxes/shiraberu/taxanswer/gensen/2795.htm" rel="noopener" target="_blank">No.2795 原稿料や講演料等を支払ったとき</a></li>
+<li>国税庁 タックスアンサー <a href="https://www.nta.go.jp/taxes/shiraberu/taxanswer/gensen/2792.htm" rel="noopener" target="_blank">No.2792 源泉徴収が必要な報酬・料金等とは</a></li>
+</ul>
+<p class="disclaimer">本ページの金額は、一般的な報酬・料金の計算方法にもとづく目安です。個別の取引への当てはめや特例の有無によって結果が変わることがあります。最終的な判断は税理士・税務署にご確認ください。</p>
+</article>
+<!-- related:start -->
+<section class="related no-print" aria-labelledby="related-h"><h2 id="related-h">関連ページ（源泉徴収）</h2><ul class="tool-list">
+<li><a class="card" href="../gensen/"><h3>源泉徴収税 計算</h3><p>報酬額を入れるだけで、源泉徴収税額・手取り・振込額を計算できます。</p></a></li>
+<li><a class="card" href="../gensen-seikyusho/"><h3>源泉徴収ありの請求書の書き方</h3><p>見本つきで、報酬・消費税・源泉徴収税・差引請求額の書き方を解説。</p></a></li>
+<li><a class="card" href="../gensen-taisho/"><h3>源泉徴収が必要な報酬・不要なケース</h3><p>対象になる報酬の種類と、源泉徴収が不要になるケースを確認できます。</p></a></li>
+<li><a class="card" href="../tedori-gyakusan/"><h3>手取りから報酬額を逆算</h3><p>「手取りで○円ほしい」から、請求すべき報酬額を1円単位で逆算。</p></a></li>
+</ul></section>
+<!-- related:end -->
+<aside class="card cta no-print"><p><strong>表で確認できたら、そのまま請求書に — 登録不要・無料</strong><span class="muted">源泉徴収・消費税（税率ごとの端数処理）・登録番号の記載に対応した適格請求書を、ブラウザだけで作成。データは端末の外に送信されません。</span></p><a class="btn btn-primary" href="../../app/?withholding=1">源泉徴収ありの請求書を作る（無料）</a></aside>
+</main>
+<footer class="site-footer"><div class="wrap">
+<nav class="footer-links" aria-label="計算ツール"><a href="../../tools/">計算ツール一覧</a><a href="../../tools/gensen/">源泉徴収税 計算</a><a href="../../tools/gensen-hayamihyo/">源泉徴収税額 早見表</a><a href="../../tools/gensen-seikyusho/">源泉徴収ありの請求書の書き方</a><a href="../../tools/gensen-taisho/">源泉徴収が必要な報酬・不要なケース</a><a href="../../tools/tedori-gyakusan/">手取りから報酬額を逆算</a><a href="../../tools/shohizei/">消費税 計算（税込⇔税抜）</a><a href="../../tools/inshi/">領収書の収入印紙 計算</a><a href="../../tools/touroku-bangou/">インボイス登録番号チェッカー</a><a href="../../tools/shiharai-kijitsu/">支払期日 計算</a></nav>
+<nav class="footer-links legal" aria-label="規約"><a href="../../">ゼロ請求書 トップ</a><a href="../../app/">請求書を作る</a><a href="../../legal/privacy/">プライバシーポリシー</a><a href="../../legal/tokushoho/">特定商取引法に基づく表記</a><a href="../../legal/terms/">利用規約</a></nav>
+<p>当サイトの計算ツールは一般的なルールに基づく目安です。最終的な判断は税理士・税務署にご確認ください。</p>
+<p>&copy; ゼロ請求書</p>
+</div></footer>
+<script type="module">
+import { withholdingTax, calcInvoice } from '../../lib/tax.js';
+import { parseAmount, yen, bindForm, setText } from '../tools.js';
+
+// 早見表の行は静的HTMLにも入っているが、表示時は tax.js から作り直す（計算ロジックを一元化）
+const ctOf = (amt) => calcInvoice([{ qty: 1, unitPrice: amt, rate: 10 }]).tax;
+const rowOf = (amt) => {
+  const wh = withholdingTax(amt);
+  const tr = document.createElement('tr');
+  tr.id = `h-${amt}`;
+  tr.dataset.amount = String(amt);
+  const th = document.createElement('th');
+  th.className = 'num'; th.scope = 'row'; th.textContent = yen(amt);
+  tr.append(th);
+  for (const v of [wh, amt - wh, amt + ctOf(amt) - wh]) {
+    const td = document.createElement('td');
+    td.className = 'num'; td.textContent = yen(v);
+    tr.append(td);
+  }
+  return tr;
+};
+for (const tb of document.querySelectorAll('tbody[data-step]')) {
+  const from = Number(tb.dataset.from), to = Number(tb.dataset.to), step = Number(tb.dataset.step);
+  const rows = [];
+  for (let a = from; a <= to; a += step) rows.push(rowOf(a));
+  tb.replaceChildren(...rows);
+}
+const allRows = [...document.querySelectorAll('tr[data-amount]')];
+
+const form = document.getElementById('f');
+let current = null;
+function render() {
+  const amt = parseAmount(form.amount.value);
+  allRows.forEach((r) => r.classList.remove('hl'));
+  current = null;
+  if (amt == null || amt <= 0) {
+    ['r-wh', 'r-net', 'r-pay'].forEach((id) => setText(id, '—'));
+    setText('r-formula', form.amount.value.trim() ? '金額を数字で入力してください。' : '金額を入力すると、計算式と表の該当行を表示します。');
+    return;
+  }
+  const wh = withholdingTax(amt);
+  setText('r-wh', yen(wh));
+  setText('r-net', yen(amt - wh));
+  setText('r-pay', yen(amt + ctOf(amt) - wh));
+  const fmt = (n) => n.toLocaleString('ja-JP');
+  const exact = allRows.find((r) => Number(r.dataset.amount) === amt);
+  // 表にない金額は、入力額以下で最も近い行（なければ先頭行）をハイライト
+  current = exact || [...allRows].reverse().find((r) => Number(r.dataset.amount) <= amt) || allRows[0];
+  current.classList.add('hl');
+  const where = exact ? '表の該当行をハイライトしています。' : `表にない金額のため、近い行（${fmt(Number(current.dataset.amount))}円）をハイライトしています。`;
+  setText('r-formula', (amt <= 1000000
+    ? `計算式：${fmt(amt)}円 × 10.21% ＝ ${fmt(wh)}円（1円未満切り捨て）。`
+    : `計算式：（${fmt(amt)}円 − 1,000,000円）× 20.42% ＋ 102,100円 ＝ ${fmt(wh)}円（1円未満切り捨て）。`) + where);
+}
+bindForm(form, render);
+const jump = () => { if (current) current.scrollIntoView({ block: 'center', behavior: 'smooth' }); };
+form.addEventListener('submit', jump);
+if (current) jump();
+</script>
+</body>
+</html>

@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>源泉徴収が必要な報酬・不要なケース｜フリーランスの対象判定チェッカー付き</title>
+<meta name="description" content="フリーランスへの報酬で源泉徴収が必要かどうかの目安を解説。原稿料・デザイン料・講演料・翻訳料など所得税法204条で対象とされる主な報酬と、プログラミングの報酬や物品の販売代金、法人への支払い、源泉徴収義務者でない個人からの支払いなど不要になりやすいケースを、簡単なチェッカーで確認できます。">
+<link rel="canonical" href="https://mamochi-ai.github.io/automoney/tools/gensen-taisho/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="ゼロ請求書">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:title" content="源泉徴収が必要な報酬・不要なケース｜フリーランスの対象判定チェッカー付き">
+<meta property="og:description" content="原稿料・デザイン料・講演料など源泉徴収の対象になる主な報酬と、プログラミングの報酬や法人への支払いなど不要になりやすいケースを、チェッカーつきで解説します。">
+<meta property="og:url" content="https://mamochi-ai.github.io/automoney/tools/gensen-taisho/">
+<meta property="og:image" content="https://mamochi-ai.github.io/automoney/assets/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="源泉徴収が必要な報酬・不要なケース｜フリーランスの対象判定チェッカー付き">
+<meta name="twitter:description" content="原稿料・デザイン料・講演料など源泉徴収の対象になる主な報酬と、プログラミングの報酬や法人への支払いなど不要になりやすいケースを、チェッカーつきで解説します。">
+<meta name="theme-color" content="#0f6e5a">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../assets/style.css">
+<link rel="stylesheet" href="../../tools/tools.css">
+<style>
+.verdict{border-radius:var(--radius);padding:14px 16px;border:1px solid var(--line);background:var(--bg)}
+.verdict .status{display:block;margin-bottom:4px}
+.verdict.need{border-color:var(--warn)}
+.verdict.need .status{color:var(--warn)}
+.verdict.noneed{border-color:var(--accent)}
+.verdict.noneed .status{color:var(--accent)}
+.verdict.unsure .status{color:var(--text)}
+.verdict p{margin:6px 0 0;font-size:.92rem}
+.reasons{margin:8px 0 0;padding-left:1.2em;font-size:.9rem}
+</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"源泉徴収が必要な報酬・不要なケース","description":"原稿料・デザイン料・講演料など源泉徴収の対象になる主な報酬と、プログラミングの報酬や法人への支払いなど不要になりやすいケースを、チェッカーつきで解説します。","url":"https://mamochi-ai.github.io/automoney/tools/gensen-taisho/","inLanguage":"ja","datePublished":"2026-10-11","dateModified":"2026-10-11","author":{"@type":"Organization","name":"ゼロ請求書"},"publisher":{"@type":"Organization","name":"ゼロ請求書"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"プログラミングやシステム開発の報酬は源泉徴収されますか？","acceptedAnswer":{"@type":"Answer","text":"プログラミングやシステム開発の報酬は、所得税法で源泉徴収の対象として列挙されている報酬・料金には含まれていないため、原則として源泉徴収の対象外とされています。ただし、同じ契約にデザインなど対象となる業務が含まれる場合は、取引先と扱いを確認してください。"}},{"@type":"Question","name":"Webデザインの報酬は源泉徴収の対象ですか？","acceptedAnswer":{"@type":"Answer","text":"「デザインの報酬」は源泉徴収の対象として定められているため、Webサイトのデザイン料は対象として扱われることが多いです。デザインとコーディング（プログラミング）が一体になった契約は、契約書や請求書での区分の仕方によって扱いが変わることがあるため、取引先や税務署・税理士に確認するのが確実です。"}},{"@type":"Question","name":"取引先が個人事業主の場合も源泉徴収されますか？","acceptedAnswer":{"@type":"Answer","text":"取引先が従業員などに給与を支払っている個人事業主であれば、源泉徴収義務者として源泉徴収することになります。給与を支払っていない個人（従業員のいない個人事業主や、個人として依頼する会社員など）は源泉徴収義務者ではないため、源泉徴収は不要です。"}},{"@type":"Question","name":"法人成りした（会社として請け負う）場合はどうなりますか？","acceptedAnswer":{"@type":"Answer","text":"報酬を受け取るのが法人であれば、原稿料やデザイン料などの報酬について源泉徴収は原則として不要です（馬主である法人に支払う競馬の賞金など一部の例外を除く）。"}},{"@type":"Question","name":"インボイス登録の有無で源泉徴収の要否は変わりますか？","acceptedAnswer":{"@type":"Answer","text":"変わりません。源泉徴収が必要かどうかは、報酬の種類と、支払う側・受け取る側が誰かによって決まり、インボイス（適格請求書発行事業者）の登録の有無とは関係ありません。"}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ゼロ請求書","item":"https://mamochi-ai.github.io/automoney/"},{"@type":"ListItem","position":2,"name":"計算ツール","item":"https://mamochi-ai.github.io/automoney/tools/"},{"@type":"ListItem","position":3,"name":"源泉徴収が必要な報酬・不要なケース","item":"https://mamochi-ai.github.io/automoney/tools/gensen-taisho/"}]}</script>
+</head>
+<body>
+<header class="site-header"><div class="wrap"><a class="brand" href="../../">ゼロ請求書</a><nav class="nav"><a href="../../app/">請求書を作る</a><a href="../../tools/">計算ツール</a><a href="../../#pricing">料金</a></nav></div></header>
+<main class="wrap">
+<ol class="crumbs" aria-label="パンくずリスト"><li><a href="../../">ゼロ請求書</a></li><li><a href="../../tools/">計算ツール</a></li><li aria-current="page">源泉徴収が必要な報酬・不要なケース</li></ol>
+<div class="tool-hero"><h1>源泉徴収が必要な報酬・不要なケース</h1><p>フリーランスの報酬がすべて源泉徴収されるわけではありません。「支払う側は誰か」「受け取る側は個人か」「どんな種類の報酬か」の3つで決まります。下のチェッカーで目安を確認し、解説で詳しい条件を確かめてください。</p></div>
+
+<form class="tool" id="f" autocomplete="off">
+<div class="card">
+<h2>源泉徴収チェッカー</h2>
+<div class="field"><label for="payer">1. 報酬を支払う側（取引先）は？</label>
+<select id="payer" name="payer">
+<option value="corp">法人（株式会社・合同会社など）</option>
+<option value="indiv-emp">個人事業主（従業員などに給与を支払っている）</option>
+<option value="indiv-none">個人（給与を支払っていない個人事業主・会社員など）</option>
+<option value="unknown">わからない</option>
+</select></div>
+<div class="field"><label for="payee">2. 報酬を受け取る側（あなた）は？</label>
+<select id="payee" name="payee">
+<option value="indiv">個人（個人事業主・フリーランス）</option>
+<option value="corp">法人（自分の会社として請け負っている）</option>
+</select></div>
+<div class="field"><label for="kind">3. 報酬の種類は？</label>
+<select id="kind" name="kind">
+<optgroup label="源泉徴収の対象として定められている主なもの">
+<option value="genko">原稿・記事執筆・校正</option>
+<option value="design">デザイン（ロゴ・グラフィック・Webデザイン等）</option>
+<option value="illust">イラスト・挿絵</option>
+<option value="photo">写真撮影（雑誌・広告等に掲載する写真）</option>
+<option value="koen">講演・セミナー講師・研修講師</option>
+<option value="honyaku">翻訳・通訳</option>
+<option value="sakkyoku">作曲・作詞・脚本</option>
+<option value="shigyo">弁護士・税理士・社労士などの資格者報酬</option>
+<option value="model">モデル・出演・演出（芸能）</option>
+</optgroup>
+<optgroup label="対象外とされることが多いもの">
+<option value="program">プログラミング・システム開発</option>
+<option value="buppan">物品の販売代金</option>
+<option value="jimu">事務作業・データ入力</option>
+</optgroup>
+<optgroup label="内容によって判断が分かれるもの">
+<option value="web">Web制作一式（デザイン＋コーディング）</option>
+<option value="video">動画編集・映像制作</option>
+<option value="consul">コンサルティング・アドバイス</option>
+<option value="other">その他・わからない</option>
+</optgroup>
+</select></div>
+<p class="note muted">受け取る側が日本に住んでいる個人（居住者）である前提の目安です。</p>
+</div>
+<div class="card" aria-live="polite">
+<h2>判定の目安</h2>
+<div class="verdict" id="verdict"><span class="status" id="v-status">—</span><p id="v-text"></p><ul class="reasons" id="v-reasons"></ul></div>
+<p class="note muted">この結果は一般的なルールにもとづく目安で、個別の取引の判断を示すものではありません。最終的には取引先・税務署・税理士にご確認ください。</p>
+<div class="tool-actions"><button type="button" class="btn" data-copy-link>この判定条件のURLをコピー</button><a class="btn" id="v-next" href="../gensen/">源泉徴収税額を計算する</a></div>
+</div>
+</form>
+
+<aside class="card cta no-print"><p><strong>源泉徴収ありの請求書も、なしの請求書も — 登録不要・無料</strong><span class="muted">チェックひとつで源泉徴収税額と差引ご請求額を自動計算。消費税（税率ごとの端数処理）・登録番号の記載に対応した適格請求書をブラウザだけで作成できます。</span></p><a class="btn btn-primary" href="../../app/?withholding=1">源泉徴収ありの請求書を作る（無料）</a></aside>
+
+<article class="article">
+<h2>源泉徴収が必要になる3つの条件</h2>
+<p>フリーランス（個人）が受け取る報酬について源泉徴収が行われるのは、おおむね次の3つがそろったときです。</p>
+<ol>
+<li><strong>支払う側が源泉徴収義務者である</strong>：法人や、従業員などに給与を支払っている個人事業主が該当します。</li>
+<li><strong>受け取る側が個人である</strong>：原稿料やデザイン料などの報酬については、受け取る側が法人であれば原則として源泉徴収はありません。</li>
+<li><strong>報酬の種類が所得税法で定められたものである</strong>：所得税法204条1項などで列挙された「報酬・料金等」に当たるものだけが対象です。</li>
+</ol>
+<p>どれか1つでも当てはまらなければ、原則として源泉徴収は不要です。</p>
+
+<h2>源泉徴収の対象になる主な報酬</h2>
+<p>所得税法204条1項では、源泉徴収の対象になる報酬・料金等が号ごとに定められています。フリーランスに関係が深いものを中心に、主な例をまとめました（すべてを網羅したものではありません）。</p>
+<div class="table-scroll"><table><thead><tr><th>区分</th><th>主な例</th></tr></thead><tbody>
+<tr><td>原稿料・デザイン料・講演料など（1号）</td><td>原稿料、挿絵・イラストの報酬、写真の報酬、作曲料、デザイン料、講演料、技芸・知識などの教授・指導料（講師料）、翻訳料、通訳料、脚本料、校正料、書籍の装丁料、著作権・工業所有権の使用料 など</td></tr>
+<tr><td>一定の資格者の報酬（2号）</td><td>弁護士、公認会計士、税理士、社会保険労務士、弁理士、司法書士、土地家屋調査士、測量士、建築士、不動産鑑定士、技術士 などの業務に関する報酬</td></tr>
+<tr><td>プロスポーツ選手・モデル・外交員など（4号）</td><td>プロ野球・サッカー・テニスなどの選手、モデル、外交員・集金人 などの報酬</td></tr>
+<tr><td>芸能・放送の出演など（5号）</td><td>映画・演劇・音楽・テレビ放送などへの出演、演出、企画の報酬</td></tr>
+<tr><td>その他</td><td>ホステス・コンパニオン等の報酬（6号）、役務の提供を約することにより一時に支払う契約金（7号）、広告宣伝のための賞金（8号） など</td></tr>
+</tbody></table></div>
+<p class="caption">3号は社会保険診療報酬支払基金などが支払う診療報酬です。区分の詳細は国税庁タックスアンサーNo.2792を参照してください。</p>
+<h3>交通費・宿泊費も含まれるのが原則</h3>
+<p>報酬と一緒に支払う交通費や宿泊費も、原則として報酬・料金に含めて源泉徴収の対象になります。ただし、支払う側が交通機関やホテルに直接支払い、その金額が通常必要な範囲であれば、対象に含めなくてよいとされています。</p>
+
+<h2>源泉徴収の対象外になりやすい例</h2>
+<ul>
+<li><strong>プログラミング・システム開発の報酬</strong>：所得税法で列挙された報酬・料金に含まれていないため、Webサイトやアプリのプログラミング、システム開発の報酬は、原則として源泉徴収の対象外とされています。</li>
+<li><strong>物品の販売代金</strong>：商品やハンドメイド作品などを販売した代金は、報酬・料金ではないため源泉徴収の対象になりません。</li>
+<li><strong>事務作業・データ入力などの作業代</strong>：一般に、列挙された報酬・料金には当たらないと考えられています。</li>
+</ul>
+<p>ただし、業務の名前ではなく<strong>実際の内容</strong>で判断されます。たとえば「Web制作」でも、デザインの報酬として支払われる部分は源泉徴収の対象になり得ます。デザインとコーディングが一体の契約では、契約書や請求書で業務ごとに金額を分けておくと、取引先とも扱いを確認しやすくなります。</p>
+
+<h2>支払先（受け取る側）が法人なら原則不要</h2>
+<p>原稿料・デザイン料・講演料などの報酬は、受け取るのが法人（株式会社・合同会社など）であれば、原則として源泉徴収は不要です。法人に対する源泉徴収は、利子・配当や、馬主である法人に支払う競馬の賞金など、限られたものに限定されています。フリーランスが法人成りした後は、請求書から源泉徴収税額の欄を外すのが一般的です。</p>
+
+<h2>支払う側が源泉徴収義務者でなければ不要</h2>
+<p>源泉徴収をするのは「源泉徴収義務者」です。法人は原則として源泉徴収義務者ですが、個人の場合は、<strong>給与を支払っていない個人</strong>（従業員を雇っていない個人事業主や、個人として依頼する会社員など）は、報酬を支払っても源泉徴収をする必要がないとされています。常時2人以下の家事使用人だけに給与を支払っている個人も同様です。</p>
+<p>取引先が個人事業主の場合、従業員の有無によって源泉徴収の要否が変わるため、請求書を作る前に「源泉徴収をされますか？」と確認しておくと確実です。</p>
+
+<h2>判断に迷いやすいケース</h2>
+<ul>
+<li><strong>Web制作一式</strong>：デザイン部分は対象、プログラミング部分は対象外になり得ます。業務と金額の区分のしかたで扱いが変わることがあります。</li>
+<li><strong>動画編集・映像制作</strong>：演出や企画、出演、デザインに当たる部分があるかなど、業務の実態によって判断が分かれます。</li>
+<li><strong>コンサルティング</strong>：内容が「知識の教授・指導」に当たるか、資格者の業務に当たるかなどで扱いが変わることがあります。</li>
+<li><strong>懸賞・コンテストの賞金</strong>：懸賞応募作品などの入選者に支払う賞金は、1人に1回に支払う金額が5万円以下なら源泉徴収をしなくてよいとされています。</li>
+</ul>
+<p>このようなケースでは、自己判断せずに取引先の経理担当や、税務署・税理士に確認することをおすすめします。</p>
+
+<h2>源泉徴収されたら請求書はどう書く？</h2>
+<p>源泉徴収の対象になる場合は、請求書に報酬（税抜）・消費税・源泉徴収税額・差引ご請求額を分けて書くのが一般的です。書き方は<a href="../gensen-seikyusho/">源泉徴収ありの請求書の書き方（見本つき）</a>、金額は<a href="../gensen/">源泉徴収税 計算</a>や<a href="../gensen-hayamihyo/">源泉徴収税額 早見表</a>で確認できます。</p>
+
+<section class="faq"><h2>よくある質問</h2>
+<details><summary>プログラミングやシステム開発の報酬は源泉徴収されますか？</summary><p>プログラミングやシステム開発の報酬は、所得税法で源泉徴収の対象として列挙されている報酬・料金には含まれていないため、原則として源泉徴収の対象外とされています。ただし、同じ契約にデザインなど対象となる業務が含まれる場合は、取引先と扱いを確認してください。</p></details>
+<details><summary>Webデザインの報酬は源泉徴収の対象ですか？</summary><p>「デザインの報酬」は源泉徴収の対象として定められているため、Webサイトのデザイン料は対象として扱われることが多いです。デザインとコーディング（プログラミング）が一体になった契約は、契約書や請求書での区分の仕方によって扱いが変わることがあるため、取引先や税務署・税理士に確認するのが確実です。</p></details>
+<details><summary>取引先が個人事業主の場合も源泉徴収されますか？</summary><p>取引先が従業員などに給与を支払っている個人事業主であれば、源泉徴収義務者として源泉徴収することになります。給与を支払っていない個人（従業員のいない個人事業主や、個人として依頼する会社員など）は源泉徴収義務者ではないため、源泉徴収は不要です。</p></details>
+<details><summary>法人成りした（会社として請け負う）場合はどうなりますか？</summary><p>報酬を受け取るのが法人であれば、原稿料やデザイン料などの報酬について源泉徴収は原則として不要です（馬主である法人に支払う競馬の賞金など一部の例外を除く）。</p></details>
+<details><summary>インボイス登録の有無で源泉徴収の要否は変わりますか？</summary><p>変わりません。源泉徴収が必要かどうかは、報酬の種類と、支払う側・受け取る側が誰かによって決まり、インボイス（適格請求書発行事業者）の登録の有無とは関係ありません。</p></details>
+</section>
+<h2>参考</h2>
+<p>本ページは、次の国税庁の案内などを参考に、フリーランス向けに要点を整理したものです。</p>
+<ul class="refs">
+<li>国税庁 タックスアンサー <a href="https://www.nta.go.jp/taxes/shiraberu/taxanswer/gensen/2792.htm" rel="noopener" target="_blank">No.2792 源泉徴収が必要な報酬・料金等とは</a>（参考）</li>
+<li>国税庁 タックスアンサー <a href="https://www.nta.go.jp/taxes/shiraberu/taxanswer/gensen/2795.htm" rel="noopener" target="_blank">No.2795 原稿料や講演料等を支払ったとき</a>（参考）</li>
+</ul>
+<p class="disclaimer">本ページの解説とチェッカーの結果は、一般的なルールにもとづく目安であり、個別の取引について源泉徴収の要否を判断するものではありません。非居住者への支払いなど、ここで扱っていない特別なルールもあります。最終的な判断は税務署・税理士にご確認ください。</p>
+</article>
+<!-- related:start -->
+<section class="related no-print" aria-labelledby="related-h"><h2 id="related-h">関連ページ（源泉徴収）</h2><ul class="tool-list">
+<li><a class="card" href="../gensen/"><h3>源泉徴収税 計算</h3><p>報酬額を入れるだけで、源泉徴収税額・手取り・振込額を計算できます。</p></a></li>
+<li><a class="card" href="../gensen-hayamihyo/"><h3>源泉徴収税額 早見表</h3><p>報酬1万円〜300万円の源泉徴収税額・差引額・振込額を一覧で確認。</p></a></li>
+<li><a class="card" href="../gensen-seikyusho/"><h3>源泉徴収ありの請求書の書き方</h3><p>見本つきで、報酬・消費税・源泉徴収税・差引請求額の書き方を解説。</p></a></li>
+<li><a class="card" href="../tedori-gyakusan/"><h3>手取りから報酬額を逆算</h3><p>「手取りで○円ほしい」から、請求すべき報酬額を1円単位で逆算。</p></a></li>
+</ul></section>
+<!-- related:end -->
+</main>
+<footer class="site-footer"><div class="wrap">
+<nav class="footer-links" aria-label="計算ツール"><a href="../../tools/">計算ツール一覧</a><a href="../../tools/gensen/">源泉徴収税 計算</a><a href="../../tools/gensen-hayamihyo/">源泉徴収税額 早見表</a><a href="../../tools/gensen-seikyusho/">源泉徴収ありの請求書の書き方</a><a href="../../tools/gensen-taisho/">源泉徴収が必要な報酬・不要なケース</a><a href="../../tools/tedori-gyakusan/">手取りから報酬額を逆算</a><a href="../../tools/shohizei/">消費税 計算（税込⇔税抜）</a><a href="../../tools/inshi/">領収書の収入印紙 計算</a><a href="../../tools/touroku-bangou/">インボイス登録番号チェッカー</a><a href="../../tools/shiharai-kijitsu/">支払期日 計算</a></nav>
+<nav class="footer-links legal" aria-label="規約"><a href="../../">ゼロ請求書 トップ</a><a href="../../app/">請求書を作る</a><a href="../../legal/privacy/">プライバシーポリシー</a><a href="../../legal/tokushoho/">特定商取引法に基づく表記</a><a href="../../legal/terms/">利用規約</a></nav>
+<p>当サイトの計算ツールは一般的なルールに基づく目安です。最終的な判断は税理士・税務署にご確認ください。</p>
+<p>&copy; ゼロ請求書</p>
+</div></footer>
+<script type="module">
+import { bindForm, setupCopyLink, setText } from '../tools.js';
+
+const TARGET = new Set(['genko', 'design', 'illust', 'photo', 'koen', 'honyaku', 'sakkyoku', 'shigyo', 'model']);
+const NON_TARGET = new Set(['program', 'buppan', 'jimu']);
+const LABEL = {
+  genko: '原稿料・校正料', design: 'デザインの報酬', illust: '挿絵・イラストの報酬', photo: '写真の報酬', koen: '講演料・講師料',
+  honyaku: '翻訳・通訳の報酬', sakkyoku: '作曲・脚本などの報酬', shigyo: '資格者（弁護士・税理士など）の報酬', model: 'モデル・出演などの報酬',
+  program: 'プログラミング・システム開発の報酬', buppan: '物品の販売代金', jimu: '事務作業・データ入力の報酬',
+};
+
+function judge({ payer, payee, kind }) {
+  // 「不要」が確定する条件を先に見る
+  if (payee === 'corp') return ['noneed', '原則不要', '報酬を受け取るのが法人の場合、原稿料やデザイン料などの報酬は原則として源泉徴収の対象になりません。', ['受け取る側：法人（一部の例外を除き源泉徴収なし）']];
+  if (payer === 'indiv-none') return ['noneed', '原則不要', '給与を支払っていない個人は源泉徴収義務者ではないため、報酬を支払っても源泉徴収をする必要はないとされています。', ['支払う側：給与を支払っていない個人（源泉徴収義務者ではない）']];
+  if (NON_TARGET.has(kind)) return ['noneed', '原則不要', `${LABEL[kind]}は、所得税法で源泉徴収の対象として定められた報酬・料金に一般に当たらないとされています。ただし、同じ取引に対象となる業務（デザインなど）が含まれる場合は、その部分が対象になり得ます。`, [`報酬の種類：${LABEL[kind]}（対象として列挙されていない）`]];
+  if (TARGET.has(kind) && payer !== 'unknown') {
+    const extra = kind === 'shigyo' ? ' 司法書士・土地家屋調査士など一部の資格者は、1万円を差し引いてから計算するなど計算方法が異なります。' : '';
+    return ['need', '源泉徴収が必要な可能性が高い', `支払う側が源泉徴収義務者で、受け取る側が個人、報酬が${LABEL[kind]}に当たる場合は、源泉徴収の対象になると考えられます。請求書に源泉徴収税額と差引ご請求額を記載しておくとスムーズです。${extra}`,
+      [payer === 'corp' ? '支払う側：法人（源泉徴収義務者）' : '支払う側：給与を支払っている個人事業主（源泉徴収義務者）', '受け取る側：個人', `報酬の種類：${LABEL[kind]}（源泉徴収の対象）`]];
+  }
+  const why = payer === 'unknown'
+    ? '取引先が源泉徴収義務者かどうか（法人か、給与を支払っている個人事業主か）によって結論が変わります。'
+    : '業務の実際の内容（デザイン・演出・知識の教授などに当たる部分があるか）によって扱いが分かれます。';
+  return ['unsure', '判断が難しい — 取引先・税務署・税理士に確認を', `${why}請求書を作る前に取引先に源泉徴収の有無を確認し、迷う場合は税務署や税理士に相談してください。`, []];
+}
+
+const form = document.getElementById('f');
+const box = document.getElementById('verdict');
+function render() {
+  const [cls, status, text, reasons] = judge({ payer: form.payer.value, payee: form.payee.value, kind: form.kind.value });
+  box.className = `verdict ${cls}`;
+  setText('v-status', status);
+  setText('v-text', text);
+  document.getElementById('v-reasons').replaceChildren(...reasons.map((r) => Object.assign(document.createElement('li'), { textContent: r })));
+  const next = document.getElementById('v-next');
+  if (cls === 'need') { next.href = '../gensen/'; next.textContent = '源泉徴収税額を計算する'; }
+  else { next.href = '../gensen-seikyusho/'; next.textContent = '請求書の書き方を見る'; }
+}
+bindForm(form, render, { always: [] });
+setupCopyLink();
+</script>
+</body>
+</html>

@@ -79,3 +79,15 @@ main.wrap{padding-top:8px}
 .footer-links{display:flex;flex-wrap:wrap;gap:6px 16px;margin:0 0 10px}
 .footer-links.legal{margin-top:6px}
 .site-footer p{margin:8px 0 0}
+/* 関連ページ（トピッククラスタ） */
+.related{margin:40px 0 0}
+.related>h2{font-size:1.15rem;margin:0 0 4px}
+.related .tool-list{margin-top:12px}
+.tool-list h3{font-size:1.02rem;margin:0 0 6px;color:var(--accent)}
+/* 大きめのCTA */
+.cta-big{display:block;text-align:center;padding:24px 20px}
+.cta-big strong{font-size:1.2rem}
+.cta-big .btn{margin-top:14px;font-size:1.05rem;padding:14px 22px}
+/* 参考リンク */
+.refs{font-size:.9rem}
+.refs li{margin:4px 0}
