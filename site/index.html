@@ -502,6 +502,9 @@ document.querySelectorAll('[data-price]').forEach((el) => { el.textContent = pri
 const link = CONFIG.stripePaymentLink;
 if (link && !/REPLACE_ME/.test(link)) {
   document.querySelectorAll('[data-stripe]').forEach((a) => { a.href = link; });
+} else {
+  // 決済の準備ができるまでは「準備中」と表示し、無料版へ案内する
+  document.querySelectorAll('[data-stripe]').forEach((a) => { a.textContent = 'Pro版は準備中です（今は無料版をどうぞ）'; a.href = 'app/'; });
 }
 if (CONFIG.contactEmail) {
   document.querySelectorAll('[data-contact]').forEach((a) => { a.href = 'mailto:' + CONFIG.contactEmail; a.textContent = CONFIG.contactEmail; });

@@ -1315,8 +1315,14 @@ window.addEventListener('storage', (e) => {
 function init() {
   $('#f-rounding').replaceChildren(...Object.entries(ROUNDING_LABELS).map(([v, l]) => h('option', { value: v }, l)));
   $('#proPrice').textContent = `¥${formatYen(CONFIG.priceJPY)}`;
-  $('#proBuy').href = CONFIG.stripePaymentLink;
-  $('#proBuy').textContent = `Pro版を購入する（¥${formatYen(CONFIG.priceJPY)}）`;
+  if (/REPLACE_ME/.test(CONFIG.stripePaymentLink || 'REPLACE_ME')) {
+    // 決済の準備ができるまでは購入ボタンを出さない
+    const soon = h('p', { class: 'btn btn-block', 'aria-disabled': 'true', style: 'cursor:default;opacity:.7' }, 'Pro版は準備中です（近日公開）');
+    $('#proBuy').replaceWith(soon);
+  } else {
+    $('#proBuy').href = CONFIG.stripePaymentLink;
+    $('#proBuy').textContent = `Pro版を購入する（¥${formatYen(CONFIG.priceJPY)}）`;
+  }
 
   const cur = load(KEY.current, null);
   doc = cur ? normalizeDoc(cur) : newDoc('invoice');
